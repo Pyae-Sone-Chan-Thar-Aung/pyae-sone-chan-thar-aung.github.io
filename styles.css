@@ -1,0 +1,143 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #bdc3c7;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: #333; /* Distinct text color */
+  background-color: #f4f4f4; 
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #a0a0a0; /* Darker grey on hover */
+  color: #fff; /* White text on hover */
+}
+
+main {
+  padding: 2rem 0;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  border-bottom: 2px solid #2c3e50;
+  padding-bottom: 0.5rem;
+}
+
+.profile-pic {
+  display: block;
+  margin: 1rem auto;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #ecf0f1;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.completed {
+  color: green;
+  font-weight: bold;
+}
+
+footer {
+  background-color: #2c3e50;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+footer address {
+  margin: 0;
+  font-style: normal;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+      width: 90%;
+  }
+
+  header h1 {
+      font-size: 2rem;
+  }
+
+  header h2 {
+      font-size: 1.2rem;
+  }
+
+  nav ul li {
+      display: block;
+      margin: 0.5rem 0;
+  }
+
+  main {
+      padding: 1rem 0;
+  }
+
+  section h2 {
+      font-size: 1.5rem;
+  }
+
+  ul li {
+      font-size: 1rem;
+  }
+}
