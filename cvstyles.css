@@ -1,51 +1,128 @@
-/* General styles for the image containers */
+/* styles.css */
+
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background theme color representing achievement */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f3e1; /* Soft gold-like background */
+  color: #333;
+  padding: 20px;
+}
+
+/* Center-align header content */
+header {
+  background-color: #ffcc00; /* Gold background */
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Style for all section headers */
+h2 {
+  font-size: 1.75em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+/* Container for images to control spacing */
 .image-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 20px;
-  border: 2px solid #ddd;
-  padding: 10px;
-  max-width: 100%; /* Ensures images stay within the frame */
-  overflow: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adds space between images */
+  margin: 20px auto;
+  max-width: 1000px; /* Ensures the images don’t stretch too wide */
 }
 
-/* All images start with a small size */
-.image-wrapper img {
-  width: 100px;
-  height: auto;
-  transition: width 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
+/* Style for images */
+img {
+  width: 300px; /* Set a fixed width for smaller, neat images */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
 
-/* Hide radio inputs */
-.image-wrapper input[type="radio"] {
-  display: none;
+/* Animation: slide to left or right on hover */
+img:hover {
+  transform: translateX(-10px); /* Slide left */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* When the image's associated radio button is checked, enlarge the image */
-.image-wrapper input[type="radio"]:checked + img {
-  width: 400px; /* Bigger size for clicked image */
-  transform: scale(1.1); /* Slight zoom-in effect */
+.image-container img:nth-child(2n):hover {
+  transform: translateX(10px); /* Slide right for every second image */
 }
 
-/* Optional hover effect */
-.image-wrapper img:hover {
-  transform: scale(1.05);
+/* Section specific styling */
+h2.AUS, h2.AYLP, h2.UNESCO, h2.ayo, h2.ASEANFestival, h2.GLC, h2.ktu {
+  color: #005ea6;
+  font-size: 1.5em;
+  margin-top: 15px;
 }
 
-/* Styling for the header */
-h1 {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: #333;
+/* Style for the "Back to Main Page" link */
+a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #005ea6;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Styling for section headings */
-h2 {
-  text-align: center;
-  font-size: 24px;
-  margin-top: 10px;
-  color: #555;
+a:hover {
+  background-color: #003f73;
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  body {
+    padding: 10px;
+  }
+
+  img {
+    width: 100%; /* Make images responsive */
+  }
+}
+
+/* Animation for headers */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
