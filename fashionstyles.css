@@ -1,56 +1,103 @@
-/* styles.css */
-
 /* Reset default margin and padding */
-body, h1, h2, h3, p, ul {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Apply a consistent font and base styles */
+body {
+  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+  color: #333; /* Dark gray text */
+  background-color: #f9f9f9; /* Light gray background */
+  line-height: 1.6;
+  padding: 20px;
 }
 
 /* Center-align header content */
 h1 {
   text-align: center;
-  font-weight: bold;
-  color: #333; /* Dark gray */
-  margin: 20px 0;
+  font-weight: 700;
+  color: #333;
+  margin: 30px 0;
+  font-size: 2.5em; /* Larger, cleaner font size */
 }
 
 /* Style images */
 img {
   max-width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  margin-bottom: 20px; /* Space below images */
+  height: auto;
+  display: block;
+  margin: 20px auto; /* Center the image */
+  border-radius: 8px; /* Smooth image corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
 
 /* Style paragraphs */
 p {
-  line-height: 1.6;
-  padding-left: 0.5in; /* 0.5-inch padding to the left */
-  margin-bottom: 20px;
+  line-height: 1.75;
+  font-size: 1.125em; /* Slightly larger for readability */
+  background-color: #ffffff; /* White background */
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 6px; /* More rounded corners */
+  max-width: 800px; /* Set max width for a better reading experience */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Style list items */
+ul {
+  margin: 20px auto;
+  padding-left: 40px; /* Create space between text and bullet points */
+}
+
 li {
-  font-size: 16px;
-  color: #555; /* Dark gray text color */
-  margin-bottom: 8px;
+  font-size: 1.125em;
+  color: #555;
+  margin-bottom: 12px;
+  line-height: 1.75;
 }
 
 /* Style contact information */
 #contact {
-  padding-left: 0.5in; /* 0.5-inch padding to the left */
-  font-weight: bold;
-  border-top: 1px solid #ddd; /* Separation line */
-  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  font-weight: 600;
+  border-top: 2px solid #ddd;
+  margin: 40px auto;
+  border-radius: 6px;
+  max-width: 800px;
 }
 
 /* Style the "Back to Main Page" link */
 a {
+  color: #0074d9;
   text-decoration: none;
-  color: #0074d9; /* Blue link color */
-  transition: color 0.3s ease; /* Smooth color transition on hover */
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 a:hover {
+  color: #005ea6;
   text-decoration: underline;
-  color: #005ea6; /* Darker blue on hover */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  p, li, #contact {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  img {
+    margin: 15px 0;
+  }
 }
