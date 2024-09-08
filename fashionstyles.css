@@ -17,7 +17,7 @@ body {
 /* Center-align header content */
 h1 {
   text-align: center;
-  font-weight: 700;
+  font-weight: 750;
   color: #333;
   margin: 30px 0;
   font-size: 2.5em; /* Larger, cleaner font size */
@@ -32,7 +32,7 @@ h2 {
 
 h3 {
   text-align: center;
-  font-weight: 700;
+  font-weight: 400;
   color: #333;
   margin: 30px 0;
   font-size: 2.5em; /* Larger, cleaner font size */
@@ -82,7 +82,7 @@ li {
   border-top: 2px solid #ddd;
   margin: 5px auto;
   border-radius: 6px;
-  max-width: 700px;
+  max-width: 750px;
 }
 
 /* Style the "Back to Main Page" link */
