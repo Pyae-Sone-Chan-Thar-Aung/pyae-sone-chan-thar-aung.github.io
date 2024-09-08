@@ -45,8 +45,8 @@ h2 {
 
 /* Image styles with hover transformation */
 img {
-  max-width: 100%;
-  border-radius: 8px;
+  max-width: 80%;
+  border-radius: 10px;
   margin: 20px auto;
   display: block;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -59,7 +59,7 @@ img:hover {
 }
 
 /* Section specific styling */
-h2.AUS, h2.AYLP, h2.UNESCO, h2.ayo, h2.ASEANFestival, h2.GLC, h2.ktu {
+h1.AUS, h1.AYLP, h1.UNESCO, h1.ayo, h1.ASEANFestival, h1.GLC, h1.ktu {
   color: #005ea6;
   font-size: 1.5em;
   margin-top: 15px;
