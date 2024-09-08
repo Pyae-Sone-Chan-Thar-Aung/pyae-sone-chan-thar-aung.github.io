@@ -60,18 +60,14 @@ p {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-h4{
-  text-align: center;
-}
+
 /* Style list items */
 ul {
-  text-align: center;
   margin: 20px auto;
   padding-left: 40px; /* Create space between text and bullet points */
 }
 
-li {
-  text-align: center;
+li { 
   font-size: 1.125em;
   color: #555;
   margin-bottom: 12px;
@@ -84,9 +80,9 @@ li {
   background-color: #f0f0f0;
   padding:0;
   border-top: 2px solid #ddd;
-  margin: 40px auto;
+  margin: 5px auto;
   border-radius: 6px;
-  max-width: 800px;
+  max-width: 650px;
 }
 
 /* Style the "Back to Main Page" link */
