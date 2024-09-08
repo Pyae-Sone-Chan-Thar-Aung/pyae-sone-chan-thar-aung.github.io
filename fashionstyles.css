@@ -53,6 +53,9 @@ p {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+h4{
+  text-align: center;
+
 /* Style list items */
 ul {
   margin: 20px auto;
@@ -65,12 +68,12 @@ li {
   margin-bottom: 12px;
   line-height: 1.75;
 }
+}
 
 /* Style contact information */
 #contact {
   background-color: #f0f0f0;
-  padding: 15px;
-  font-weight: 600;
+  padding:0;
   border-top: 2px solid #ddd;
   margin: 40px auto;
   border-radius: 6px;
