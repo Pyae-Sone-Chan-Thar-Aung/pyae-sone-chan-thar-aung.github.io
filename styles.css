@@ -44,28 +44,39 @@ header h2 {
   color: #bdc3c7;
 }
 
+/* Style for the navigation bar */
 nav ul {
   list-style: none;
   padding: 0;
+  text-align: center; /* Center the navigation links */
 }
 
 nav ul li {
-  display: inline;
+  display: inline-block;
   margin: 0 1rem;
 }
 
 nav ul li a {
-  color: #333; /* Distinct text color */
-  background-color: #f4f4f4; 
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  color: #333; /* Text color */
+  background-color: #f4f4f4; /* Light background color */
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px; /* Rounded button style */
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
 nav ul li a:hover {
-  background-color: #a0a0a0; /* Darker grey on hover */
+  background-color: #a0a0a0; /* Darker background on hover */
   color: #fff; /* White text on hover */
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Optional: Add a slight shadow to the navigation bar */
+nav {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
 }
 
 main {
