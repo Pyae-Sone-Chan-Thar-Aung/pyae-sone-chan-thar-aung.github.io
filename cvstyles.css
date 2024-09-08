@@ -1,0 +1,111 @@
+/* styles.css */
+
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background theme color representing achievement */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f3e1; /* Soft gold-like background */
+  color: #333;
+  padding: 20px;
+}
+
+/* Center-align header content */
+header {
+  background-color: #ffcc00; /* Gold background */
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Style for all section headers */
+h2 {
+  font-size: 1.75em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+/* Image styles with hover transformation */
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Section specific styling */
+h2.AUS, h2.AYLP, h2.UNESCO, h2.ayo, h2.ASEANFestival, h2.GLC, h2.ktu {
+  color: #005ea6;
+  font-size: 1.5em;
+  margin-top: 15px;
+}
+
+/* Style for the "Back to Main Page" link */
+a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #005ea6;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+  background-color: #003f73;
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  body {
+    padding: 10px;
+  }
+}
+
+/* Animation for headers */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
