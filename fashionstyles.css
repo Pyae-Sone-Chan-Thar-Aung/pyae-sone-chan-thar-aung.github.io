@@ -19,6 +19,9 @@ h1 {
   text-align: center;
   font-weight: 750;
   color: #333;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text; /* Clip the gradient to the text */
+    color: transparent; /* Make the text transparent */
   margin: 30px 0;
   font-size: 2.5em; /* Larger, cleaner font size */
 }
