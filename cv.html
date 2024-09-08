@@ -3,70 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Achievement</title>
-  <link rel="stylesheet" href="cvstyles.css">
+  <title>Personal Achievements</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <header>
     <div class="container">
-        <h1>Personal Achievement</h1>
+      <h1>Personal Achievements</h1>
     </div>
   </header>
 
-  <img src="AUS (12).jpg" alt="Picture Taken in NUS"> 
-  <img src="AUS.jpg" alt="Picture Taken in NUS">
-  <img src="AUS (16).jpg" alt="Picture Taken in NUS">
-  <img src="AUS (13).jpg" alt="Picture Taken in NUS">
-  <img src="AUS (31).jpg" alt="Picture Taken in NUS">
-  <img src="AUS (32).jpg" alt="Picture Taken in NUS">
-  
-  <h2 class="AUS">Former Delegate - Asian Undergraduate Symposium 2024 at the National University of Singapore</h2>
+  <!-- Image section for AUS -->
+  <div class="image-container">
+    <div class="image-wrapper">
+      <input type="radio" id="aus1" name="aus-group" checked>
+      <label for="aus1">
+        <img src="AUS (12).jpg" alt="Picture Taken in NUS">
+      </label>
+    </div>
+    <div class="image-wrapper">
+      <input type="radio" id="aus2" name="aus-group">
+      <label for="aus2">
+        <img src="AUS (13).jpg" alt="Picture Taken in NUS">
+      </label>
+    </div>
+    <div class="image-wrapper">
+      <input type="radio" id="aus3" name="aus-group">
+      <label for="aus3">
+        <img src="AUS (16).jpg" alt="Picture Taken in NUS">
+      </label>
+    </div>
+  </div>
+  <h2>Former Delegate - Asian Undergraduate Symposium 2024 at the National University of Singapore</h2>
 
-  <img src="CED (3).JPG" alt="Picture Taken in CED">
-  <img src="CED (2).JPG" alt="Picture Taken in CED">
-  <img src="CED.jpg" alt="Picture Taken in CED">
-  <h2>Former Delegate - Community Engagement for Development Program 2024 at Surabraya Indonesia</h2>
+  <!-- Image section for CED -->
+  <div class="image-container">
+    <div class="image-wrapper">
+      <input type="radio" id="ced1" name="ced-group" checked>
+      <label for="ced1">
+        <img src="CED (2).JPG" alt="Picture Taken in CED">
+      </label>
+    </div>
+    <div class="image-wrapper">
+      <input type="radio" id="ced2" name="ced-group">
+      <label for="ced2">
+        <img src="CED (3).JPG" alt="Picture Taken in CED">
+      </label>
+    </div>
+    <div class="image-wrapper">
+      <input type="radio" id="ced3" name="ced-group">
+      <label for="ced3">
+        <img src="CED.jpg" alt="Picture Taken in CED">
+      </label>
+    </div>
+  </div>
+  <h2>Former Delegate - Community Engagement for Development Program 2024 at Surabaya, Indonesia</h2>
 
-  <img src="AYLP1.jpg" alt="Picture Taken in AYLP"> 
-  <img src="AYLP3.jpg" alt="Picture Taken in AYLP">
-  <img src="AYLP5.jpg" alt="Picture Taken in AYLP">
-  <h2 class="AYLP">Former Delegate - ASEAN Young Leaders
-    Program 2023, Jakarta, Indonesia</h2>
+  <!-- Image section for AYLP -->
+  <div class="image-container">
+    <div class="image-wrapper">
+      <input type="radio" id="aylp1" name="aylp-group" checked>
+      <label for="aylp1">
+        <img src="AYLP1.jpg" alt="Picture Taken in AYLP">
+      </label>
+    </div>
+    <div class="image-wrapper">
+      <input type="radio" id="aylp2" name="aylp-group">
+      <label for="aylp2">
+        <img src="AYLP3.jpg" alt="Picture Taken in AYLP">
+      </label>
+    </div>
 
-  <img src="EU (2).jpg" alt="Picture Taken in EU in ASEAN">
-  <img src="EU (1).jpg" alt="Picture Taken in EU in ASEAN">
-  <h2 class="eu">Representative of Myanmar’s Disable Youths in
-    4th ASEAN-EU Cooperation</h2>
-  
-  <img src="unesco (1).webp" alt="Picture Taken in UNESCO Model">
-  <img src="unesco (2).webp" alt="Picture Taken in UNESCO Model">
-  <img src="unesco (3).webp" alt="Picture Taken in UNESCO Model">
-  <h2 class="UNESCO">Ambassador of Myanmar in UNESCO First
-    International Model 2022</h2>
+    <div class="image-wrapper">
+      <input type="radio" id="aylp3" name="aylp-group">
+      <label for="aylp3">
+        <img src="AYLP5.jpg" alt="Picture Taken in AYLP">
+      </label>
+    </div>
+  </div>
+  <h2>Former Delegate - ASEAN Young Leaders Program 2023, Jakarta, Indonesia</h2>
 
-    <img src="AYDF.jpg" alt="Picture Taken in ASEAN Youth Digital Forum">
-  <h2 class="ayo">Myanmar Youth Leader in ASEAN Youth Digital
-      Forum, organized by ASEAN Youth Organization 2021</h2>
+  <!-- Image section for ASEAN-EU Cooperation -->  <div class="image-container">    <div class="image-wrapper">      <input type="radio" id="eu1" name="eu-group" checked>      <label for="eu1">        <img src="EU (1).jpg" alt="Picture Taken in EU in ASEAN">      </label>    </div>    <div class="image-wrapper">      <input type="radio" id="eu2" name="eu-group">      <label for="eu2">        <img src="EU (2).jpg" alt="Picture Taken in EU in ASEAN">      </label>    </div>  </div>  <h2>Representative of Myanmar’s Disabled Youths in the 4th ASEAN-EU Cooperation</h2>
+    <!-- Image section for UNESCO -->  <div class="image-container">    <div class="image-wrapper">      <input type="radio" id="unesco1" name="unesco-group" checked>      <label for="unesco1">        <img src="unesco (1).webp" alt="Picture Taken in UNESCO Model">      </label>    </div>    <div class="image-wrapper">      <input type="radio" id="unesco2" name="unesco-group">      <label for="unesco2">        <img src="unesco (2).webp" alt="Picture Taken in UNESCO Model">      </label>    </div>    <div class="image-wrapper">      <input type="radio" id="unesco3" name="unesco-group">      <label for="unesco3">        <img src="unesco (3).webp" alt="Picture Taken in UNESCO Model">      </label>    </div>  </div>  <h2>Ambassador of Myanmar in UNESCO First International Model 2022</h2>
+    <!-- Image section for ASEAN Youth Digital Forum -->  <div class="image-container">    <div class="image-wrapper">      <input type="radio" id="aydf1" name="aydf-group" checked>      <label for="aydf1">        <img src="AYDF.jpg" alt="Picture Taken in ASEAN Youth Digital Forum">      </label>    </div>  </div>  <h2>Myanmar Youth Leader in ASEAN Youth Digital Forum, organized by ASEAN Youth Organization 2021</h2>
+    <!-- Image section for ASEAN Festival -->  <div class="image-container">    <div class="image-wrapper">      <input type="radio" id="aseanfest1" name="aseanfest-group" checked>      <label for="aseanfest1">        <img src="ASEANFestival (1).jpg" alt="Picture Taken in ASEAN Festival">      </label>    </div>    <div class="image-wrapper">      <input type="radio" id="aseanfest2" name="aseanfest-group">      <label for="aseanfest2">        <img src="ASEANFestival (2).jpg" alt="Picture Taken in ASEAN Festival">      </label>    </div>    <div class="image-wrapper">      <input type="radio" id="aseanfest3" name="aseanfest-group">      <label for="aseanfest3">        <img src="ASEANFestival (3).jpg" alt="Picture Taken in ASEAN Festival">      </label>    </div>  </div>  <h2>Winner - ASEAN Festival 2021: Secured wins in Cuisine and Digital Photography competitions</h2>
+    <!-- Image section for Global Leaders Club -->  <div class="image-container">    <div class="image-wrapper">      <input type="radio" id="glc1" name="glc-group" checked>      <label for="glc1">        <img src="GLC (1).jpg" alt="Picture Taken in GLC">      </label>    </div>    <div class="image-wrapper">      <input type="radio" id="glc2" name="glc-group">      <label for="glc2">        <img src="GLC (2).jpg" alt="Picture Taken in GLC">      </label>    </div>  </div>  <h2>President of Global Leaders Club, University of the Immaculate Conception, Philippines (2023 - Present)</h2>
+    <!-- Image section for Kyaing Tong University -->  <div class="image-container">    <div class="image-wrapper">      <input type="radio" id="ktu1" name="ktu-group" checked>      <label for="ktu1">        <img src="KTU.jpeg" alt="Picture Taken in Kyaing Tong University">      </label>    </div>  </div>  <h2>Former Student Ambassador of Kyaing Tong University, Myanmar (2019 - 2021)</h2>
+    <!-- Link back to main page -->  <br>  <a href="index.html">Back to Main Page</a>
 
-
-  <img src="ASEANFestival (1).jpg" alt="Picture Taken in ASEAN Festival">
-  <img src="ASEANFestival (2).jpg" alt="Picture Taken in ASEAN Festival">
-  <img src="ASEANFestival (3).jpg" alt="Picture Taken in ASEAN Festival">
-  <h2 class="ASEANFestival">Winner - ASEAN Festival 2021: Secured wins in
-        Cuisine and Digital Photography competitions</h2>
-  
-  <img src="GLC (2).jpg" alt="Picture Taken in CHED">
-  <img src="GLC (1).jpg" alt="Picture Taken in CHED">
-  <h2 class="GLC">President of Global Leaders Club, University of the
-    Immaculate Conception, Philippines (2023
-   Present)</h2>
-
-  <img src="KTU.jpeg" alt="Picture Taken in KTU">
-  <h2 class="ktu">Former Student Ambassador of Kyaing Tong
-    University, Myanmar(2019 - 2021)</h2>
-
-  <br>
-	    <a href="index.html">Back to Main Page</a>
 </body>
 </html>
