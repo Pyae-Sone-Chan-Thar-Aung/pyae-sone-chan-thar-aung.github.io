@@ -1,0 +1,52 @@
+/* styles.css */
+
+/* Reset default margin and padding */
+body, h1, h2, h3, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Center-align header content */
+h1 {
+  text-align: center;
+  font-weight: bold;
+  color: #333; /* Choose a suitable color */
+  margin: 20px 0;
+}
+
+/* Style images */
+img {
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style paragraphs */
+p {
+  line-height: 1.6;
+  background-color: #f9f9f9; /* Light gray background */
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Style list items */
+li {
+  font-size: 16px;
+  color: #555; /* Dark gray text color */
+}
+
+/* Style contact information */
+#contact {
+  background-color: #f0f0f0; /* Lighter gray background */
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Style the "Back to Main Page" link */
+a {
+  text-decoration: none;
+  color: #0074d9; /* Blue link color */
+}
+
+a:hover {
+  text-decoration: underline;
+}
