@@ -18,15 +18,14 @@ h1 {
 img {
   max-width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-bottom: 20px; /* Space below images */
 }
 
 /* Style paragraphs */
 p {
   line-height: 1.6;
-  background-color: #f9f9f9; /* Light gray background */
-  padding: 10px;
-  margin: 0.5in 0 20px 0.5in; /* 0.5-inch padding to the left and top */
-  border-radius: 4px; /* Rounded corners */
+  padding-left: 0.5in; /* 0.5-inch padding to the left */
+  margin-bottom: 20px;
 }
 
 /* Style list items */
@@ -38,11 +37,10 @@ li {
 
 /* Style contact information */
 #contact {
-  background-color: #f0f0f0; /* Lighter gray background */
-  padding: 10px;
+  padding-left: 0.5in; /* 0.5-inch padding to the left */
   font-weight: bold;
   border-top: 1px solid #ddd; /* Separation line */
-  margin: 0.5in 0.5in 20px 0.5in; /* 0.5-inch padding to the left, top, and bottom */
+  margin-bottom: 20px;
 }
 
 /* Style the "Back to Main Page" link */
