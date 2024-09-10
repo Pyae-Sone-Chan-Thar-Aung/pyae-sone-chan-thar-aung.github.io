@@ -62,6 +62,7 @@ img {
   padding: 12px;
   background-color: #ffcc00;
   margin: 30px;
+  cursor: pointer;
 }
 
 
@@ -69,7 +70,8 @@ img {
 img:focus {
   transform: scale(1.5);
   z-index: 10;
-  outline: none;
+  outline:none;
+ 
 }
 
 
