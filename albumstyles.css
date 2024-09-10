@@ -1,30 +1,4 @@
-/* Style the "Back to Main Page" link */
-a {
-  color: #0074d9;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
 
-a:hover {
-  color: #005ea6;
-  text-decoration: underline;
-}
-
-
-:root {font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: #000;
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
 
 * {
   box-sizing: border-box;
