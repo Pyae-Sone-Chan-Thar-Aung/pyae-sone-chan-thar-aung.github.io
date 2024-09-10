@@ -59,6 +59,22 @@ img {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.4s ease, box-shadow 0.3s ease;
+  padding: 12px;
+  background-color: #ffcc00;
+  margin: 30px;
+}
+
+
+
+img:focus {
+  transform: scale(1.5);
+  z-index: 10;
+  outline: none;
+}
+
+
+img:focus-visible{
+  outline: 2px solid #005ea6;
 }
 
 /* Animation: slide to left or right on hover */
