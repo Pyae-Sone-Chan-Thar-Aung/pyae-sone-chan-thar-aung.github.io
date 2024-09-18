@@ -1,0 +1,241 @@
+.title{
+  color: rgb(243, 110, 22);
+  font-family: Arial;
+  font-size: 50px;
+  font-weight: bold;
+  text-align:justify;
+}
+.rows{
+  text-decoration: color(white rgb(255, 255, 255) rgb(255, 255, 255) rgb(255, 255, 255));
+  padding: 10px;
+  text-align: center;
+  width: 300px;
+  height: 50px;
+}
+.table{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+.automata{
+  background-color: greenyellow;
+}
+.mml{
+  background-color: aqua;
+}
+.networking{
+  background-color: rgb(55, 55, 248);
+}
+.contem{
+  background-color: yellow;
+}
+.im{
+  background-color: rgb(224, 70, 121);
+}
+.algo{
+  background-color: gold;
+}
+.webdev{
+  background-color: plum;
+}
+.oop{
+  background-color: blueviolet;
+}
+.pe{
+  background-color: red;
+}
+.sia{
+  background-color: darkcyan;
+}
+.tabletitle{
+  color: green;
+  font-family: Arial;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+.room{
+  text-align: center;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4a90e2;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+/* Section styles */
+section {
+  margin: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  border: 2px solid #4a90e2;
+  padding: 15px;
+  text-align: center;
+}
+
+.rows {
+  background-color: #f9f9f9;
+}
+
+.rows:nth-child(even) {
+  background-color: #efefef;
+}
+
+/* Classroom lists */
+.floor-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.classroom {
+  background-color: #e0f7fa;
+  border-radius: 8px;
+  padding: 15px;
+  width: 200px;
+}
+
+.floorlist {
+  list-style: none;
+  padding: 0;
+}
+
+.floorlist li {
+  font-weight: bold;
+}
+
+/* Media container */
+.media-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.media-item {
+  flex: 1;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+}
+
+/* Form styles */
+form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+input[type="submit"], input[type="reset"] {
+  width: 100px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+  background-color: #357ab8;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .floor-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .media-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .media-item {
+      width: 100%;
+  }
+ 
+      .floor-container {
+        display: flex;
+        gap: 20px;
+    
+      }
+
+      .floor {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 20vh; 
+    }
+    .room{
+      text-align: center;
+      color: chocolate;
+      font-family: Arial;
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 45px;
+      margin-bottom: 20px;
+      
+    }
+    .classroom{
+      flex: 2;
+    }
+    .floorlist{
+      width: 100px;
+      font-weight: bold;
+    }
+    .media-container {
+    display: flex;
+    gap: 20px; }
+
+   .media-item {
+    flex: 1; 
+   }
+ 
+
+}
