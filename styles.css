@@ -6,13 +6,6 @@ body {
   color: #333;
 }
 
-.container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 1rem;
-  flex: 10;
-  display: flex;
-}
 
 header {
   background-color: #2c3e50;
