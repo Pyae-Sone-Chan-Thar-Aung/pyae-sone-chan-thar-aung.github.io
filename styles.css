@@ -5,7 +5,11 @@ body {
   background: #f4f4f4;
   color: #333;
 }
-
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+}
 
 header {
   background-color: #2c3e50;
