@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Activities</title>
+    <!-- Link your CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .rows{
+        text-decoration: color(white rgb(255, 255, 255) rgb(255, 255, 255) rgb(255, 255, 255));
+        padding: 10px;
+        text-align: center;
+        width: 300px;
+        height: 50px;
+      }
+      .automata{
+        background-color: greenyellow;
+      }
+      .mml{
+        background-color: aqua;
+      }
+      .networking{
+        background-color: rgb(55, 55, 248);
+      }
+      .contem{
+        background-color: yellow;
+      }
+      .im{
+        background-color: rgb(224, 70, 121);
+      }
+      .algo{
+        background-color: gold;
+      }
+      .webdev{
+        background-color: plum;
+      }
+      .oop{
+        background-color: blueviolet;
+      }
+      .pe{
+        background-color: red;
+      }
+      .sia{
+        background-color: darkcyan;
+      }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Class Activities</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="class-activities.html">Class Activities</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section 1: Lists Example -->
+    <section>
+        <h2>Classroom Lists</h2>
+
+        <h3>Second Floor</h3>
+        <ul>
+          <ol>
+            <li>L201</li>
+            <li>L202</li>
+            <li>L203</li>
+            <li>IOT</li>
+          </ol>
+        </ul>
+        <h3>Third Floor</h3>
+        <ul>
+          <ol>
+            <li>304</li>
+            <li>305</li>
+            <li>307</li>
+          </ol>
+        </ul>
+    </section>
+
+    <!-- Section 2: Table Example -->
+    <section>
+        <h2>BSCS-2A Class Schedule</h2>
+        <table border="5" style="margin: none;; color: #000; border-style: solid; border-color: rgb(43, 7, 143);">
+            <tr class="rows">
+              <th>Class Schedule</th> 
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+            </tr>
+            <tr class="rows">
+                <th>7:30 AM - 9:00 AM</th>
+                <td></td>
+                <td class="contem">Contemporary World</td>
+                <td></td>
+                <td></td>
+                <td class="contem">Contemporary World</td>
+            </tr>
+            <tr class="rows">
+                <th>9:00 AM - 12:00 PM</th>
+                <td class="automata" rowspan="2">Automata</td>
+                <td class="im" rowspan="2">IM</td>
+                <td class="webdev" rowspan="2">WebDev</td>
+                <td class="oop" rowspan="2">OOP1</td>
+                <td></td>
+
+            </tr>
+            <tr class="rows">
+              <th>10:00 AM - 12:00 PM</th>
+             
+              <td class="pe">PE3</td>
+            </tr>
+            <tr class="rows">
+              <th>12:00 PM - 1:00 PM</th>
+              <td colspan="5"><strong>Lunch Break</strong></td>
+            </tr>
+            <tr class="rows">
+              <th>1:00 PM - 2:30 PM</th>
+              <td class="mml">MML2</td>
+              <td class="algo" rowspan="2">Algorithms</td>
+              <td></td>
+              <td class="mml">MML2</td>
+              <td class="sia" rowspan="2">SIA</td>
+            </tr>
+            <tr class="rows">
+              <th>2:30 PM - 4:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+           
+            <tr class="rows">
+              <th>3:00 PM - 4:30 PM</th>
+              <td class="networking" rowspan="2">Networking</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="rows">
+              <th>4:30 PM - 6:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Section 3: Form Example -->
+    <section>
+        <h2>HTML5 Forms</h2>
+        <form action="#">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <!-- Section 4: Media Elements (Images, Links, Sound, Video) -->
+    <section>
+        <h2>Media Examples</h2>
+
+        <!-- Image -->
+        <h3>Project Proposal</h3>
+        <img src="main/photo/Final Poster (1).png" alt="Example Image" width="300">
+
+        <!-- Video -->
+        <h3>Video test</h3>
+        <video width="320" height="240" controls>
+            <source src="Vvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Audio -->
+        <h3>Hello Mic Test</h3>
+        <audio controls>
+            <source src="audio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Link Example -->
+        <h3>Link Example</h3>
+        <a href="https://github.com/pyae-sone-chan-thar-aung">Visit My GitHub</a>
+    </section>
+
+</body>
+</html>
