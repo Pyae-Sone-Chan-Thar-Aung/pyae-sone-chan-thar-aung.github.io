@@ -1,77 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Album</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        /* Basic styling for readability */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <form action="">
+        <fieldset>
+            <legend>Contact Information</legend>
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
 
-  <div>
-    <video width="320" height="240" controls>
-      <source src="Vvideo.mp4" type="video/mp4">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password">
 
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <form action="">
-    <fieldset>
-      <legend>Contact</legend>
-      <p><label> Name: </label>
-          <input type="text" placeholder="type here">
-      </p>
-      <p>
-        <label>Password: </label>
-        <input type="password" placeholder="type password">
-      </p>
-      <p>
-        <label>Write your message</label>
-      </p>
-      <p>
-        
-        <textarea name="essay" id="essay" rows="10" cols="40"></textarea>
-      </p>
-      <p>
-        <label>Gender</label>
-        <select>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Not Specify">Not Specify</option>
-        </select>
-      </p>
-      <p>
-        <label>My Hobby</label>
-        <input type="checkbox">Biking
-        <input type="checkbox">Traelling
-        <input type="checkbox">Hiking
-        <input type="checkbox">Swimming
-      </p>
-      <label>Education</label>
-      <input type="radio">YADANA 
-      <input type="radio">UIC
-      <input type="radio">KTU
-      <p>
-        <input type="button" placeholder="Click">
-        <input type="reset">
-        <input type="submit">       
-      </p>
-      <p>
-        <button type="button">HELLO</button>
-      </p>
-      <p>
-        <input type="datetime-local">
-        <input type="week">
-        <input type="month">
-        <input type="color">
-        <input type="number" max="99" min="0" value="55">
-        <input type="search" placeholder="search">
-        <input type="tel">
-        <input type="url">
-        <input type="email">
-        <input type="file">
-      </p>
-    </fieldset>
-  </form>
+            <label for="message">Write your message:</label>
+            <textarea id="message" rows="5" placeholder="Type your message here"></textarea>
 
+            <label for="gender">Gender:</label>
+            <select id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="NotSpecify">Prefer not to specify</option>
+            </select>
+
+            <label>Hobbies:</label>
+            <input type="checkbox" id="biking"> <label for="biking">Biking</label>
+            <input type="checkbox" id="traveling"> <label for="traveling">Traveling</label>
+            <input type="checkbox" id="hiking"> <label for="hiking">Hiking</label>
+            <input type="checkbox" id="swimming"> <label for="swimming">Swimming</label>
+
+            <label>Education:</label>
+            <input type="radio" id="yadana" name="education" value="YADANA">
+            <label for="yadana">YADANA</label>
+            <input type="radio" id="uic" name="education" value="UIC">
+            <label for="uic">UIC</label>
+            <input type="radio" id="ktu" name="education" value="KTU">
+            <label for="ktu">KTU</label>
+
+            <button type="button">Submit</button>
+        </fieldset>
+    </form>
 </body>
 </html>
