@@ -237,5 +237,16 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     flex: 1; 
    }
  
+   a {
+    color: #0074d9;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #005ea6;
+    text-decoration: underline;
+  }
 
 }

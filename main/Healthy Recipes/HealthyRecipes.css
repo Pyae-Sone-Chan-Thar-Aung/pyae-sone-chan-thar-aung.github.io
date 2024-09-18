@@ -1,0 +1,40 @@
+
+
+img {
+  height: 150px;
+}
+
+.description {
+  font-size: 20px;
+}
+
+#cook-time {
+  font-weight: bold;
+}
+
+.ingredients li {
+  list-style: square;
+}
+
+p.time {
+  color: gray;
+}
+
+.external-link {
+  color: seagreen;
+}
+
+h1, h2, p, li {
+  font-family: Arial, Helvetica, sans-serif;
+}
+a {
+  color: #0074d9;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #005ea6;
+  text-decoration: underline;
+}
