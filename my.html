@@ -7,12 +7,24 @@
     <!-- Link your CSS file -->
     <link rel="stylesheet" href="style.css">
     <style>
+      .title{
+        color: rgb(243, 110, 22);
+        font-family: Arial;
+        font-size: 50px;
+        font-weight: bold;
+        text-align:justify;
+      }
       .rows{
         text-decoration: color(white rgb(255, 255, 255) rgb(255, 255, 255) rgb(255, 255, 255));
         padding: 10px;
         text-align: center;
         width: 300px;
         height: 50px;
+      }
+      .table{
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
       }
       .automata{
         background-color: greenyellow;
@@ -44,157 +56,263 @@
       .sia{
         background-color: darkcyan;
       }
+      .tabletitle{
+        color: green;
+        font-family: Arial;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .floor-container {
+        display: flex;
+        gap: 20px;
+    
+      }
+
+      .floor {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 20vh; 
+    }
+    .room{
+      text-align: center;
+      color: chocolate;
+      font-family: Arial;
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 45px;
+      margin-bottom: 20px;
+      
+    }
+    .classroom{
+      flex: 2;
+    }
+    .floorlist{
+      width: 100px;
+      font-weight: bold;
+    }
+    .media-container {
+    display: flex;
+    gap: 20px; }
+
+   .media-item {
+    flex: 1; 
+   }
+ 
+
 
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Class Activities</h1>
+        <h1 class="title">Class Activities</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="class-activities.html">Class Activities</a></li>
+                <li><a href="index.html"><strong>Back to Home Page</strong></a></li>
+                <li><a href="main/fashion/fashion.html" target="_blank">Fashion Blog</a></li>
+                <li><a href="main/Healthy Recipes/HealthyRecipes.html">Healthy Recipes</a></li>
             </ul>
         </nav>
     </header>
-
-    <!-- Section 1: Lists Example -->
     <section>
-        <h2>Classroom Lists</h2>
+      <h2 class="tabletitle">BSCS-2A Class Schedule</h2>
+      <table class="table" border="5" style=" color: #000; border-style: solid; border-color: rgb(43, 7, 143);">
+          <tr class="rows">
+            <th>Class Schedule</th> 
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+          </tr>
+          <tr class="rows">
+              <th>7:30 AM - 9:00 AM</th>
+              <td></td>
+              <td class="contem">Contemporary World</td>
+              <td></td>
+              <td></td>
+              <td class="contem">Contemporary World</td>
+          </tr>
+          <tr class="rows">
+              <th>9:00 AM - 12:00 PM</th>
+              <td class="automata" rowspan="2">Automata</td>
+              <td class="im" rowspan="2">IM</td>
+              <td class="webdev" rowspan="2">WebDev</td>
+              <td class="oop" rowspan="2">OOP1</td>
+              <td></td>
 
-        <h3>Second Floor</h3>
-        <ul>
+          </tr>
+          <tr class="rows">
+            <th>10:00 AM - 12:00 PM</th>
+           
+            <td class="pe">PE3</td>
+          </tr>
+          <tr class="rows">
+            <th>12:00 PM - 1:00 PM</th>
+            <td colspan="5"><strong>Lunch Break</strong></td>
+          </tr>
+          <tr class="rows">
+            <th>1:00 PM - 2:30 PM</th>
+            <td class="mml">MML2</td>
+            <td class="algo" rowspan="2">Algorithms</td>
+            <td></td>
+            <td class="mml">MML2</td>
+            <td class="sia" rowspan="2">SIA</td>
+          </tr>
+          <tr class="rows">
+            <th>2:30 PM - 4:00 PM</th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+         
+          <tr class="rows">
+            <th>3:00 PM - 4:30 PM</th>
+            <td class="networking" rowspan="2">Networking</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="rows">
+            <th>4:30 PM - 6:00 PM</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+      </table>
+  </section>
+
+  <h2 class="room">Classroom Lists</h2>
+  <div class="floor">
+  <section class="floor-container">
+        <div class="classroom">
+        <ul class="floorlist">
+          <li>Second Floor</li>
           <ol>
             <li>L201</li>
             <li>L202</li>
             <li>L203</li>
             <li>IOT</li>
           </ol>
-        </ul>
-        <h3>Third Floor</h3>
-        <ul>
+          </ul>
+        </div>
+        <div class="classroom">
+          <ul class="floorlist">
+          <li>Third Floor</li>
           <ol>
             <li>304</li>
             <li>305</li>
             <li>307</li>
           </ol>
         </ul>
+      </div>
+     
     </section>
+  </div>
 
-    <!-- Section 2: Table Example -->
+  <section>
+    <div class="media-container">
+      <div class="media-item">
+          <h3>Project Proposal</h3>
+          <img src="main/photo/Final Poster (1).png" alt="Example Image" width="300">
+      </div>
+      <div class="media-item">
+          <h3>Video test</h3>
+          <video width="320" height="240" controls>
+              <source src="Vvideo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+      <div class="media-item">
+          <h3>Hello Mic Test</h3>
+          <audio controls>
+              <source src="main/Dream Big - Jeremy Korpas.mp3" type="audio/mp3">
+              Your browser does not support the audio element.
+          </audio>
+      </div>
+  </div>
+  
+    <h3>Link Example</h3>
+    <a href="https://github.com/pyae-sone-chan-thar-aung">Visit My GitHub</a>
+    <br><br>
+</section>
+
     <section>
-        <h2>BSCS-2A Class Schedule</h2>
-        <table border="5" style="margin: none;; color: #000; border-style: solid; border-color: rgb(43, 7, 143);">
-            <tr class="rows">
-              <th>Class Schedule</th> 
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
-            </tr>
-            <tr class="rows">
-                <th>7:30 AM - 9:00 AM</th>
-                <td></td>
-                <td class="contem">Contemporary World</td>
-                <td></td>
-                <td></td>
-                <td class="contem">Contemporary World</td>
-            </tr>
-            <tr class="rows">
-                <th>9:00 AM - 12:00 PM</th>
-                <td class="automata" rowspan="2">Automata</td>
-                <td class="im" rowspan="2">IM</td>
-                <td class="webdev" rowspan="2">WebDev</td>
-                <td class="oop" rowspan="2">OOP1</td>
-                <td></td>
-
-            </tr>
-            <tr class="rows">
-              <th>10:00 AM - 12:00 PM</th>
+       
+        <Form action="">
+          <fieldset>
+              <h1>Want to connect with me?</h1>
+              <p>
+                  <label>Name: </label>
+                  <input type="text" placeholder="username">
+              </p>
+              <p>
+                  <label>Password: </label>
+                  <input type="password" placeholder="****">
+              </p>
+              <p>
+                  <label>Email: </label>
+                  <input type="email" placeholder="abc@gmail.com">
+              </p>
+              <p>
+                <input type="file" placeholder="anyfile">
+                <br><br>
+                <input type="datetime-local">
+                <input type="week">
+              </p>
+              <p>
+                <p>
+                  <label>Gender</label>
+                  <select>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Not Specify">Not Specify</option>
+                  </select>
+                </p>
+                <p>
+                  <label>What is my program?</label>
+                  <br>
+                  <input type="checkbox">BSIT
+                  <input type="checkbox">BSSE
+                  <input type="checkbox">BSCS
+                  <input type="checkbox">BSIS
+                </p>
+                <label>What is my hometown?</label>
+                <br>
+                <input type="radio">Keng Tung
+                <input type="radio">Naypyitaw
+                <input type="radio">Hanoi
+                <br><br>
+                <input type="color">
+                <input type="number" max="99" min="0" value="55">
+                <input type="search" placeholder="search">
+                <input type="tel" placeholder="telephone">
+                <input type="url" placeholder="url: link">
+                <p>
+              </p>
+              <p>
+                <textarea name="comment" id="comment" placeholder="any suggestions"></textarea>
+              </p>
+              <p>
+                  <input type="reset">
              
-              <td class="pe">PE3</td>
-            </tr>
-            <tr class="rows">
-              <th>12:00 PM - 1:00 PM</th>
-              <td colspan="5"><strong>Lunch Break</strong></td>
-            </tr>
-            <tr class="rows">
-              <th>1:00 PM - 2:30 PM</th>
-              <td class="mml">MML2</td>
-              <td class="algo" rowspan="2">Algorithms</td>
-              <td></td>
-              <td class="mml">MML2</td>
-              <td class="sia" rowspan="2">SIA</td>
-            </tr>
-            <tr class="rows">
-              <th>2:30 PM - 4:00 PM</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-           
-            <tr class="rows">
-              <th>3:00 PM - 4:30 PM</th>
-              <td class="networking" rowspan="2">Networking</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr class="rows">
-              <th>4:30 PM - 6:00 PM</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-        </table>
-    </section>
+                  <input class="login-btn" type="submit" value="Submit">
+              </p>
+              <p>Connect directly? Email <span> <a href="mailto:paung_230000001724@uic.edu.ph">here</a></span></p>
+              
+  
+              
+          </fieldset>
+      </Form>
+      <br>
+      <nav>
+     <a href="index.html"><strong>Back to Home Page</strong></a>
 
-    <!-- Section 3: Form Example -->
-    <section>
-        <h2>HTML5 Forms</h2>
-        <form action="#">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name"><br><br>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email"><br><br>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password"><br><br>
-
-            <input type="submit" value="Submit">
-        </form>
-    </section>
-
-    <!-- Section 4: Media Elements (Images, Links, Sound, Video) -->
-    <section>
-        <h2>Media Examples</h2>
-
-        <!-- Image -->
-        <h3>Project Proposal</h3>
-        <img src="main/photo/Final Poster (1).png" alt="Example Image" width="300">
-
-        <!-- Video -->
-        <h3>Video test</h3>
-        <video width="320" height="240" controls>
-            <source src="Vvideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <!-- Audio -->
-        <h3>Hello Mic Test</h3>
-        <audio controls>
-            <source src="audio.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-
-        <!-- Link Example -->
-        <h3>Link Example</h3>
-        <a href="https://github.com/pyae-sone-chan-thar-aung">Visit My GitHub</a>
+      </nav>
     </section>
 
 </body>
