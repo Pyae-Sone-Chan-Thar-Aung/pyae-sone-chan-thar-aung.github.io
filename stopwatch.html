@@ -87,13 +87,13 @@
             bottom: 0;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 2px;
-            animation: wave 1s infinite;
+            animation: wave 0.5s infinite;
         }
 
         @keyframes wave {
-            0% { height: 10%; transform: translateX(0); }
-            50% { height: 60%; transform: translateX(10px); }
-            100% { height: 10%; transform: translateX(0); }
+            0% { height: 10%; transform: translateY(0); }
+            50% { height: 60%; transform: translateY(-10px); }
+            100% { height: 10%; transform: translateY(0); }
         }
 
         .wave div:nth-child(1) { left: 10%; animation-delay: 0s; }
@@ -108,11 +108,11 @@
     <button id="startStopwatch">Start Stopwatch</button>
     <div id="stopwatch">0:00</div>
     <div class="wave">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div style="height: 10%;"></div>
+        <div style="height: 10%;"></div>
+        <div style="height: 10%;"></div>
+        <div style="height: 10%;"></div>
+        <div style="height: 10%;"></div>
     </div>
     <div id="transcription"></div>
 
