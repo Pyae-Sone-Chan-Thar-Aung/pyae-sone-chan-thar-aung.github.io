@@ -238,15 +238,20 @@ input[type="submit"]:hover, input[type="reset"]:hover {
    }
  
    a {
-    color: #0074d9;
+    display: inline-block;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    background-color: #005ea6;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
   a:hover {
-    color: #005ea6;
-    text-decoration: underline;
+    background-color: #003f73;
+    transform: scale(1.1);
   }
 
 }
