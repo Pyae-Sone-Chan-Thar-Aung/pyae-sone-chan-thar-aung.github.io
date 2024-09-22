@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyae Sone Chan Thar Aung - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Chat box styles */
+        #chatbox {
+            position: fixed;
+            bottom: 70px; /* Adjusted to accommodate the icon */
+            right: 20px;
+            width: 300px;
+            max-width: 80%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: none; /* Hidden by default */
+        }
+        #chatbox header {
+            background: #0072ff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        #messages {
+            height: 200px;
+            padding: 10px;
+            overflow-y: auto;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .message {
+            margin: 5px 0;
+        }
+        .user-message {
+            text-align: right;
+            color: blue;
+        }
+        .ai-message {
+            text-align: left;
+            color: green;
+        }
+        #input-area {
+            display: flex;
+            padding: 5px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #send-button {
+            padding: 5px 10px;
+            background: #0072ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        #send-button:hover {
+            background: #005bb5;
+        }
+        #chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #0072ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pyae Sone Chan Thar Aung</h1>
+        <h2 id="role">Year 2 Computer Science Student</h2>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="main/personal achievement/cv.html">Achievement</a></li>
+                <li><a href="my.html" target="_blank">Exam</a></li>
+                <li><a href="stopwatch.html" target="_blank">StopWatch</a></li>
+                <li><a href="stop.html" target="_blank">Stop</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+      <section id="about" class="container">
+        <h2>About Me</h2>
+        <img src="main/photo/formal pic.jpg" alt="Pyae Sone Chan Thar Aung" class="profile-pic">
+        <p>I am a young Burmese youth; an enthusiastic tech addict and a problem-solver. Justice and the minor ethnic groups that reside in the mountainous regions of Myanmar are deep interests of mine, and I like to advocate for them through Information and Communication Technology. I am pursuing my undergraduate degree, Bachelor of Science in Computer Science at the University of the Immaculate Conception, Davao City, the Philippines. I was born and raised by a loving family. My dad is a skillful car driver, and my mom is a dedicated janitor. I have two elder sisters and I am the youngest in the family. I grew up in a mountainous area, far from our relatives. Now, I am living in Davao City, Philippines.</p>
+    </section>
+    <section id="favorites" class="container">
+        <h2>Favourites</h2>
+        <ul>
+            <li>Planting trees</li>
+            <li>Travelling</li>
+            <li>Cooking</li>
+            <li>Teaching</li>
+            <li>Petting animals</li>
+            <li>Watching movies</li>
+        </ul>
+    </section>
+    <section id="education" class="container">
+        <h2>Education</h2>
+        <ul>
+            <li>Preschool: St. Mary's Preschool <span class="completed">✔</span></li>
+            <li>Primary School: No.7 Basic Education High School, Kyaing Tong <span class="completed">✔</span></li>
+            <li>Middle School: No.7 Basic Education High School, Kyaing Tong <span class="completed">✔</span></li>
+            <li>High School: YADANA Private High School, Kyaing Tong <span class="completed">✔</span></li>
+            <li>University (First Year): Kyaing Tong University, English Language and Literature <span class="completed">✔</span></li>
+            <li>University (Second Year): Kyaing Tong University, English Language and Literature <span class="completed">✔</span></li>
+            <li>Due to the country's political crisis, I did not complete my degree at Kyaing Tong University, Myanmar.</li>
+            <li>Current University: University of the Immaculate Conception, Davao City, Philippines, Computer Science (First Year) <span class="completed">✔</span></li>
+            <li>Current University: University of the Immaculate Conception, Davao City, Philippines, Computer Science (Second Year)</li>
+        </ul>
+    </section>
+    <section id="projects" class="container">
+        <h2>School Projects</h2>
+        <p>WE L.E.A.D 3.0</p>
+        <p>UIC Ignacian Marian Leadership Training Bootcamp</p>
+        <p>StudentEvents Hub project</p>
+        
+    </section>
+    <section id="talents" class="container">
+        <h2>Talents</h2>
+        <ul>
+            <li>Writing</li>
+            <li>Dancing</li>
+            <li>Drawing</li>
+            <li>Leadership</li>
+            <li>Communicating</li>
+            <li>Speaking Multi-Language</li>
+        </ul>
+    </section>
+    </main>
+    <footer>
+        <div id="contact" class="container">
+            <address>
+                <strong>With Regards,</strong><br>
+                Pyae Sone Chan Thar Aung<br>
+                <a href="mailto:paung_230000001724@uic.edu.ph">paung_230000001724@uic.edu.ph</a><br>
+                University of the Immaculate Conception<br>
+                Davao City, the Philippines
+                <br>
+                <a href="https://www.facebook.com/MgPyaeSoneChanTharAung">Facebook</a> || <a href="https://www.instagram.com/pyaesone_chantharaung/">Instagram</a>
+            </address>
+        </div>
+    </footer>
+
+    <!-- Chat Icon -->
+    <div id="chat-icon">💬</div>
+
+    <!-- Chat Box -->
+    <div id="chatbox">
+        <header>Chat with Me</header>
+        <div id="messages"></div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Type a message..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const chatbox = document.getElementById('chatbox');
+        const chatIcon = document.getElementById('chat-icon');
+
+        const responses = {
+            "about you": "I'm a second-year Computer Science student passionate about technology and problem-solving.",
+            "education": "I studied at Kyaing Tong University before transferring to the University of the Immaculate Conception.",
+            "hobbies": "I love planting trees, traveling, cooking, and watching movies!",
+            "who are you": "I'm Pyae Sone Chan Thar Aung, a Computer Science student passionate about technology and advocacy.",
+            "projects": "I've worked on several school projects, including WE L.E.A.D 3.0 and StudentEvents Hub.",
+            "contact": "You can reach me at paung_230000001724@uic.edu.ph.",
+            "favorite hobbies": "My favorite hobbies include planting trees and teaching.",
+            "what do you study": "I study Computer Science at the University of the Immaculate Conception.",
+        };
+
+        let inactivityTimeout;
+
+        chatIcon.addEventListener('click', () => {
+            chatbox.style.display = chatbox.style.display === 'none' ? 'block' : 'none';
+            userInput.focus();
+            resetInactivityTimeout();
+        });
+
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+            resetInactivityTimeout();
+        });
+
+        function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, 'user');
+                userInput.value = '';
+                respond(userMessage);
+            }
+        }
+
+        function addMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', type === 'user' ? 'user-message' : 'ai-message');
+            messageDiv.textContent = message;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Text-to-speech
+            if (type === 'ai') {
+                speak(message);
+            }
+        }
+
+        function respond(userMessage) {
+            const lowerCaseMessage = userMessage.toLowerCase();
+            const response = responses[lowerCaseMessage] || "Sorry, I didn't understand that.";
+            addMessage(response, 'ai');
+        }
+
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+        }
+
+        function resetInactivityTimeout() {
+            clearTimeout(inactivityTimeout);
+            inactivityTimeout = setTimeout(() => {
+                chatbox.style.display = 'none';
+            }, 5000); // Hide after 5 seconds of inactivity
+        }
+    </script>
+</body>
+</html>
