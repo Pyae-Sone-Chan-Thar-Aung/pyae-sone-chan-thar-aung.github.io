@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stopwatch & Transcription</title>
+    <title>Voice Command & Stopwatch</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -73,7 +73,6 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Sound Wave Animation */
         .wave {
             position: relative;
             width: 100%;
@@ -104,7 +103,7 @@
     </style>
 </head>
 <body>
-    <h1>Stopwatch & Transcription</h1>
+    <h1>Voice Command & Stopwatch</h1>
     <button id="startStopwatch">Start Stopwatch</button>
     <div id="stopwatch">0:00</div>
     <div class="wave">
@@ -154,6 +153,7 @@
             recognition.onresult = (event) => {
                 const transcript = event.results[event.resultIndex][0].transcript;
                 transcriptionDisplay.innerHTML += `<p>${transcript}</p>`;
+                handleCommand(transcript.toLowerCase());
             };
 
             recognition.onend = () => {
@@ -163,6 +163,17 @@
             };
 
             recognition.start();
+        }
+
+        function handleCommand(command) {
+            if (command.includes('open the new tab')) {
+                window.open('about:blank', '_blank'); // Open new tab
+            } else if (command.includes('open the camera')) {
+                // You can customize this part based on your needs
+                alert('Opening camera is not supported in this demo.');
+            } else {
+                console.log('Command not recognized:', command);
+            }
         }
     </script>
 </body>
