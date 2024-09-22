@@ -145,16 +145,18 @@
                 transcriptionDisplay.innerHTML += `<p>Hello! How can I assist you today?</p>`;
             } else if (command.includes('how are you')) {
                 transcriptionDisplay.innerHTML += `<p>I'm just a program developed by Mr. Pyae, but I'm here to help you!</p>`;
-            } else if (command.includes('what is your name') || command.includes('who are you')) {
+            } else if (command.includes('who is your developer') || command.includes('who created you')) {
+                transcriptionDisplay.innerHTML += `<p>Mr. Pyae Sone Chan Thar Aung, a second year computer science student from UIC.</p>`;
+            } else if (command.includes('what is your name') || command.includes('whats your name') || command.includes('who are you')) {
                 transcriptionDisplay.innerHTML += `<p>I am your friendly assistant!</p>`;
             } else if (command.includes('i am sad') || command.includes('i am not ok')) {
                 transcriptionDisplay.innerHTML += `<p>I'm sorry to hear that. How can I help?</p>`;
             } else if (command.includes('i am fine') || command.includes('i am good')) {
                 transcriptionDisplay.innerHTML += `<p>Glad to hear! What would you like to do?</p>`;
-            } else if (command.includes('sing a song')) {
+            } else if (command.includes('sing a song') || command.includes('sing me a song')) {
                 const song = "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶";
                 transcriptionDisplay.innerHTML += `<p>Here’s a song: ${song}</p>`;
-            } else if (command.includes('tell me a story')) {
+            } else if (command.includes('tell me a story') || command.includes('tell a story') || command.includes('tell story')) {
                 const story = "Once upon a time, in the southern part of the Philippines, there was a royal king named Pyae Sone. He was the bravest emperor of the whole universe. When he was young, he studied the BS in Computer Science and he became one of the most successful Computer Scientists and he create a litter artificial world called 'Creature.' Welcome to the world, how can I help you";
                 transcriptionDisplay.innerHTML += `<p>Here's a story: ${story}</p>`;
             } else if (command.includes('wow')) {
@@ -183,6 +185,8 @@
                 transcriptionDisplay.innerHTML += `<p>You're welcome! I'm here to help!</p>`;
             } else if (command.includes('goodbye')) {
                 transcriptionDisplay.innerHTML += `<p>Goodbye! Have a great day!</p>`;
+            } else if (command.includes('byebye')) {
+                transcriptionDisplay.innerHTML += `<p>Byebye! Have a great day!</p>`;
             } else {
                 transcriptionDisplay.innerHTML += `<p>Sorry, I couldn't process that. Please try again.</p>`;
             }
