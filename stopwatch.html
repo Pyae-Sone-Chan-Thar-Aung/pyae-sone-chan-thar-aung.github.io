@@ -27,15 +27,11 @@
             color: white;
             cursor: pointer;
             transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         button:hover {
             background-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
-        }
-        button:active {
-            background-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(1px);
         }
         #stopwatch {
             font-size: 48px;
@@ -55,40 +51,29 @@
             overflow-y: auto;
             max-height: 300px;
         }
-        #transcription p {
-            margin: 10px 0;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            transition: background 0.3s;
-        }
-        #transcription p:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
         .wave {
-            position: relative;
-            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
             height: 60px;
             margin-top: 20px;
-            overflow: hidden;
+            width: 100%;
         }
         .wave div {
-            position: absolute;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 2px;
-            animation: wave 0.5s infinite;
+            width: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            animation: wave 0.5s infinite ease-in-out;
         }
         @keyframes wave {
-            0% { height: 10%; transform: translateY(0); }
-            50% { height: 60%; transform: translateY(-10px); }
-            100% { height: 10%; transform: translateY(0); }
+            0%, 100% { height: 10%; }
+            50% { height: 100%; }
         }
-        .wave div:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .wave div:nth-child(2) { left: 30%; animation-delay: 0.1s; }
-        .wave div:nth-child(3) { left: 50%; animation-delay: 0.2s; }
-        .wave div:nth-child(4) { left: 70%; animation-delay: 0.3s; }
-        .wave div:nth-child(5) { left: 90%; animation-delay: 0.4s; }
+        .wave div:nth-child(1) { animation-delay: 0s; }
+        .wave div:nth-child(2) { animation-delay: 0.1s; }
+        .wave div:nth-child(3) { animation-delay: 0.2s; }
+        .wave div:nth-child(4) { animation-delay: 0.3s; }
+        .wave div:nth-child(5) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -96,11 +81,11 @@
     <button id="startStopwatch">Start Stopwatch</button>
     <div id="stopwatch">0:00</div>
     <div class="wave">
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
     <div id="transcription"></div>
 
@@ -155,35 +140,39 @@
         }
 
         function handleCommand(command) {
-          if (command.includes('Hello')) {
-                transcriptionDisplay.innerHTML += `<p>Hello! How can I assist you today?</p>`;
-            } else if (command.includes('Hi')) {
-              transcriptionDisplay.innerHTML += `<p>Hi there! What can I do for you?</p>`;
-            } else if (command.includes('I am fine'||'I am good')) {
-                transcriptionDisplay.innerHTML += `<p>Nice! What can I assist you</p>`;
-            } else if (command.includes('I am sad'||'I am not ok')) {
-                transcriptionDisplay.innerHTML += `<p>Oh I am sorry to hear! What can I assist you</p>`;
-            }  else if (command.includes('open a new tab')) {
-                window.open('https://www.google.com', '_blank');
-                transcriptionDisplay.innerHTML += `<p>Opening a new tab for you! Feel free to explore!</p>`;
-            } else if (command.includes('open youtube')) {
-                window.open('https://www.youtube.com', '_blank');
-                transcriptionDisplay.innerHTML += `<p>Here’s YouTube. Enjoy learning!</p>`;
-            } else if (command.includes('open facebook')) {
-                window.open('https://www.facebook.com', '_blank');
-                transcriptionDisplay.innerHTML += `<p>Accessing Facebook. Stay connected!</p>`;
-            } else if (command.includes('open the camera')) {
-                alert('Camera access is not supported in this demo.'); 
-            } else if (command.includes('stop')) {
-                stopStopwatch(); 
-            } else if (command.includes('sing a song')) {
-                const song = "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶";
-                transcriptionDisplay.innerHTML += `<p>Here’s a song for you: ${song}</p>`;
-            } else if (command.includes('tell me a story')) {
-                const story = "Once upon a time, in a magical land, there lived a wise owl who helped children learn.";
-                transcriptionDisplay.innerHTML += `<p>Here's a story: ${story}</p>`;
+            const responses = {
+                'hi': 'Hello! How can I assist you today?',
+                'how are you': "I'm just a program developed by Mr. Pyae, but I'm here to help you!",
+                'who is your developer': "Mr. Pyae Sone Chan Thar Aung, a second year computer science student from UIC.",
+                'who created you': "Mr. Pyae Sone Chan Thar Aung, a second year computer science student from UIC.",
+                'who is your owner': "Mr. Pyae Sone Chan Thar Aung, a second year computer science student from UIC.",
+                'what is your name': 'I am your friendly assistant!',
+                'i am sad': "I'm sorry to hear that. How can I help?",
+                'i am fine': 'Glad to hear! What would you like to do?',
+                'curse': "As a program developed by Mr. Pyae, I do not support any negative behaviors",
+                'sing': "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶",
+                'story': "Once upon a time, in a realm of code, there was a brave developer named Pyae Sone...",
+                'wow': 'Thank you!',
+                'what can you do': 'I am here to assist you with various tasks!',
+                'open a new tab': 'Opening a new tab!',
+                'open youtube': 'Here’s YouTube. Enjoy!',
+                'open facebook': 'Accessing Facebook for you!',
+                'stop': 'Stopwatch has been stopped.',
+                'thank you': "You're welcome! I'm here to help!",
+                'goodbye': 'Goodbye! Have a great day!',
+                'bye-bye': 'Goodbye! Have a great day!',
+                'contact': 'Do you want to contact Mr. Pyae? Email: paung.uic.edu.ph'
+            };
+
+            const commandKeys = Object.keys(responses);
+            const foundCommand = commandKeys.find(key => command.includes(key));
+            if (foundCommand) {
+                transcriptionDisplay.innerHTML += `<p>${responses[foundCommand]}</p>`;
+                if (foundCommand === 'open a new tab') window.open('https://www.google.com', '_blank');
+                if (foundCommand === 'open youtube') window.open('https://www.youtube.com', '_blank');
+                if (foundCommand === 'open facebook') window.open('https://www.facebook.com', '_blank');
             } else {
-                transcriptionDisplay.innerHTML += `<p>Sorry, I didn't catch that. Could you try rephrasing it?</p>`;
+                transcriptionDisplay.innerHTML += `<p>Sorry, I couldn't process that. Please try again.</p>`;
             }
         }
     </script>
