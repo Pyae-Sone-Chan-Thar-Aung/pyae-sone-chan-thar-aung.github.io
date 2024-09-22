@@ -159,10 +159,18 @@
                 window.open('about:blank', '_blank'); // Open new tab
             } else if (command.includes('open youtube')) {
                 window.open('https://www.youtube.com', '_blank'); // Open YouTube
+            } else if (command.includes('open facebook')) {
+                window.open('https://www.facebook.com', '_blank'); // Open Facebook
             } else if (command.includes('open the camera')) {
                 alert('Camera access is not supported in this demo.'); // Placeholder for camera action
+            } else if (command.includes('sing a song')) {
+                const song = "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶";
+                transcriptionDisplay.innerHTML += `<p>${song}</p>`;
+            } else if (command.includes('tell me a story')) {
+                const story = "Once upon a time in a land far away, there was a brave knight who fought dragons.";
+                transcriptionDisplay.innerHTML += `<p>${story}</p>`;
             } else {
-                console.log('Command not recognized:', command);
+                transcriptionDisplay.innerHTML += `<p>Command not recognized. Please try again.</p>`;
             }
         }
     </script>
