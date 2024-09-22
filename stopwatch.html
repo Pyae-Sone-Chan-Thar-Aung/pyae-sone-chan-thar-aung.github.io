@@ -168,9 +168,10 @@
         function handleCommand(command) {
             if (command.includes('open the new tab')) {
                 window.open('about:blank', '_blank'); // Open new tab
+            } else if (command.includes('open youtube')) {
+                window.open('https://www.youtube.com', '_blank'); // Open YouTube
             } else if (command.includes('open the camera')) {
-                // You can customize this part based on your needs
-                alert('Opening camera is not supported in this demo.');
+                alert('Mrs. Babiera Camera is out of Date'); // Placeholder for camera action
             } else {
                 console.log('Command not recognized:', command);
             }
