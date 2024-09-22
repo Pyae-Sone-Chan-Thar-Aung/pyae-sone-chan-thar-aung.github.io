@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
             color: #fff;
             text-align: center;
             padding: 50px;
@@ -16,7 +16,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
         button {
             padding: 15px 30px;
@@ -27,7 +26,6 @@
             color: white;
             cursor: pointer;
             transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         button:hover {
             background-color: rgba(255, 255, 255, 0.3);
@@ -40,14 +38,12 @@
         #stopwatch {
             font-size: 48px;
             margin-top: 20px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
         #transcription {
             margin-top: 30px;
             padding: 20px;
             border-radius: 15px;
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             max-width: 600px;
             width: 100%;
             font-size: 22px;
@@ -60,48 +56,13 @@
             padding: 10px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
-            transition: background 0.3s;
         }
-        #transcription p:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .wave {
-            position: relative;
-            width: 100%;
-            height: 60px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-        .wave div {
-            position: absolute;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 2px;
-            animation: wave 0.5s infinite;
-        }
-        @keyframes wave {
-            0% { height: 10%; transform: translateY(0); }
-            50% { height: 60%; transform: translateY(-10px); }
-            100% { height: 10%; transform: translateY(0); }
-        }
-        .wave div:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .wave div:nth-child(2) { left: 30%; animation-delay: 0.1s; }
-        .wave div:nth-child(3) { left: 50%; animation-delay: 0.2s; }
-        .wave div:nth-child(4) { left: 70%; animation-delay: 0.3s; }
-        .wave div:nth-child(5) { left: 90%; animation-delay: 0.4s; }
     </style>
 </head>
 <body>
     <h1>Voice Command & Stopwatch</h1>
     <button id="startStopwatch">Start Stopwatch</button>
     <div id="stopwatch">0:00</div>
-    <div class="wave">
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-        <div style="height: 10%;"></div>
-    </div>
     <div id="transcription"></div>
 
     <script>
@@ -137,43 +98,43 @@
 
         function startTranscription() {
             const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.interimResults = false; // Final results only
+            recognition.interimResults = false;
 
             recognition.onresult = (event) => {
                 const transcript = event.results[event.resultIndex][0].transcript;
-                transcriptionDisplay.innerHTML += `<p>${transcript}</p>`;
-                handleCommand(transcript.toLowerCase());
+                transcriptionDisplay.innerHTML += `<p>You said: "${transcript}"</p>`;
+                handleCommand(transcript);
             };
 
             recognition.onend = () => {
                 if (isRunning) {
-                    startTranscription(); // Restart if stopwatch is running
+                    startTranscription();
                 }
             };
 
             recognition.start();
         }
 
-        function handleCommand(command) {
-          if (command.includes('open a new tab')) {
-                window.open('about:blank', '_blank');
-                transcriptionDisplay.innerHTML += `<p>Opening a new tab for you! Feel free to explore!</p>`;
-            } else if (command.includes('open youtube')) {
-                window.open('https://www.youtube.com', '_blank');
-                transcriptionDisplay.innerHTML += `<p>Here’s YouTube. Enjoy learning!</p>`;
-            } else if (command.includes('open facebook')) {
-                window.open('https://www.facebook.com', '_blank');
-                transcriptionDisplay.innerHTML += `<p>Accessing Facebook. Stay connected!</p>`;
-            } else if (command.includes('open the camera')) {
-                alert('Camera access is not supported in this demo.'); 
-            } else if (command.includes('sing a song')) {
-                const song = "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶";
-                transcriptionDisplay.innerHTML += `<p>Here’s a song for you: ${song}</p>`;
-            } else if (command.includes('tell me a story')) {
-                const story = "Once upon a time, in a magical land, there lived a wise owl who helped children learn.";
-                transcriptionDisplay.innerHTML += `<p>Here's a story: ${story}</p>`;
+        async function handleCommand(command) {
+            // Send command to the OpenAI API
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer YOUR_API_KEY' // Replace with your OpenAI API key
+                },
+                body: JSON.stringify({
+                    model: 'gpt-3.5-turbo',
+                    messages: [{ role: 'user', content: command }]
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const botResponse = data.choices[0].message.content;
+                transcriptionDisplay.innerHTML += `<p>Response: ${botResponse}</p>`;
             } else {
-                transcriptionDisplay.innerHTML += `<p>Sorry, I didn't catch that. Could you try rephrasing it?</p>`;
+                transcriptionDisplay.innerHTML += `<p>Sorry, I couldn't process that. Please try again.</p>`;
             }
         }
     </script>
