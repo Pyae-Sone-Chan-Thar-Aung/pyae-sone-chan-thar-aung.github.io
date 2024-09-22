@@ -161,9 +161,11 @@
                 transcriptionDisplay.innerHTML += `<p>Here's a story: ${story}</p>`;
             } else if (command.includes('wow')) {
                 transcriptionDisplay.innerHTML += `<p>Thank You</p>`;  
+            } else if (command.includes('what can you do') || command.includes('what else can you do')) {
+                transcriptionDisplay.innerHTML += `<p>I am here to assist you</p>`; 
             } else if (command.includes('curse')) {
                 transcriptionDisplay.innerHTML += `<p>I do not support cursing. But if it makes you happy, BITCH! YAWA! Thank You, anything else?</p>`;    
-            } else if (command.includes('curse again')) {
+            } else if (command.includes('can you curse again')) {
                 transcriptionDisplay.innerHTML += `<p>Sorry I am innocent!</p>`;  
             } else if (command.includes('What can you do?')) {
                 transcriptionDisplay.innerHTML += `<p>I am the program developed by Mr.Pyae. What I can assist you</p>`;
