@@ -18,7 +18,6 @@
             align-items: center;
             overflow: hidden;
         }
-
         button {
             padding: 15px 30px;
             font-size: 18px;
@@ -30,23 +29,19 @@
             transition: transform 0.2s, background 0.2s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-
         button:hover {
             background-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
-
         button:active {
             background-color: rgba(255, 255, 255, 0.4);
             transform: translateY(1px);
         }
-
         #stopwatch {
             font-size: 48px;
             margin-top: 20px;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
-
         #transcription {
             margin-top: 30px;
             padding: 20px;
@@ -60,7 +55,6 @@
             overflow-y: auto;
             max-height: 300px;
         }
-
         #transcription p {
             margin: 10px 0;
             padding: 10px;
@@ -68,11 +62,9 @@
             border-radius: 10px;
             transition: background 0.3s;
         }
-
         #transcription p:hover {
             background: rgba(255, 255, 255, 0.3);
         }
-
         .wave {
             position: relative;
             width: 100%;
@@ -80,7 +72,6 @@
             margin-top: 20px;
             overflow: hidden;
         }
-
         .wave div {
             position: absolute;
             bottom: 0;
@@ -88,13 +79,11 @@
             border-radius: 2px;
             animation: wave 0.5s infinite;
         }
-
         @keyframes wave {
             0% { height: 10%; transform: translateY(0); }
             50% { height: 60%; transform: translateY(-10px); }
             100% { height: 10%; transform: translateY(0); }
         }
-
         .wave div:nth-child(1) { left: 10%; animation-delay: 0s; }
         .wave div:nth-child(2) { left: 30%; animation-delay: 0.1s; }
         .wave div:nth-child(3) { left: 50%; animation-delay: 0.2s; }
@@ -166,12 +155,12 @@
         }
 
         function handleCommand(command) {
-            if (command.includes('open the new tab')) {
+            if (command.includes('open a new tab')) {
                 window.open('about:blank', '_blank'); // Open new tab
             } else if (command.includes('open youtube')) {
                 window.open('https://www.youtube.com', '_blank'); // Open YouTube
             } else if (command.includes('open the camera')) {
-                alert('Mrs. Babiera Camera is out of Date'); // Placeholder for camera action
+                alert('Camera access is not supported in this demo.'); // Placeholder for camera action
             } else {
                 console.log('Command not recognized:', command);
             }
