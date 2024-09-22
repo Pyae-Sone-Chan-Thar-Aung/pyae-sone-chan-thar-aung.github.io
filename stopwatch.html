@@ -155,8 +155,16 @@
         }
 
         function handleCommand(command) {
-          if (command.includes('open a new tab')) {
-                window.open('about:blank', '_blank');
+          if (command.includes('Hello')) {
+                transcriptionDisplay.innerHTML += `<p>Hello! How can I assist you today?</p>`;
+            } else if (command.includes('Hi')) {
+              transcriptionDisplay.innerHTML += `<p>Hi there! What can I do for you?</p>`;
+            } else if (command.includes('I am fine'||'I am good')) {
+                transcriptionDisplay.innerHTML += `<p>Nice! What can I assist you</p>`;
+            } else if (command.includes('I am sad'||'I am not ok')) {
+                transcriptionDisplay.innerHTML += `<p>Oh I am sorry to hear! What can I assist you</p>`;
+            }  else if (command.includes('open a new tab')) {
+                window.open('https://www.google.com', '_blank');
                 transcriptionDisplay.innerHTML += `<p>Opening a new tab for you! Feel free to explore!</p>`;
             } else if (command.includes('open youtube')) {
                 window.open('https://www.youtube.com', '_blank');
@@ -166,6 +174,8 @@
                 transcriptionDisplay.innerHTML += `<p>Accessing Facebook. Stay connected!</p>`;
             } else if (command.includes('open the camera')) {
                 alert('Camera access is not supported in this demo.'); 
+            } else if (command.includes('stop')) {
+                stopStopwatch(); 
             } else if (command.includes('sing a song')) {
                 const song = "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶";
                 transcriptionDisplay.innerHTML += `<p>Here’s a song for you: ${song}</p>`;
