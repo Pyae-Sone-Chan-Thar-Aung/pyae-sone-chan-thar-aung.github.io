@@ -90,11 +90,14 @@
     <div id="transcription"></div>
 
     <script>
-        let seconds = 0;
-        let interval;
-        let isRunning = false;
-        const stopwatchDisplay = document.getElementById('stopwatch');
-        const transcriptionDisplay = document.getElementById('transcription');
+      let seconds = 0;
+      let interval;
+      let isRunning = false;
+      const stopwatchDisplay = document.getElementById('stopwatch');
+      const transcriptionDisplay = document.getElementById('transcription');
+      let isSpeaking = false;
+      let recognition;
+      let isRecognizing = false; // Prevents multiple starts
 
         // Button event listener to start/stop the stopwatch and transcription
         document.getElementById('startStopwatch').addEventListener('click', () => {
@@ -124,7 +127,7 @@
         }
 
         function startTranscription() {
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             recognition.interimResults = false;
 
             recognition.onresult = (event) => {
@@ -156,46 +159,22 @@
             });
         }
 
+        function speak(text) {
+            isSpeaking = true; // Set flag to true
+            const utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+            recognition.stop(); // Stop recognition when speaking
+
+            utterance.onend = () => {
+                isSpeaking = false; // Reset flag
+                if (isRunning) {
+                    startTranscription(); // Restart recognition after speaking
+                }
+            };
+        }
+
         function handleCommand(command) {
-          let recognition; // Define recognition in a broader scope
-
-function startTranscription() {
-    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.interimResults = false;
-
-    recognition.onresult = (event) => {
-        const transcript = event.results[event.resultIndex][0].transcript;
-        transcriptionDisplay.innerHTML += `<p>${transcript}</p>`;
-        handleCommand(transcript.toLowerCase());
-    };
-
-    recognition.onend = () => {
-        if (isRunning) {
-            startTranscription(); // Restart if stopwatch is running
-        }
-    };
-
-    recognition.start();
-}
-
-function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    speechSynthesis.speak(utterance);
-
-    // Stop recognition when speaking
-    if (recognition) {
-        recognition.stop();
-    }
-
-    utterance.onend = () => {
-        // Restart recognition after speaking
-        if (isRunning) {
-            startTranscription();
-        }
-    };
-}
-
-// The rest of your existing code...
+            if (isSpeaking) return; // Ignore commands if speaking
 
             const responses = {
                 'hi': 'Hello! How can I assist you today?',
@@ -206,7 +185,7 @@ function speak(text) {
                 'i am sad': "I'm sorry to hear that. How can I help?",
                 'i am fine': 'Glad to hear! What would you like to do?',
                 'sing': "🎶 Twinkle, twinkle, little star, How I wonder what you are! 🎶",
-                'story': "Once upon a time, in the southern part of the Philippines, there was a royal king named Pyae Sone. He was the bravest emperor of the whole universe. When he was young, he studied the BS in Computer Science and he became one of the most successful Computer Scientists and he create a litter artificial world called 'Creature.' Welcome to the world, how can I help you today",
+                'story': "Once upon a time, in the southern part of the Philippines, there was a royal king named Pyae Sone. He was the bravest emperor of the whole universe. When he was young, he studied the BS in Computer Science and he became one of the most successful Computer Scientists and he created a little artificial world called 'Creature.' Welcome to the world, how can I help you today?",
                 'wow': 'Thank you!',
                 'what can you do': 'I can assist you with various tasks, like telling stories or opening websites!',
                 'open a new tab': () => window.open('https://www.google.com', '_blank'),
@@ -222,77 +201,24 @@ function speak(text) {
                 'time': `The current time is ${new Date().toLocaleTimeString()}.`,
                 'date': `Today's date is ${new Date().toLocaleDateString()}.`,
                 'help': 'I can assist you with a variety of tasks. Just ask!',
-                'where am I': getLocation,
-                'weather': getWeather,
                 // Add more commands here as needed
             };
 
-              const commandKeys = Object.keys(responses);
-              const foundCommand = commandKeys.find(key => command.includes(key));
-               if (foundCommand) {
-                 const response = typeof responses[foundCommand] === 'function' 
-                  ? responses[foundCommand]() 
-                  : responses[foundCommand];
-        
-               transcriptionDisplay.innerHTML += `<p>${response}</p>`;
-              speak(response); // Speak the response
-            } else {
-              const noResponse = "Sorry, I couldn't process that. Please try again.";
-              transcriptionDisplay.innerHTML += `<p>${noResponse}</p>`;
-             speak(noResponse); // Speak the default response
-        }
-        }
+            const commandKeys = Object.keys(responses);
+            const foundCommand = commandKeys.find(key => command.includes(key));
+            if (foundCommand) {
+                const response = typeof responses[foundCommand] === 'function' 
+                    ? responses[foundCommand]() 
+                    : responses[foundCommand];
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const { latitude, longitude } = position.coords;
-                    transcriptionDisplay.innerHTML += `<p>Your location coordinates are Latitude: ${latitude}, Longitude: ${longitude}.</p>`;
-                    getWeather(latitude, longitude); // Optionally fetch weather info
-                }, () => {
-                    transcriptionDisplay.innerHTML += `<p>Unable to retrieve your location.</p>`;
-                });
+                transcriptionDisplay.innerHTML += `<p>${response}</p>`;
+                speak(response); // Speak the response
             } else {
-                transcriptionDisplay.innerHTML += `<p>Geolocation is not supported by this browser.</p>`;
+                const noResponse = "Sorry, I couldn't process that. Please try again.";
+                transcriptionDisplay.innerHTML += `<p>${noResponse}</p>`;
+                speak(noResponse); // Speak the default response
             }
         }
-
-        function getWeather(latitude, longitude) {
-            const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
-            const apiUrl = `https://api.openweathermap.org/data/25/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const weather = `Current weather: ${data.weather[0].description}, Temperature: ${data.main.temp}°C`;
-                    transcriptionDisplay.innerHTML += `<p>${weather}</p>`;
-                })
-                .catch(error => {
-                    transcriptionDisplay.innerHTML += `<p>Unable to retrieve weather data: ${error.message}</p>`;
-                });
-               }
-               function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    speechSynthesis.speak(utterance);
-    
-    // Stop recognition when speaking
-    recognition.stop();
-
-    utterance.onend = () => {
-        // Restart recognition after speaking
-        if (isRunning) {
-            startTranscription();
-        }
-    };
-}
-
-
     </script>
 </body>
 </html>
-
