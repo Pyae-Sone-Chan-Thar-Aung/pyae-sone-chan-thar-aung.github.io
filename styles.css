@@ -4,6 +4,7 @@ body {
   padding: 0;
   background: #f4f4f4;
   color: #333;
+  background-image: url(https://content.codecademy.com/courses/learn-css-selectors-visual-rules/hypnotize_bg.png);
 }
 .container {
   width: 80%;
@@ -11,11 +12,18 @@ body {
   padding: 1rem;
 }
 
+#talents{
+  margin-bottom: 10%;
+}
+
 header {
   background-color: #2c3e50;
   color: #fff;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   text-align: center;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 /* Define the animation */
 @keyframes changeRole {
@@ -80,6 +88,9 @@ nav {
 
 main {
   padding: 2rem 0;
+  position: relative;
+  top: 150px;
+  display: inline-block;
 }
 
 section {
@@ -122,6 +133,8 @@ footer {
   color: #fff;
   text-align: center;
   padding: 1rem 0;
+  position:sticky;
+
 }
 
 footer address {
@@ -139,6 +152,7 @@ footer a {
   .container {
       width: 90%;
   }
+
 
   header h1 {
       font-size: 2rem;
