@@ -64,7 +64,7 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
-  url(main/olivia-woodruff-portfolio/style.css)
+  background-image: url(https://content.codecademy.com/courses/learn-css-selectors-visual-rules/hypnotize_bg.png);
 }
 
 header {
@@ -237,7 +237,6 @@ input[type="submit"]:hover, input[type="reset"]:hover {
    .media-item {
     flex: 1; 
    }
- 
    a {
     display: inline-block;
     text-decoration: none;
