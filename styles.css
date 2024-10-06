@@ -31,7 +31,7 @@ p.aboutMe{
 .header-bar {
   background-color: var(--header-bg);
   color: var(--link-color);
-  padding: 1.5rem 0;
+  padding: 2 rem 0;
   text-align: center;
   position: sticky;
   top: 0;
@@ -343,7 +343,7 @@ body {
 .nav__list {
   display: flex;
   gap: 2rem;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 0;
   list-style: none;
 }
@@ -394,7 +394,7 @@ body {
 }
 
 #move{
-  font-size: 2rem;
+  font-size: 1.5rem;
   
 }
 #move::after {
