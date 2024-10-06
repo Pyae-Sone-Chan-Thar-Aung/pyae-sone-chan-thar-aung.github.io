@@ -24,6 +24,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
 }
 
 .header-bar h1 {
@@ -57,13 +58,15 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 1rem;
+  margin: 0 1.5rem; /* Increased spacing for better separation */
 }
 
 nav ul li a {
   color: var(--link-color);
-  padding: 1rem;
+  padding: 0.75rem 1.5rem; /* Adjusted padding for better button feel */
   text-decoration: none;
+  border-radius: 5px; /* Added border-radius for rounded buttons */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
 nav ul li a:hover {
@@ -114,12 +117,12 @@ ul li {
   color: var(--completed-color);
   font-weight: bold;
 }
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem; /* Increased gap for better spacing between items */
 }
-
 
 .footer-container {
   background-color: #2c3e50; /* Dark background for contrast */
@@ -191,6 +194,7 @@ ul li {
       display: none; /* Hide image on very small screens */
   }
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -237,7 +241,7 @@ body {
 }
 
 .nav__link {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(58, 247, 58, 0.75);
   font-size: 15px;
   text-decoration: none;
   transition: color 0.4s;
@@ -245,7 +249,7 @@ body {
 
 .nav__link:hover,
 .nav__link:focus {
-  color: rgba(255, 255, 255, 1);
+  color: rgb(87, 204, 251);
 }
 
 .hamburger {
@@ -257,7 +261,7 @@ body {
 .bar {
   width: 27px;
   height: 2px;
-  background: white;
+  background: rgb(222, 228, 180);
   margin: 5px 0;
   transition: all 0.3s;
 }
