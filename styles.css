@@ -20,6 +20,7 @@ body {
   padding: 20px; /* General body padding */
   background: var(--bg-color);
   color: var(--text-color);
+  background-image: url(https://content.codecademy.com/courses/learn-css-selectors-visual-rules/hypnotize_bg.png);
 }
 
 .header-bar {
