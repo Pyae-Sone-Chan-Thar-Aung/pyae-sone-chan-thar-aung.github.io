@@ -12,7 +12,17 @@ img{
 h3{
   color: rgb(0, 0, 0);
 }
+a {
+  color: #0074d9;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
 
+a:hover {
+  color: #005ea6;
+  text-decoration: underline;
+}
 /*------------------------------------------
 Responsive Grid Media Queries - 1280, 1024, 768, 480
  1280-1024   - desktop (default grid)
