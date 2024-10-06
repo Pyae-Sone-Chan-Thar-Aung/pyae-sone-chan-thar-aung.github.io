@@ -23,7 +23,7 @@ body {
   background-image: url(https://content.codecademy.com/courses/learn-css-selectors-visual-rules/hypnotize_bg.png);
 }
 
-p{
+p.aboutMe{
   text-align: justify;
   line-height: 1.8;
 }
