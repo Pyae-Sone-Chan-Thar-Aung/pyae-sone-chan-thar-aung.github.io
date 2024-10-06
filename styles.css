@@ -166,6 +166,19 @@ ul li {
   transform: scale(1.1);
 }
 
+a {
+  color: #0074d9;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #005ea6;
+  text-decoration: underline;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .social-icon {
@@ -325,7 +338,7 @@ body {
 }
 
 .nav__link {
-  color: rgba(58, 247, 58, 0.75);
+  color: rgba(0, 0, 255, 0.75);
   padding: 0.75rem 1.25rem;
   text-decoration: none;
   border-radius: 5px;
