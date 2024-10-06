@@ -23,6 +23,11 @@ body {
   background-image: url(https://content.codecademy.com/courses/learn-css-selectors-visual-rules/hypnotize_bg.png);
 }
 
+p{
+  text-align: justify;
+  line-height: 1.8;
+}
+
 .header-bar {
   background-color: var(--header-bg);
   color: var(--link-color);
@@ -135,6 +140,15 @@ ul li {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1.5rem;
+}
+#weLead{
+  color: red;
+}
+#uicEcho{
+  color: #09f60d;
+}
+#habit{
+  color: goldenrod;
 }
 
 .footer-container {
