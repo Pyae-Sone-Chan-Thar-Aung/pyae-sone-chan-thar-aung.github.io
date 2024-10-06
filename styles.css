@@ -8,6 +8,12 @@
   --card-bg: #ecf0f1;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -157,48 +163,42 @@ ul li {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .social-icon {
-      width: 25px; /* Smaller icons on mobile */
-      height: 25px;
+    width: 25px; /* Smaller icons on mobile */
+    height: 25px;
   }
 }
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
   .hamburger {
-      display: block; /* Show hamburger icon on smaller screens */
+    display: block; /* Show hamburger icon on smaller screens */
   }
 
   nav ul {
-      flex-direction: column; /* Stack items vertically in mobile view */
-      display: none; /* Hide by default */
-      position: absolute;
-      background: var(--header-bg);
-      top: 60px; /* Adjust based on header height */
-      left: 0;
-      width: 100%;
-      z-index: 5;
+    flex-direction: column; /* Stack items vertically in mobile view */
+    display: none; /* Hide by default */
+    position: absolute;
+    background: var(--header-bg);
+    top: 60px; /* Adjust based on header height */
+    left: 0;
+    width: 100%;
+    z-index: 5;
   }
 
   nav ul.active {
-      display: flex; /* Show menu when active */
+    display: flex; /* Show menu when active */
   }
 
   .profile-pic {
-      width: 100px; /* Smaller size on smaller screens */
-      height: 100px; /* Smaller size on smaller screens */
+    width: 100px; /* Smaller size on smaller screens */
+    height: 100px; /* Smaller size on smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .profile-pic {
-      display: none; /* Hide image on very small screens */
+    display: none; /* Hide image on very small screens */
   }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -268,23 +268,23 @@ body {
 
 @media (max-width: 650px) {
   .nav__list {
-      position: fixed;
-      top: 60px;
-      left: -100%;
-      background: rgb(19, 22, 26);
-      flex-direction: column;
-      gap: 20px;
-      padding: 10px 0;
-      width: 100%;
-      transition: transform 0.3s ease-in-out;
+    position: fixed;
+    top: 60px;
+    left: -100%;
+    background: rgb(19, 22, 26);
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 0;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
   }
 
   .nav__list.nav__open {
-      transform: translateX(100%);
+    transform: translateX(100%);
   }
 
   .hamburger {
-      display: flex;
+    display: flex;
   }
 }
 
@@ -341,7 +341,7 @@ body {
   width: 0;
   height: 2px;
   background: var(--link-hover-bg); /* Border color */
-  transition: width 0.3s ease, left 0.3s ease;
+  transition: width 0.3s ease, left 0.3s ease
 }
 
 .nav__link:hover::after {
