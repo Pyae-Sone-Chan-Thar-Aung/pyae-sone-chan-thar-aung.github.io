@@ -17,7 +17,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 20px; /* General body padding */
   background: var(--bg-color);
   color: var(--text-color);
 }
@@ -30,7 +30,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header-bar h1 {
@@ -64,15 +64,15 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 1.5rem; /* Increased spacing for better separation */
+  margin: 0 1.5rem;
 }
 
 nav ul li a {
   color: var(--link-color);
-  padding: 0.75rem 1.5rem; /* Adjusted padding for better button feel */
+  padding: 0.75rem 1.5rem;
   text-decoration: none;
-  border-radius: 5px; /* Added border-radius for rounded buttons */
-  transition: background-color 0.3s ease; /* Smooth transition for hover */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
@@ -81,12 +81,18 @@ nav ul li a:hover {
 
 /* Main content styles */
 main {
-  padding: 2rem 0;
+  padding: 2rem 0; /* Increased padding for main */
+}
+
+.container {
+  max-width: 800px; /* Set a maximum width for content */
+  margin: 0 auto; /* Center the content */
 }
 
 .profile-section {
   display: flex;
   align-items: center;
+  margin-bottom: 100px; /* Space between sections */
 }
 
 .profile-pic {
@@ -98,7 +104,7 @@ main {
 }
 
 section {
-  margin-bottom: 3rem;
+  margin-bottom: 100px; /* Set margin to 100px for spacing */
 }
 
 section h2 {
@@ -127,43 +133,43 @@ ul li {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem; /* Increased gap for better spacing between items */
+  gap: 1.5rem;
 }
 
 .footer-container {
-  background-color: #2c3e50; /* Dark background for contrast */
-  color: #fff; /* White text */
+  background-color: #2c3e50;
+  color: #fff;
   text-align: center;
   padding: 2rem 0;
-  margin-top: 2rem; /* Add space above */
+  margin-top: 2rem;
 }
 
 .footer-container address {
   margin: 0;
   font-style: normal;
-  margin-bottom: 1rem; /* Space between address and icons */
+  margin-bottom: 1rem;
 }
 
 .social-links {
   display: flex;
-  justify-content: center; /* Center the icons */
-  gap: 20px; /* Space between icons */
+  justify-content: center;
+  gap: 20px;
 }
 
 .social-icon {
-  width: 30px; /* Size of the icons */
+  width: 30px;
   height: 30px;
-  transition: transform 0.3s ease; /* Smooth scaling on hover */
+  transition: transform 0.3s ease;
 }
 
 .social-icon:hover {
-  transform: scale(1.1); /* Slightly enlarge on hover */
+  transform: scale(1.1);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .social-icon {
-    width: 25px; /* Smaller icons on mobile */
+    width: 25px;
     height: 25px;
   }
 }
@@ -171,40 +177,40 @@ ul li {
 /* Responsive Styles */
 @media (max-width: 1024px) {
   .hamburger {
-    display: block; /* Show hamburger icon on smaller screens */
+    display: block;
   }
 
   nav ul {
-    flex-direction: column; /* Stack items vertically in mobile view */
-    display: none; /* Hide by default */
+    flex-direction: column;
+    display: none;
     position: absolute;
     background: var(--header-bg);
-    top: 60px; /* Adjust based on header height */
+    top: 60px;
     left: 0;
     width: 100%;
     z-index: 5;
   }
 
   nav ul.active {
-    display: flex; /* Show menu when active */
+    display: flex;
   }
 
   .profile-pic {
-    width: 100px; /* Smaller size on smaller screens */
-    height: 100px; /* Smaller size on smaller screens */
+    width: 100px;
+    height: 100px;
   }
 }
 
 @media (max-width: 480px) {
   .profile-pic {
-    display: none; /* Hide image on very small screens */
+    display: none;
   }
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background-color: #e8f0f7;
-  height: 200vh; /* Just for scrolling */
+  height: 200vh;
 }
 
 .header {
@@ -302,34 +308,34 @@ body {
 
 /* Navigation styles */
 .nav {
-  background-color: var(--header-bg); /* Use the header background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: var(--header-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav__list {
   display: flex;
-  gap: 2rem; /* Space between items */
-  padding: 1rem; /* Padding around the list */
-  margin: 0; /* Remove default margin */
-  list-style: none; /* Remove bullet points */
+  gap: 2rem;
+  padding: 1rem;
+  margin: 0;
+  list-style: none;
 }
 
 .nav__item {
-  position: relative; /* Position for pseudo-element (if needed) */
+  position: relative;
 }
 
 .nav__link {
   color: rgba(58, 247, 58, 0.75);
-  padding: 0.75rem 1.25rem; /* Padding for better click area */
-  text-decoration: none; /* Remove underline */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav__link:hover,
 .nav__link:focus {
-  background-color: var(--link-hover-bg); /* Change background on hover */
-  color: #fff; /* Ensure text is readable on hover */
+  background-color: var(--link-hover-bg);
+  color: #fff;
 }
 
 /* Optional: Add a border under each nav item on hover */
@@ -337,14 +343,38 @@ body {
   content: '';
   position: absolute;
   left: 50%;
-  bottom: -5px; /* Position below the link */
+  bottom: -5px;
   width: 0;
   height: 2px;
-  background: var(--link-hover-bg); /* Border color */
-  transition: width 0.3s ease, left 0.3s ease
+  background: var(--link-hover-bg);
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .nav__link:hover::after {
-  width: 100%; /* Expand to full width on hover */
-  left: 0; /* Align to the left */
+  width: 100%;
+  left: 0;
+}
+
+#move{
+  font-size: 12px;
+  color: #09f60d;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  font-weight: bold;
+  margin-top: 7px;
+  margin-bottom: 80px; 
+}
+
+#move{
+  font-size: 2rem;
+  
+}
+#move::after {
+  content: '|'; 
+  position: absolute;
+  right: 1;
+  top: 1;
+  animation: blink 1.8s step-start infinite;
+  color: #17252a; 
+  font-size: 20px;
 }

@@ -11,7 +11,7 @@
     <header class="header-bar">
         <div class="header__content">
             <a href="main/photo/formal pic.jpg" class="logo"></a>
-            <h2 id="role">Pyae Sone Chan Thar Aung</h2>
+            <h2 id="role">Hello, this is <span id="move"></span></h2>
             <nav class="nav">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="#about" class="nav__link">About Me</a></li>
@@ -29,13 +29,16 @@
     </header>
   
     <main>
+        <br>
         <section id="about" class="container">
+            <br>
             <h2>About Me</h2>
             <div class="profile-section">
                 <img src="main/photo/formal pic.jpg" alt="Pyae Sone Chan Thar Aung" class="profile-pic">
                 <p>I am a dedicated Burmese youth with a passion for technology and problem-solving. My interests include advocating for justice and the rights of ethnic minorities in Myanmar’s mountainous regions, which I pursue through Information and Communication Technology. Currently, I am pursuing a Bachelor of Science in Computer Science at the University of the Immaculate Conception in Davao City, Philippines.</p>
             </div>
         </section>
+    
         <section id="favorites" class="container">
             <h2>Favourites</h2>
             <ul class="grid">
@@ -47,6 +50,7 @@
                 <li>🎬 Watching movies</li>
             </ul>
         </section>
+        <br> <br>
         <section id="education" class="container">
             <h2>Education</h2>
             <ul>
@@ -57,6 +61,7 @@
                 <li>University of the Immaculate Conception, Davao City, Philippines, Computer Science (Year 2)</li>
             </ul>
         </section>
+        <br> <br>
         <section id="projects" class="container">
             <h2>School Projects</h2>
             <div class="project-list">
@@ -65,6 +70,7 @@
                 <p>StudentEvents Hub project</p>
             </div>
         </section>
+        <br> <br>
         <section id="talents" class="container">
             <h2>Talents</h2>
             <ul class="grid">
@@ -76,6 +82,7 @@
                 <li>🌍 Speaking Multi-Language</li>
             </ul>
         </section>
+        <br> <br>
         <div class="footer-container">
             <address>
                 <strong>With Regards,</strong><br>
@@ -96,6 +103,41 @@
     </main>
 
     <script>
+        const moveElement = document.getElementById('move');
+const moves = ['Pyae Sone C. Aung'];
+let moveIndex = 0;
+let charIndex = 0;
+let deleting = false;
+let typingSpeed = 200; 
+let deletingSpeed = 400; 
+let pauseBeforeDeleting = 1000; 
+let pauseAfterDeleting = 2000; 
+
+function type() {
+    if (deleting) {
+        if (charIndex > 9) {
+            moveElement.textContent = moves[moveIndex].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(type, deletingSpeed);
+        } else {
+            deleting = false;
+            moveIndex = (moveIndex + 1) % moves.length;
+            setTimeout(type, pauseBeforeDeleting);
+        }
+    } else {
+        if (charIndex < moves[moveIndex].length) {
+            moveElement.textContent = moves[moveIndex].substring(0, charIndex + 1);
+            charIndex++;
+            setTimeout(type, typingSpeed);
+        } else {
+            deleting = true;
+            setTimeout(type, pauseAfterDeleting); 
+        }
+    }
+}
+
+type();
+
         const navList = document.querySelector('.nav__list');
         const hamburger = document.querySelector('.hamburger');
 
