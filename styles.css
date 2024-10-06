@@ -299,3 +299,52 @@ body {
 .hamburger__open .bar:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
+
+/* Navigation styles */
+.nav {
+  background-color: var(--header-bg); /* Use the header background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.nav__list {
+  display: flex;
+  gap: 2rem; /* Space between items */
+  padding: 1rem; /* Padding around the list */
+  margin: 0; /* Remove default margin */
+  list-style: none; /* Remove bullet points */
+}
+
+.nav__item {
+  position: relative; /* Position for pseudo-element (if needed) */
+}
+
+.nav__link {
+  color: rgba(58, 247, 58, 0.75);
+  padding: 0.75rem 1.25rem; /* Padding for better click area */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+.nav__link:hover,
+.nav__link:focus {
+  background-color: var(--link-hover-bg); /* Change background on hover */
+  color: #fff; /* Ensure text is readable on hover */
+}
+
+/* Optional: Add a border under each nav item on hover */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px; /* Position below the link */
+  width: 0;
+  height: 2px;
+  background: var(--link-hover-bg); /* Border color */
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav__link:hover::after {
+  width: 100%; /* Expand to full width on hover */
+  left: 0; /* Align to the left */
+}
