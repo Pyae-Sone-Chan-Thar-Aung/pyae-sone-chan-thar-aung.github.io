@@ -1,0 +1,65 @@
+body{
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+img{
+  height: 500px;
+  width: 500px;
+}
+
+/*------------------------------------------
+Responsive Grid Media Queries - 1280, 1024, 768, 480
+ 1280-1024   - desktop (default grid)
+ 1024-768    - tablet landscape
+ 768-480     - tablet 
+ 480-less    - phone landscape & smaller
+--------------------------------------------*/
+@media all and (min-width: 1024px) and (max-width: 1280px) { 
+  body{
+      background-color: red;
+      transition: background-color 0.5s, color 0.5s; /* Smooth transition */
+  }
+
+  img{
+      height: 500px;
+      width: 400px;
+  }
+  
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) { 
+  body{
+      background-color: green;
+      transition: background-color 0.5s, color 0.5s; /* Smooth transition */
+  }
+
+  img{
+      height: 400px;
+      width: 300px;
+  }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) { 
+  body{
+      background-color: blue;
+      transition: background-color 0.5s, color 0.5s; /* Smooth transition */
+  }
+  img{
+      height: 300px;
+      width: 200px;
+  }
+}
+
+@media all and (max-width: 480px) { 
+  body{
+      background-color: yellow;
+      transition: background-color 0.5s, color 0.5s; /* Smooth transition */
+  }
+
+  img{
+      display: none;
+  }
+}
