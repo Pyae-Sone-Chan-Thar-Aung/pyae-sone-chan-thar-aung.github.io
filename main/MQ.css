@@ -9,6 +9,9 @@ img{
   height: 500px;
   width: 500px;
 }
+h3{
+  color: rgb(0, 0, 0);
+}
 
 /*------------------------------------------
 Responsive Grid Media Queries - 1280, 1024, 768, 480
@@ -27,6 +30,10 @@ Responsive Grid Media Queries - 1280, 1024, 768, 480
       height: 500px;
       width: 400px;
   }
+
+  h3{
+    color: rgb(13, 246, 67);
+  }
   
 }
 
@@ -40,6 +47,10 @@ Responsive Grid Media Queries - 1280, 1024, 768, 480
       height: 400px;
       width: 300px;
   }
+
+  h3{
+    color: white;
+  }
 }
 
 @media all and (min-width: 480px) and (max-width: 768px) { 
@@ -51,6 +62,10 @@ Responsive Grid Media Queries - 1280, 1024, 768, 480
       height: 300px;
       width: 200px;
   }
+  h3{
+    color: yellow;
+  }
+
 }
 
 @media all and (max-width: 480px) { 
@@ -61,5 +76,9 @@ Responsive Grid Media Queries - 1280, 1024, 768, 480
 
   img{
       display: none;
+  }
+
+  h3{
+    color: blue;
   }
 }
