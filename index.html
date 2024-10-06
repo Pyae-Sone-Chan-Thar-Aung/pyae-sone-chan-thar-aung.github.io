@@ -4,40 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pyae Sone Chan Thar Aung - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-   </head>
+    <link rel="stylesheet" href="test.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <body>
-    <header>
-      
-            <h1>Pyae Sone Chan Thar Aung</h1>
-            <h2 id="role">Year 2 Computer Science Student</h2>
-            <nav>
-                <ul>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="main/personal achievement/cv.html">Achievement</a></li>
-                    <li><a href="my.html" target="_blank">Activities</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    
-                    
+    <header class="header-bar">
+        <div class="header__content">
+            <a href="main/photo/formal pic.jpg" class="logo"></a>
+            <h2 id="role">Pyae Sone Chan Thar Aung</h2>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#about" class="nav__link">About Me</a></li>
+                    <li class="nav__item"><a href="main/personal achievement/cv.html" class="nav__link">Achievement</a></li>
+                    <li class="nav__item"><a href="my.html" class="nav__link">Activities</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                 </ul>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </nav>
-      
+        </div>
     </header>
+  
     <main>
         <section id="about" class="container">
             <h2>About Me</h2>
-            <img src="main/photo/formal pic.jpg" alt="Pyae Sone Chan Thar Aung" class="profile-pic">
-            <p>I am a young Burmese youth; an enthusiastic tech addict and a problem-solver. Justice and the minor ethnic groups that reside in the mountainous regions of Myanmar are deep interests of mine, and I like to advocate for them through Information and Communication Technology. I am pursuing my undergraduate degree, Bachelor of Science in Computer Science at the University of the Immaculate Conception, Davao City, the Philippines. I was born and raised by a loving family. My dad is a skillful car driver, and my mom is a dedicated janitor. I have two elder sisters and I am the youngest in the family. I grew up in a mountainous area, far from our relatives. Now, I am living in Davao City, Philippines.</p>
+            <div class="profile-section">
+                <img src="main/photo/formal pic.jpg" alt="Pyae Sone Chan Thar Aung" class="profile-pic">
+                <p>I am a young Burmese youth; an enthusiastic tech addict and a problem-solver. Justice and the minor ethnic groups that reside in the mountainous regions of Myanmar are deep interests of mine, and I like to advocate for them through Information and Communication Technology. I am pursuing my undergraduate degree, Bachelor of Science in Computer Science at the University of the Immaculate Conception, Davao City, the Philippines. I was born and raised by a loving family and now live in Davao City.</p>
+            </div>
         </section>
         <section id="favorites" class="container">
             <h2>Favourites</h2>
-            <ul>
-                <li>Planting trees</li>
-                <li>Travelling</li>
-                <li>Cooking</li>
-                <li>Teaching</li>
-                <li>Petting animals</li>
-                <li>Watching movies</li>
+            <ul class="grid">
+                <li>🌱 Planting trees</li>
+                <li>✈️ Travelling</li>
+                <li>🍳 Cooking</li>
+                <li>📚 Teaching</li>
+                <li>🐾 Petting animals</li>
+                <li>🎬 Watching movies</li>
             </ul>
         </section>
         <section id="education" class="container">
@@ -47,44 +54,64 @@
                 <li>Primary School: No.7 Basic Education High School, Kyaing Tong <span class="completed">✔</span></li>
                 <li>Middle School: No.7 Basic Education High School, Kyaing Tong <span class="completed">✔</span></li>
                 <li>High School: YADANA Private High School, Kyaing Tong <span class="completed">✔</span></li>
-                <li>University (First Year): Kyaing Tong University, English Language and Literature <span class="completed">✔</span></li>
-                <li>University (Second Year): Kyaing Tong University, English Language and Literature <span class="completed">✔</span></li>
-                <li>Due to the country's political crisis, I did not complete my degree at Kyaing Tong University, Myanmar.</li>
-                <li>Current University: University of the Immaculate Conception, Davao City, Philippines, Computer Science (First Year) <span class="completed">✔</span></li>
-                <li>Current University: University of the Immaculate Conception, Davao City, Philippines, Computer Science (Second Year)</li>
+                <li>University of the Immaculate Conception, Davao City, Philippines, Computer Science (Year 2)</li>
             </ul>
         </section>
         <section id="projects" class="container">
             <h2>School Projects</h2>
-            <p>WE L.E.A.D 3.0</p>
-            <p>UIC Ignacian Marian Leadership Training Bootcamp</p>
-            <p>StudentEvents Hub project</p>
-            
+            <div class="project-list">
+                <p>WE L.E.A.D 3.0</p>
+                <p>UIC Ignacian Marian Leadership Training Bootcamp</p>
+                <p>StudentEvents Hub project</p>
+            </div>
         </section>
         <section id="talents" class="container">
             <h2>Talents</h2>
-            <ul>
-                <li>Writing</li>
-                <li>Dancing</li>
-                <li>Drawing</li>
-                <li>Leadership</li>
-                <li>Communicating</li>
-                <li>Speaking Multi-Language</li>
+            <ul class="grid">
+                <li>✍️ Writing</li>
+                <li>🕺 Dancing</li>
+                <li>🎨 Drawing</li>
+                <li>👥 Leadership</li>
+                <li>🗣️ Communication</li>
+                <li>🌍 Speaking Multi-Language</li>
             </ul>
         </section>
-    </main>
-    <footer>
-        <div id = "contact" class="container">
+        <div class="footer-container">
             <address>
                 <strong>With Regards,</strong><br>
                 Pyae Sone Chan Thar Aung<br>
                 <a href="mailto:paung_230000001724@uic.edu.ph">paung_230000001724@uic.edu.ph</a><br>
                 University of the Immaculate Conception<br>
-                Davao City, the Philippines
-                <br>
-                <a href="https://www.facebook.com/MgPyaeSoneChanTharAung">Facebook</a> || <a href="https://www.instagram.com/pyaesone_chantharaung/">Instagram</a>
+                Davao City, Philippines
             </address>
+            <div class="social-links">
+                <a href="https://www.facebook.com/MgPyaeSoneChanTharAung" target="_blank">
+                    <img src="main/photo/facebook-icon.png" alt="Facebook" class="social-icon">
+                </a>
+                <a href="https://www.instagram.com/pyaesone_chantharaung/" target="_blank">
+                    <img src="main/photo/instagram-icon.png" alt="Instagram" class="social-icon">
+                </a>
+            </div>
         </div>
-    </footer>
+    </main>
+
+    <script>
+        const navList = document.querySelector('.nav__list');
+        const hamburger = document.querySelector('.hamburger');
+
+        hamburger.addEventListener('click', () => {
+            navList.classList.toggle('nav__open');
+            hamburger.classList.toggle('hamburger__open');
+        });
+
+        // Close menu when clicking on a nav link
+        const navLinks = document.querySelectorAll('.nav__link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('nav__open');
+                hamburger.classList.remove('hamburger__open');
+            });
+        });
+    </script>
 </body>
 </html>
