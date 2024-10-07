@@ -33,9 +33,11 @@
         <section id="about" class="container">
  
             <br>
-            <marquee direction="right"><strong> Hi there, Welcome to my own little world!</strong></marquee>
+            <marquee direction="right"><strong>Hi there, Welcome to my own little world!</strong></marquee>
             <br>
-            <br>
+            <br> <p>
+                Current Time: <span id="current-time"></span>
+            </p>
             <br>
             <h2>About Me</h2>
             <div class="profile-section">
@@ -145,6 +147,13 @@ function type() {
 }
 
 type();
+
+function updateTime() {
+    const now = new Date();
+    document.getElementById('current-time').textContent = now.toLocaleString();
+  }
+  setInterval(updateTime, 1000);
+  updateTime(); // Initial call
 
         const navList = document.querySelector('.nav__list');
         const hamburger = document.querySelector('.hamburger');
