@@ -8,6 +8,7 @@
   --card-bg: #ecf0f1;
 }
 
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +21,6 @@ body {
   padding: 20px; /* General body padding */
   background: var(--bg-color);
   color: var(--text-color);
-  background-image: url(https://content.codecademy.com/courses/learn-css-selectors-visual-rules/hypnotize_bg.png);
 }
 
 .sticky-footer {
@@ -33,15 +33,17 @@ body {
   font-size: 18px;
 }
 
-p.aboutMe{
+/* Paragraph Styles */
+p.aboutMe {
   text-align: justify;
   line-height: 1.8;
 }
 
+/* Header Styles */
 .header-bar {
   background-color: var(--header-bg);
   color: var(--link-color);
-  padding: 2 rem 0;
+  padding: 2rem 0;
   text-align: center;
   position: sticky;
   top: 0;
@@ -60,6 +62,7 @@ p.aboutMe{
   color: #bdc3c7;
 }
 
+/* Navigation Styles */
 nav {
   display: flex;
   justify-content: space-between;
@@ -71,6 +74,7 @@ nav {
   font-size: 2rem;
   cursor: pointer;
   display: none; /* Hidden by default */
+  color: rgba(222, 228, 180, 1); /* Same color for consistency */
 }
 
 nav ul {
@@ -84,18 +88,50 @@ nav ul li {
 }
 
 nav ul li a {
-  color: var(--link-color);
+  color: rgba(222, 228, 180, 1); /* Same color as hamburger */
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav ul li a:hover {
   background-color: var(--link-hover-bg);
 }
 
-/* Main content styles */
+/* Navigation Styles */
+.nav {
+  background-color: var(--header-bg); /* Set the same color as header bar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav__list {
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem;
+  margin: 0;
+  list-style: none;
+}
+
+.nav__item {
+  position: relative;
+}
+
+.nav__link {
+  color: rgba(255, 215, 0, 1); /* Same color as hamburger */
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus {
+  background-color: var(--link-hover-bg);
+  color: #fff;
+}
+
+/* Main Content Styles */
 main {
   padding: 2rem 0; /* Increased padding for main */
 }
@@ -103,6 +139,11 @@ main {
 .container {
   max-width: 800px; /* Set a maximum width for content */
   margin: 0 auto; /* Center the content */
+}
+
+.container1 {
+  max-width: 250px;
+  margin: 0 auto;
 }
 
 .profile-section {
@@ -151,16 +192,20 @@ ul li {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1.5rem;
 }
-#weLead{
+
+#weLead {
   color: red;
 }
-#uicEcho{
+
+#uicEcho {
   color: #09f60d;
 }
-#habit{
+
+#habit {
   color: goldenrod;
 }
 
+/* Footer Styles */
 .footer-container {
   background-color: #2c3e50;
   color: #fff;
@@ -203,8 +248,23 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Dark Mode Text Color for Section Titles */
+.dark-mode #favorites h2,
+.dark-mode #education h2,
+.dark-mode #talents h2 {
+  color: rgb(146, 124, 5); /* Change text color to gold */
+}
 
-/* Responsive adjustments */
+/* Dark Mode Text Color for List Items */
+.dark-mode #favorites ul li,
+.dark-mode #education ul li,
+.dark-mode #talents ul li {
+  color: rgb(123, 105, 5); /* Change list item text color to gold */
+}
+
+
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .social-icon {
     width: 25px;
@@ -212,7 +272,6 @@ a:hover {
   }
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .hamburger {
     display: block;
@@ -245,12 +304,14 @@ a:hover {
   }
 }
 
+/* Body Styles */
 body {
   font-family: 'Inter', sans-serif;
   background-color: #e8f0f7;
   height: 200vh;
 }
 
+/* Header Styles */
 .header {
   background-color: rgb(19, 22, 26);
   position: fixed;
@@ -274,28 +335,7 @@ body {
   font-weight: 500;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-}
-
-.nav__list {
-  display: flex;
-  gap: 40px;
-}
-
-.nav__link {
-  color: rgba(58, 247, 58, 0.75);
-  font-size: 15px;
-  text-decoration: none;
-  transition: color 0.4s;
-}
-
-.nav__link:hover,
-.nav__link:focus {
-  color: rgb(87, 204, 251);
-}
-
+/* Hamburger Menu Styles */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -310,6 +350,7 @@ body {
   transition: all 0.3s;
 }
 
+/* Mobile Navigation */
 @media (max-width: 650px) {
   .nav__list {
     position: fixed;
@@ -344,57 +385,9 @@ body {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Navigation styles */
-.nav {
-  background-color: var(--header-bg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.nav__list {
-  display: flex;
-  gap: 2rem;
-  padding: 0.5rem;
-  margin: 0;
-  list-style: none;
-}
-
-.nav__item {
-  position: relative;
-}
-
-.nav__link {
-  color: rgba(0, 0, 255, 0.75);
-  padding: 0.75rem 1.25rem;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav__link:hover,
-.nav__link:focus {
-  background-color: var(--link-hover-bg);
-  color: #fff;
-}
-
-/* Optional: Add a border under each nav item on hover */
-.nav__link::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -5px;
-  width: 0;
-  height: 2px;
-  background: var(--link-hover-bg);
-  transition: width 0.3s ease, left 0.3s ease;
-}
-
-.nav__link:hover::after {
-  width: 100%;
-  left: 0;
-}
-
-#move{
-  font-size: 12px;
+/* Moving Text Styles */
+#move {
+  font-size: 1.5rem;
   color: #09f60d;
   font-family: Arial, sans-serif;
   line-height: 1;
@@ -403,10 +396,6 @@ body {
   margin-bottom: 80px; 
 }
 
-#move{
-  font-size: 1.5rem;
-  
-}
 #move::after {
   content: '|'; 
   position: absolute;
@@ -416,3 +405,79 @@ body {
   color: #17252a; 
   font-size: 20px;
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.light-mode {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.header-bar {
+  background-color: #f1f1f1; /* Light mode header */
+}
+
+.dark-mode .header-bar {
+  background-color: #1e1e1e; /* Dark mode header */
+}
+
+.dark-mode .nav__link {
+  color: #1e90ff;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212; /* Dark mode background */
+  color: #ffffff; /* Dark mode text color */
+}
+
+.light-bulb {
+  cursor: pointer;
+  width: 80px;  /* Adjusted width */
+  height: 120px; /* Adjusted height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.bulb {
+  width: 60px;  /* Adjusted bulb width */
+  height: 90px; /* Adjusted bulb height */
+  background: linear-gradient(to bottom, #ffec40, #ffbd00);
+  border-radius: 50px 50px 20px 20px;
+  box-shadow: 0 0 30px rgba(255, 189, 0, 0.6);
+  transition: opacity 0.3s;
+}
+
+.clock {
+  font-size: 3em;  /* Adjusted font size */
+  font-weight: bold;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  padding: 10px;  /* Adjusted padding */
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  transition: transform 0.2s;
+}
+
+.clock:hover {
+  transform: scale(1.1);
+}
+
+.bulb.off {
+  opacity: 0.3; /* Dim the bulb when off */
+}
+
