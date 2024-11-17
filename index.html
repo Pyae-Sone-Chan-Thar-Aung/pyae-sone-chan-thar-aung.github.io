@@ -219,35 +219,70 @@
             });
         });
 
-        // Open-Meteo API URL for current weather data
-// Example: Latitude and Longitude for Davao City, Philippines
-const latitude = 7.1907;
-const longitude = 125.4553;
-const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+        // Function to get the user's geolocation
+function getUserLocation() {
+  // Check if geolocation is supported by the browser
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(showWeather, handleError);
+  } else {
+    alert("Geolocation is not supported by your browser.");
+  }
+}
 
-// Fetch weather data from Open-Meteo API
-fetch(apiUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Weather data not available');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Extract weather information from the response
-    const location = 'Davao City, Philippines';  // Static location name for this example
-    const temperature = data.current_weather.temperature;
-    const weatherDescription = data.current_weather.weathercode;
+// Success callback - when the location is retrieved
+function showWeather(position) {
+  const latitude = position.coords.latitude;  // User's latitude
+  const longitude = position.coords.longitude;  // User's longitude
+  
+  // Construct the Open-Meteo API URL using the user's coordinates
+  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
 
-    // Update the HTML with the weather data
-    document.getElementById('location').textContent = `Location: ${location}`;
-    document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
-    document.getElementById('weather-description').textContent = `Weather: ${weatherDescription}`;
-  })
-  .catch(error => {
-    console.error('Error fetching weather data:', error);
-    document.getElementById('weather-info').innerHTML = '<p>Unable to fetch weather data.</p>';
-  });
+  // Fetch weather data from Open-Meteo API
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Weather data not available');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Extract weather information from the API response
+      const location = `Latitude: ${latitude.toFixed(2)}, Longitude: ${longitude.toFixed(2)}`;
+      const temperature = data.current_weather.temperature;
+      const weatherDescription = data.current_weather.weathercode;
+      
+      // Update the HTML with the weather data
+      document.getElementById('location').textContent = `Location: ${location}`;
+      document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+      document.getElementById('weather-description').textContent = `Weather: ${weatherDescription}`;
+    })
+    .catch(error => {
+      console.error('Error fetching weather data:', error);
+      document.getElementById('weather-info').innerHTML = '<p>Unable to fetch weather data.</p>';
+    });
+}
+
+// Error callback - when the location retrieval fails
+function handleError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      alert("Permission denied. Please allow location access.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      alert("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("An unknown error occurred.");
+      break;
+  }
+}
+
+// Call the function to get the user's location and show the weather
+getUserLocation();
+
 
     </script>
 </body>
