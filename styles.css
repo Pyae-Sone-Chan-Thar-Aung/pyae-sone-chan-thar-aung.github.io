@@ -481,3 +481,16 @@ body {
   opacity: 0.3; /* Dim the bulb when off */
 }
 
+#weather {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+#weather-info p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}

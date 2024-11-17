@@ -40,7 +40,7 @@
           </div>
 
         <section id="about" class="container">
-            <br>
+            <br> <br>
             <marquee direction="right"><strong>Hi there, Welcome to my own little world!</strong></marquee>
             <br><br>
 
@@ -101,6 +101,16 @@
                 <li>🌍 Speaking Multi-Language</li>
             </ul>
         </section>
+
+        <section id="weather" class="container">
+            <h2>Current Weather</h2>
+            <div id="weather-info">
+                <p id="location">Loading...</p>
+                <p id="temperature"></p>
+                <p id="weather-description"></p>
+            </div>
+        </section>
+        
 
         <br><br>
         <div class="footer-container">
@@ -209,7 +219,36 @@
             });
         });
 
-        
+        // Open-Meteo API URL for current weather data
+// Example: Latitude and Longitude for Davao City, Philippines
+const latitude = 7.1907;
+const longitude = 125.4553;
+const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+
+// Fetch weather data from Open-Meteo API
+fetch(apiUrl)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Weather data not available');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Extract weather information from the response
+    const location = 'Davao City, Philippines';  // Static location name for this example
+    const temperature = data.current_weather.temperature;
+    const weatherDescription = data.current_weather.weathercode;
+
+    // Update the HTML with the weather data
+    document.getElementById('location').textContent = `Location: ${location}`;
+    document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+    document.getElementById('weather-description').textContent = `Weather: ${weatherDescription}`;
+  })
+  .catch(error => {
+    console.error('Error fetching weather data:', error);
+    document.getElementById('weather-info').innerHTML = '<p>Unable to fetch weather data.</p>';
+  });
+
     </script>
 </body>
 </html>
