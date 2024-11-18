@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Professional Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="try.css">
+</head>
+<body>
+
+  <!-- Dark Mode Toggle (Light Bulb Icon) -->
+  <div class="light-bulb" id="light-bulb">
+    <div class="bulb"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header class="header-bar">
+    <h1>My Professional Website</h1>
+    <h2>Your tagline or description goes here</h2>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="nav">
+    <div class="logo">Logo</div>
+    <div class="hamburger" id="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <ul class="nav__list">
+      <li><a href="#profile" class="nav__link">Profile</a></li>
+      <li><a href="#weather" class="nav__link">Weather</a></li>
+      <li><a href="#contact" class="nav__link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Profile Section -->
+  <section id="profile" class="profile-section">
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="profile-text">
+      <h2>About Me</h2>
+      <p class="aboutMe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet purus erat. Sed tempus...</p>
+    </div>
+  </section>
+
+  <!-- Moving Text -->
+  <div id="move">Exciting News Coming Soon!</div>
+
+  <!-- Weather Section -->
+  <section id="weather">
+    <h2>Weather Information</h2>
+    <div id="weather-info">
+      <p>Loading weather data...</p>
+    </div>
+  </section>
+
+  <!-- Clock Widget -->
+  <section id="clock">
+    <h2>Current Time</h2>
+    <div class="clock" id="clock"></div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer-container">
+    <p>Footer Content</p>
+    <div class="social-links">
+      <a href="#" class="social-icon">FB</a>
+      <a href="#" class="social-icon">TW</a>
+      <a href="#" class="social-icon">IG</a>
+    </div>
+  </footer>
+
+  <!-- Sticky Footer -->
+  <div class="sticky-footer">Sticky Footer Content</div>
+
+
+  <script src="script.js">
+    // Dark Mode Toggle
+document.getElementById('light-bulb').addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+  this.classList.toggle('active');
+});
+
+// Hamburger Menu Functionality
+const hamburger = document.getElementById('hamburger');
+const navList = document.querySelector('.nav__list');
+
+hamburger.addEventListener('click', function() {
+  navList.classList.toggle('active');
+});
+
+// Clock Update
+function updateClock() {
+  const clockElement = document.getElementById('clock');
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+setInterval(updateClock, 1000);
+
+// Weather API Call
+const apiKey = 'your_api_key_here'; // Replace with a valid API key
+const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}&units=metric`;
+
+function getWeather() {
+  fetch(weatherUrl)
+    .then(response => response.json())
+    .then(data => {
+      const weatherInfo = document.getElementById('weather-info');
+      weatherInfo.innerHTML = `
+        <p>Temperature: ${data.main.temp}°C</p>
+        <p>Weather: ${data.weather[0].description}</p>
+      `;
+    })
+    .catch(err => console.error('Error fetching weather data:', err));
+}
+
+getWeather();
+
+
+  </script>
+</body>
+</html>
