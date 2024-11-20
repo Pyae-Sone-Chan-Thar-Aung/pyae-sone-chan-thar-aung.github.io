@@ -112,15 +112,7 @@
   <h1>Weather & Time Information</h1>
   
   <div class="weather-container">
-    <!-- User's Location Weather Info -->
-    <div class="location-container">
-      <h2>Your Location</h2>
-      <p><strong>City:</strong> <span id="user_city">--</span></p>
-      <p><strong>Temperature:</strong> <span id="user_temperature">--</span></p>
-      <p><strong>Condition:</strong> <span id="user_condition">--</span></p>
-      <p><strong>Time:</strong> <span id="user_time">--</span></p>
-    </div>
-    
+   
     <!-- My Location Weather Info (Davao) -->
     <div class="location-container">
       <h2>My Location (Davao City, Philippines)</h2>
@@ -129,6 +121,16 @@
       <p><strong>Condition:</strong> <span id="my_condition">--</span></p>
       <p><strong>Time:</strong> <span id="my_time">--</span></p>
     </div>
+
+      <!-- User's Location Weather Info -->
+      <div class="location-container">
+        <h2>Your Location</h2>
+        <p><strong>City:</strong> <span id="user_city">--</span></p>
+        <p><strong>Temperature:</strong> <span id="user_temperature">--</span></p>
+        <p><strong>Condition:</strong> <span id="user_condition">--</span></p>
+        <p><strong>Time:</strong> <span id="user_time">--</span></p>
+      </div>
+      
   </div>
 
   <button onclick="callAPI()">Fetch Weather Data</button>
