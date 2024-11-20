@@ -1,28 +1,254 @@
+/* Global Styles (Light Mode by Default) */
+
+/* Set up light mode colors */
 :root {
-  --bg-color: #f4f4f4;
-  --header-bg: #2c3e50;
-  --text-color: #333;
-  --link-color: #fff;
-  --link-hover-bg: #1abc9c;
-  --completed-color: green;
-  --card-bg: #ecf0f1;
+  --header-bg: #fff; /* Light background for header */
+  --header-bgh2: #2c3e50; /* Light background for header h2 */
+  --link-color: #333; /* Dark color for links */
+  --link-hover-bg: #f2f2f2; /* Subtle hover background */
+  --background-color: #f4f4f4; /* Light background color for the body */
+  --text-color: #333; /* Light text color */
+  --link-active-color: #007bff; /* Professional blue for active links */
+  --nav-background-color: #f9f9f9; /* Clean background for the nav */
+  --button-bg: #007bff; /* Button background color */
+  --button-hover-bg: #0056b3; /* Button hover background color */
+  --button-text-color: #fff; /* Button text color */
+  --button-border-radius: 8px; /* Button border radius */
 }
 
-/* Global Styles */
-* {
+/* Dark Mode Overrides */
+body.dark-mode {
+  --header-bg: #333; /* Dark background for header */
+  --header-bgh2: #fff; /* Dark background for header h2 */
+  --link-color: #fff; /* Light text for links */
+  --link-hover-bg: #444; /* Darker hover background */
+  --background-color: #222; /* Dark background color for the body */
+  --text-color: #ddd; /* Light text color for body */
+  --link-active-color: #ee6723; /* Active link color for dark mode */
+  --nav-background-color: #222; /* Dark background for the nav */
+  --button-bg: #fdbd39; /* Button background for dark mode */
+  --button-hover-bg: #f69833; /* Button hover color for dark mode */
+}
+
+/* Body Styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global Navigation Styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  background-color: var(--header-bg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+/* Sticky Navigation Bar Styles */
+nav.sticky {
+  position: sticky;
+  top: 0;
+  background-color: var(--header-bg);
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+nav .logo {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--link-color);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Desktop Menu Styles */
+.nav__list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 20px; /* General body padding */
-  background: var(--bg-color);
-  color: var(--text-color);
+/* Button-like Nav Items */
+.nav__item {
+  position: relative;
 }
 
+.nav__link {
+  text-decoration: none;
+  color: var(--button-text-color);
+  padding: 0.75rem 1.5rem; /* Padding to make the button look bigger */
+  background-color: var(--button-bg); /* Button color */
+  border-radius: var(--button-border-radius); /* Rounded corners */
+  border: 2px solid transparent; /* Border */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.nav__link:hover {
+  background-color: var(--button-hover-bg); /* Darker background on hover */
+  color: #fff; /* Text color on hover */
+  transform: scale(1.05); /* Slight scaling effect for hover */
+}
+
+.nav__link.active {
+  color: #fff;
+  background-color: var(--link-active-color); /* Active link color */
+  border-color: var(--link-active-color); /* Border color on active */
+}
+
+/* Mobile Navigation (Hamburger) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: var(--link-color); /* Same color as links */
+  margin: 5px 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Mobile Navigation (Active) */
+@media (max-width: 767px) {
+  /* Show Hamburger for mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  nav .nav__list {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Toggle nav visibility when hamburger is clicked */
+  nav .nav__list.active {
+    display: flex;
+  }
+
+  /* Hamburger icon as a regular 3-strike when not clicked */
+  .hamburger .bar:nth-child(1) {
+    transform: translateY(0) rotate(0);
+  }
+  .hamburger .bar:nth-child(2) {
+    opacity: 1;
+  }
+  .hamburger .bar:nth-child(3) {
+    transform: translateY(0) rotate(0);
+  }
+
+  /* Hamburger icon animation (X shape) when clicked */
+  .hamburger.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg); /* Top bar turns */
+  }
+  .hamburger.open .bar:nth-child(2) {
+    opacity: 0; /* Middle bar disappears */
+  }
+  .hamburger.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg); /* Bottom bar turns */
+  }
+
+  /* Mobile - Improved nav item styles */
+  .nav__link {
+    padding: 1rem 2rem; /* Make buttons bigger for mobile */
+    background-color: var(--button-bg);
+    text-align: center;
+    width: 100%; /* Full width for each item */
+    display: block;
+    border-radius: 0; /* No rounded corners for mobile */
+  }
+
+  .nav__link:hover {
+    background-color: var(--button-hover-bg); /* Ensure consistent hover effect */
+  }
+
+  .nav__link.active {
+    background-color: var(--link-active-color); /* Active state for mobile */
+  }
+}
+
+/* Tablet to Laptop - Responsive Styles (768px - 1024px) */
+@media (max-width: 1024px) {
+  .nav__list {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  /* Make navigation items slightly more compact for tablets and laptops */
+  .nav__link {
+    padding: 0.5rem 1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  /* Ensure the navigation is evenly spaced on larger screens */
+  .nav__list {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav__link {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Gradient Circle for Light/Dark Mode Toggle */
+.dark-mode-toggle {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ffbd00, #ffec40); /* Light mode */
+  transition: background 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-toggle.dark {
+  background: linear-gradient(45deg, #4f4f4f, #2e2e2e); /* Dark mode */
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+}
+
+.dark-mode-toggle .inner-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.dark-mode-toggle.dark .inner-circle {
+  background: #333;
+}
+
+/* Footer Styles */
 .sticky-footer {
   position: sticky;
   bottom: 0;
@@ -33,464 +259,567 @@ body {
   font-size: 18px;
 }
 
-/* Paragraph Styles */
-p.aboutMe {
-  text-align: justify;
-  line-height: 1.8;
+/* Hamburger Menu Open Animation */
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
 
-/* Header Styles */
-.header-bar {
-  background-color: var(--header-bg);
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* About Section */
+section h2 {
+  border-bottom: 2px solid var(--header-bgh2);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
   color: var(--link-color);
-  padding: 2rem 0;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.header-bar h1 {
+#about {
+  padding: 50px 2rem; /* Add padding to create space around the section */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Section Title */
+#role {
   font-size: 2.5rem;
-  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--link-color);
+  display: inline; /* Align inline with the profile picture */
 }
 
-.header-bar h2 {
-  margin: 0.5rem 0;
-  font-size: 1.5rem;
-  color: #bdc3c7;
+#role span {
+  font-weight: bold;
+  color: var(--link-active-color); /* Highlighted name color */
+  font-size: 2.8rem;
 }
 
-/* Navigation Styles */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-}
-
-.hamburger {
-  font-size: 2rem;
-  cursor: pointer;
-  display: none; /* Hidden by default */
-  color: rgba(222, 228, 180, 1); /* Same color for consistency */
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-}
-
-nav ul li {
-  margin: 0 1.5rem;
-}
-
-nav ul li a {
-  color: rgba(222, 228, 180, 1); /* Same color as hamburger */
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-nav ul li a:hover {
-  background-color: var(--link-hover-bg);
-}
-
-/* Navigation Styles */
-.nav {
-  background-color: var(--header-bg); /* Set the same color as header bar */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.nav__list {
-  display: flex;
-  gap: 2rem;
-  padding: 0.5rem;
-  margin: 0;
-  list-style: none;
-}
-
-.nav__item {
-  position: relative;
-}
-
-.nav__link {
-  color: rgba(255, 215, 0, 1); /* Same color as hamburger */
-  padding: 0.75rem 1.25rem;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav__link:hover,
-.nav__link:focus {
-  background-color: var(--link-hover-bg);
-  color: #fff;
-}
-
-/* Main Content Styles */
-main {
-  padding: 2rem 0; /* Increased padding for main */
-}
-
-.container {
-  max-width: 800px; /* Set a maximum width for content */
-  margin: 0 auto; /* Center the content */
-}
-
-.container1 {
-  max-width: 250px;
-  margin: 0 auto;
-}
-
+/* Profile Section */
 .profile-section {
   display: flex;
   align-items: center;
-  margin-bottom: 100px; /* Space between sections */
+  justify-content: flex-start;
+  margin-top: 20px;
+  text-align: left;
+  gap: 2rem; /* Space between profile picture and the role */
 }
 
+/* Profile Picture and Role Container */
+.profile-and-role {
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* Space between profile picture and role text */
+}
+
+/* Profile Picture */
 .profile-pic {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  margin-right: 2rem;
-  border: 3px solid var(--header-bg);
+  width: 250px; /* Bigger size for profile image */
+  height: 250px;
+  border: 5px solid var(--header-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline;
 }
 
-section {
-  margin-bottom: 100px; /* Set margin to 100px for spacing */
+/* Profile Pic Hover Effect */
+.profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-section h2 {
-  border-bottom: 2px solid var(--header-bg);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+/* About Info Container */
+.about-info {
+  margin-top: 30px; /* Add some space between the profile section and about me */
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+/* About Me Paragraph */
+.aboutMe {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 0 0.5in; /* 0.5 inch margin on left and right */
+  font-weight: 400;
+  text-align: justify;
 }
 
-ul li {
-  background: var(--card-bg);
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  border-radius: 5px;
+
+/* Light and Dark Mode */
+body.dark-mode #about {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-.completed {
-  color: var(--completed-color);
-  font-weight: bold;
+body.dark-mode .aboutMe {
+  color: var(--text-color);
 }
 
+/* Favourites Section */
+#favorites {
+  padding: 50px 2rem; /* Add padding to create space around the section */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: left;
+}
+
+/* Grid Layout for Favourites - 2 rows of 4 items */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-
-#weLead {
-  color: red;
-}
-
-#uicEcho {
-  color: #09f60d;
-}
-
-#habit {
-  color: goldenrod;
-}
-
-/* Footer Styles */
-.footer-container {
-  background-color: #2c3e50;
-  color: #fff;
-  text-align: center;
-  padding: 2rem 0;
-  margin-top: 2rem;
-}
-
-.footer-container address {
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 1rem; /* Space between items */
+  list-style: none;
+  padding: 0;
   margin: 0;
-  font-style: normal;
-  margin-bottom: 1rem;
 }
 
-.social-links {
+/* Individual Items */
+.grid li {
+  background-color: var(--header-bg);
+  padding: 1rem;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--link-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Item Hover Effect */
+.grid li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: var(--button-hover-bg);
+  color: #fff; /* Change text color on hover */
+}
+
+/* Education Section */
+#education {
+  padding: 50px 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: left;
+}
+
+/* List Style */
+#education ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Education List Items */
+#education ul li {
+  background-color: var(--header-bg);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Education Item Hover Effect */
+#education ul li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: var(--button-hover-bg);
+  color: #fff;
+}
+
+/* Completed Indicator */
+.completed {
+  color: #0af761;
+  font-size: 1.2rem;
+}
+
+/* Projects Section */
+#projects {
+  padding: 50px 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: left;
+}
+
+/* Project List */
+.project-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns layout by default */
+  gap: 2rem; /* Space between items */
+}
+
+/* Project List Items */
+.project-list ul li {
+  background-color: var(--header-bg);
+  border: 1px solid var(--border-color); /* Thin border for professionalism */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-weight: bold;
+  color: var(--text-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center; /* Center the text for a clean look */
+  min-height: 200px; /* Ensure uniform height for all items */
   display: flex;
   justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
-.social-icon {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.3s ease;
+/* Project Item Title */
+.project-list ul li strong {
+  font-size: 1.3rem;
+  color: var(--link-active-color); /* Highlight the project name */
+  margin-bottom: 10px; /* Space between title and description */
+  text-transform: capitalize; /* Proper case for better readability */
+  font-weight: 600; /* Slightly bolder for emphasis */
 }
 
-.social-icon:hover {
-  transform: scale(1.1);
+/* Project Description */
+.project-list ul li p {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  font-weight: 400;
+  margin-bottom: 15px; /* Space before the end of the card */
 }
 
-a {
-  color: #0af761;
-  text-decoration: none;
-  font-weight: 600;
+/* Hover Effect */
+.project-list ul li:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+  background-color: var(--button-hover-bg); /* Change background on hover */
+  color: #fff; /* Change text color to white */
+}
+
+/* Mobile Responsiveness: 1 column layout for small screens */
+@media (max-width: 768px) {
+  .project-list ul {
+    grid-template-columns: 1fr; /* 1 column layout */
+  }
+}
+
+/* Talents Section */
+#talents {
+  padding: 50px 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: left;
+}
+
+/* Talent List (Grid Layout) */
+#talents .grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Talent Card */
+#talents .grid li {
+  background-color: var(--header-bg);
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Talent Card Hover Effect */
+#talents .grid li:hover {
+  transform: scale(1.05); /* Slight zoom-in effect */
+  background-color: var(--button-hover-bg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for hover */
+  color: white; /* Text becomes white */
+}
+
+/* Talent Icons */
+#talents .grid li i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--link-active-color);
+}
+
+/* Talent Item Description */
+#talents .grid li span {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  color: var(--text-color);
   transition: color 0.3s ease;
 }
 
-a:hover {
-  color: #005ea6;
-  text-decoration: underline;
-}
-
-/* Dark Mode Text Color for Section Titles */
-.dark-mode #favorites h2,
-.dark-mode #education h2,
-.dark-mode #talents h2 {
-  color: rgb(146, 124, 5); /* Change text color to gold */
-}
-
-/* Dark Mode Text Color for List Items */
-.dark-mode #favorites ul li,
-.dark-mode #education ul li,
-.dark-mode #talents ul li {
-  color: rgb(123, 105, 5); /* Change list item text color to gold */
-}
-
-
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .social-icon {
-    width: 25px;
-    height: 25px;
-  }
-}
-
+/* Mobile Responsiveness */
 @media (max-width: 1024px) {
-  .hamburger {
-    display: block;
+  #talents .grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens */
   }
+}
 
-  nav ul {
+@media (max-width: 768px) {
+  #talents .grid {
+    grid-template-columns: 1fr; /* 1 item per row on small screens */
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-section {
     flex-direction: column;
-    display: none;
-    position: absolute;
-    background: var(--header-bg);
-    top: 60px;
-    left: 0;
-    width: 100%;
-    z-index: 5;
-  }
-
-  nav ul.active {
-    display: flex;
+    gap: 1.5rem;
+    text-align: center;
   }
 
   .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .name {
+    font-size: 1.6rem;
+  }
+
+  .aboutMe {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  #role {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
   .profile-pic {
-    display: none;
+    width: 180px;
+    height: 180px;
+  }
+
+  .name {
+    font-size: 1.4rem;
+  }
+
+  .aboutMe {
+    font-size: 0.95rem;
   }
 }
 
-/* Body Styles */
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #e8f0f7;
-  height: 200vh;
-}
-
-/* Header Styles */
-.header {
-  background-color: rgb(19, 22, 26);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
-
-.header__content {
+/* Footer Section */
+.footer-container {
+  background-color: #232323; /* Dark background for modern feel */
+  color: #eaeaea; /* Light text color for contrast */
+  padding: 60px 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
-  height: 60px;
-}
-
-.logo {
-  color: white;
-  font-size: 23px;
-  letter-spacing: -1.5px;
-  font-weight: 500;
-}
-
-/* Hamburger Menu Styles */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.bar {
-  width: 27px;
-  height: 2px;
-  background: rgb(222, 228, 180);
-  margin: 5px 0;
-  transition: all 0.3s;
-}
-
-/* Mobile Navigation */
-@media (max-width: 650px) {
-  .nav__list {
-    position: fixed;
-    top: 60px;
-    left: -100%;
-    background: rgb(19, 22, 26);
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px 0;
-    width: 100%;
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .nav__list.nav__open {
-    transform: translateX(100%);
-  }
-
-  .hamburger {
-    display: flex;
-  }
-}
-
-.hamburger__open .bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.hamburger__open .bar:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger__open .bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* Moving Text Styles */
-#move {
-  font-size: 1.5rem;
-  color: #09f60d;
-  font-family: Arial, sans-serif;
-  line-height: 1;
-  font-weight: bold;
-  margin-top: 7px;
-  margin-bottom: 80px; 
-}
-
-#move::after {
-  content: '|'; 
-  position: absolute;
-  right: 1;
-  top: 1;
-  animation: blink 1.8s step-start infinite;
-  color: #17252a; 
-  font-size: 20px;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.light-mode {
-  background-color: #ffffff;
-  color: #333333;
-}
-
-.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-.header-bar {
-  background-color: #f1f1f1; /* Light mode header */
-}
-
-.dark-mode .header-bar {
-  background-color: #1e1e1e; /* Dark mode header */
-}
-
-.dark-mode .nav__link {
-  color: #1e90ff;
-}
-
-/* Dark Mode Styles */
-.dark-mode {
-  background-color: #121212; /* Dark mode background */
-  color: #ffffff; /* Dark mode text color */
-}
-
-.light-bulb {
-  cursor: pointer;
-  width: 80px;  /* Adjusted width */
-  height: 120px; /* Adjusted height */
-  display: flex;
   align-items: center;
-  justify-content: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  flex-wrap: wrap;
+  text-align: center;
+  border-top: 2px solid #444;
+  margin-top: 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
-.bulb {
-  width: 60px;  /* Adjusted bulb width */
-  height: 90px; /* Adjusted bulb height */
-  background: linear-gradient(to bottom, #ffec40, #ffbd00);
-  border-radius: 50px 50px 20px 20px;
-  box-shadow: 0 0 30px rgba(255, 189, 0, 0.6);
-  transition: opacity 0.3s;
+.contact-container {
+  text-align: center;
+  flex: 1;
 }
 
-.clock {
-  font-size: 3em;  /* Adjusted font size */
+.contact-container h3 {
+  font-size: 1.8rem;
+  color: #00bcd4; /* Eye-catching color for the CTA */
+  margin-bottom: 15px;
   font-weight: bold;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  padding: 10px;  /* Adjusted padding */
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-  transition: transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.clock:hover {
-  transform: scale(1.1);
+#contact {
+  font-size: 1.1rem;
+  color: #eaeaea;
+  margin: 0;
+  line-height: 1.8;
+  padding: 0 20px; /* Padding for spacing */
 }
 
-.bulb.off {
-  opacity: 0.3; /* Dim the bulb when off */
+#contact strong {
+  font-size: 1.4rem;
+  color: #00bcd4; /* Accent color for name */
+  font-weight: 600;
 }
 
+#contact a {
+  color: #eaeaea;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#contact a:hover {
+  color: #00bcd4; /* Hover color for links */
+}
+
+/* Social Media Links */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  flex: 1;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 50%;
+  background-color: #444; /* Dark background for icons */
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: brightness(1.2); /* Brighter icons */
+}
+
+.social-icon:hover {
+  transform: scale(1.1); /* Zoom effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for hover effect */
+  filter: brightness(1.5); /* Even brighter on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-container {
+    margin-bottom: 20px;
+  }
+
+  .social-links {
+    margin-top: 20px;
+  }
+}
+
+/* Weather Section */
 #weather {
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f4f4f4;
+  padding: 40px 2rem;
+  background-color: #f5f5f5;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
 }
 
-#weather-info p {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
+#weather h1 {
+  font-size: 2.5rem;
+  color: #4a90e2;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
+
+.weather-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 20px;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.location-container {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: background 0.3s ease;
+}
+
+.location-container:hover {
+  background: #f0f0f0;
+}
+
+.location-container h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.location-container p {
+  font-size: 1rem;
+  color: #666;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ab7;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .weather-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .location-container {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+
+
