@@ -228,7 +228,7 @@ nav .logo {
 }
 
 .dark-mode-toggle.dark {
-  background: linear-gradient(45deg, #4f4f4f, #2e2e2e); /* Dark mode */
+  background: linear-gradient(45deg, #c6b6b6, #2e2e2e); /* Dark mode */
 }
 
 .dark-mode-toggle:hover {
