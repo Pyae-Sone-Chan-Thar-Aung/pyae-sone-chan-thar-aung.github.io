@@ -133,7 +133,7 @@ function fetchWeatherData(url, location) {
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
-            alert("Error fetching weather data. Please try again.");
+            alert("Unable to fetch the weather data. Please try again later!");
         });
 }
 

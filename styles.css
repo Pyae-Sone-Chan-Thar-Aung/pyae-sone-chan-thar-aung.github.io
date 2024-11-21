@@ -379,7 +379,7 @@ body.dark-mode .aboutMe {
 /* Grid Layout for Favourites - 2 rows of 4 items */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(3, 1fr); /* 4 items per row */
   gap: 1rem; /* Space between items */
   list-style: none;
   padding: 0;
@@ -743,22 +743,22 @@ body.dark-mode .aboutMe {
 /* Weather Section */
 #weather {
   padding: 40px 2rem;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: var(--background-color); /* Light/Dark Mode Background */
+  color: var(--text-color); /* Light/Dark Mode Text Color */
   transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
 }
 
 #weather h1 {
   font-size: 2.5rem;
-  color: #4a90e2;
+  color: var(--link-active-color); /* Link color for h1 */
   font-weight: bold;
   margin-bottom: 20px;
 }
 
 .weather-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 2rem;
   margin-top: 20px;
   text-align: left;
@@ -766,7 +766,7 @@ body.dark-mode .aboutMe {
 }
 
 .location-container {
-  background: #ffffff;
+  background: var(--header-bg); /* Light/Dark Mode Header Background */
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -778,41 +778,45 @@ body.dark-mode .aboutMe {
 }
 
 .location-container:hover {
-  background: #f0f0f0;
+  background: var(--link-hover-bg); /* Hover effect */
 }
 
 .location-container h2 {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #333;
+  color: var(--link-color); /* Light/Dark Mode Link Color */
 }
 
 .location-container p {
   font-size: 1rem;
-  color: #666;
+  color: var(--text-color); /* Light/Dark Mode Text Color */
 }
 
+/* Button Styles */
 button {
   padding: 10px 20px;
-  background-color: #4a90e2;
-  color: white;
+  background-color: var(--button-bg); /* Light/Dark Mode Button Background */
+  color: var(--button-text-color); /* Light/Dark Mode Button Text Color */
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
   cursor: pointer;
   margin-top: 20px;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Transition all relevant properties */
 }
 
+/* Button Hover Effect with 3D Transformation */
 button:hover {
-  background-color: #357ab7;
+  background-color: var(--button-hover-bg); /* Button Hover Effect */
+  transform: translateY(-5px); /* Moves the button up to create the "pop" effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
 }
+
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .weather-container {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr; /* 1 column layout */
   }
 
   .location-container {
@@ -820,6 +824,4 @@ button:hover {
     margin-bottom: 15px;
   }
 }
-
-
 
