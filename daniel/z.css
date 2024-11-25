@@ -205,3 +205,82 @@ audio {
       font-size: 1em;
   }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 3.5em;
+  }
+
+  .subheader {
+    font-size: 1.6em;
+  }
+
+  .birthday-card {
+    flex-direction: column;
+    padding: 25px;
+    height: auto;
+  }
+
+  .card-left {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+  }
+
+  .card-right p {
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2.5em;
+  }
+
+  .subheader {
+    font-size: 1.2em;
+  }
+
+  .birthday-card {
+    padding: 15px;
+  }
+
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+  }
+
+  .card-right p {
+    font-size: 1em;
+  }
+}
+
+/* Add some styles for the confetti and audio button on mobile */
+@media (max-width: 768px) {
+  .confetti-button {
+    font-size: 1.2em;
+    padding: 10px 15px;
+  }
+
+  /* Adjust the positioning of the play music button for mobile */
+  .play-music-button {
+    display: block;
+    margin: 20px auto;
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .play-music-button:hover {
+    background-color: #ff9e00;
+  }
+}
