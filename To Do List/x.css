@@ -1,0 +1,413 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #4CAF50; /* Green color */
+  color: white;
+  padding: 10px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar .logo h1 {
+  font-size: 1.5rem;
+}
+
+.navbar .nav-links {
+  display: flex;
+}
+
+.navbar .nav-links li {
+  list-style-type: none;
+  margin-left: 20px;
+}
+
+.navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
+.navbar .nav-links a:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+/* Container Styles */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input, button {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+input {
+  font-size: 1rem;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Task List Styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+li.completed {
+  text-decoration: line-through;
+  color: grey;
+}
+
+button.remove {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button.remove:hover {
+  background-color: darkred;
+}
+
+button.complete {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button.complete:hover {
+  background-color: #45a049;
+}
+
+/* History Table Styles */
+#historyTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#historyTable th, #historyTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#historyTable th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#historyTable td {
+  background-color: #f9f9f9;
+}
+
+#backToHomeBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  display: block;
+  margin: 20px auto;
+}
+
+#backToHomeBtn:hover {
+  background-color: #45a049;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  form input, form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap');
+
+
+.container1 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container1 #timing {
+  background-color:#2f363e;
+}
+
+.clock {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    border-radius: 450%;
+    background-color: #2f363e;
+    box-shadow: 10px 50px 70px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.clock::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #2f363e;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    z-index: 100000;
+}
+
+.clock span {
+    position: absolute;
+    inset: 20px;
+    color: #fff;
+    text-align: center;
+    transform: rotate(calc(30deg * var(--i)));
+    /* 360 / 12 = 30deg */
+}
+
+.clock span b {
+    font-size: 2em;
+    opacity: 0.25;
+    font-weight: 600;
+    display: inline-block;
+    transform: rotate(calc(-30deg * var(--i)));
+}
+
+.circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+.circle i {
+    position: absolute;
+    width: 6px;
+    height: 50%;
+    background: var(--clr);
+    opacity: 0.75;
+    transform-origin: bottom;
+    transform: scaleY(0.5);
+}
+
+.circle:nth-child(1) i {
+    width: 2px;
+}
+
+.circle:nth-child(2) i {
+    width: 6px;
+}
+
+.circle-2 {
+    width: 240px;
+    height: 240px;
+    z-index: 9;
+}
+
+.circle-3 {
+    width: 180px;
+    height: 180px;
+    z-index: 8;
+}
+
+.circle::before {
+    content: '';
+    position: absolute;
+    top: -8.5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--clr);
+    box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+}
+
+/* digital clock style */
+#timing {
+    margin-bottom: 40px;
+    display: flex;
+    padding: 10px 20px;
+    font-size: 2em;
+    font-weight: 600;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+
+#timing div {
+    position: relative;
+    width: 60px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--clr);
+}
+
+#timing div:nth-child(1)::after,
+#timing div:nth-child(2)::after {
+    content: ':';
+    position: absolute;
+    right: -4px;
+}
+
+#timing div:last-child {
+    font-size: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+#timing div:nth-child(2)::after {
+    animation: animate 1s steps(1) infinite;
+}
+
+
+@keyframes animate {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+#calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+#calendar .day {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+#calendar .day:hover {
+  background-color: #f0f0f0;
+}
+
+#calendar .highlighted {
+  background-color: #ffcc00; /* Highlight color for dates with tasks */
+}
+
+#reminder-list {
+  font-size: 1.1em;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+#reminder-list h3 {
+  text-align: center;
+}
