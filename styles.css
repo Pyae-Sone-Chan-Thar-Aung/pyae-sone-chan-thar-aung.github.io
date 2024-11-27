@@ -379,7 +379,7 @@ body.dark-mode .aboutMe {
 /* Grid Layout for Favourites - 2 rows of 4 items */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
   gap: 1rem; /* Space between items */
   list-style: none;
   padding: 0;
