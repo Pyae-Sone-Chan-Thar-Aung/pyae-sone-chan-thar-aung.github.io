@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#101e3f">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#101e3f">
+
+    <title>Menu</title>
+
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+    
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans Condensed', sans-serif;
+            background: #fffde7;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .searchBox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 10em;
+            width: 100%;
+            background: url(assets/bg.png);
+            background-position: bottom;
+            background-size: cover;
+            z-index: 1000;
+        }
+        
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            width: 350px;
+            line-height: 30px;
+            font-size: 1.5em;
+            margin: 50px auto 0 auto;
+        }
+
+        @media only screen and (max-width: 35em) {
+            .search {
+                width: 300px;
+            }
+        }
+
+        .bottom-margin--small {
+            margin-bottom: .5em;
+        }
+
+        .container {
+            padding: 10em 0 30em 0;
+            margin: 2rem 7rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(50px, min-content);
+            justify-content: center;
+            grid-gap: 1.2rem;
+        }
+
+        @media only screen and (max-width: 70em) {
+            .container {
+                margin: 2rem 6rem;
+                grid-template-columns: repeat(3, 1fr); 
+            } 
+        }
+
+        @media only screen and (max-width: 55em) {
+            .container {
+                margin: 2rem 5rem;
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+
+        @media only screen and (max-width: 35em) {
+            .container {
+                grid-template-columns: repeat(1, 1fr); 
+                margin: 2rem 3rem;
+            }
+        }
+
+        .container .heading{
+            grid-column: span 4;
+            padding: .5rem;
+            font-size: 3rem;
+            color: #e65100;
+        }
+
+        @media only screen and (max-width: 70em) {
+            .container .heading{
+                grid-column: span 3;
+            } 
+        }
+
+        @media only screen and (max-width: 55em) {
+            .container .heading{
+                grid-column: span 2;
+            }
+        }
+
+        @media only screen and (max-width: 35em) {
+            .container .heading{
+                grid-column: span 1;
+            }
+        }
+
+        .container .project {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            border: 3px solid #1b5e20;
+            transition: all .2s;
+        }
+
+        .container .project:hover{
+            transform: translateY(-5px) scale(1.05);
+            border: 3px solid #43a047;
+        }
+
+        .container .project a{
+            font-size: 1.7em;
+            color: #43a047;
+            text-decoration: none;
+            padding: 1rem;
+            transition: all .2;
+        }
+
+        .container .project:hover a{
+            color: #2e7d32;
+        }
+
+        .container a:visited {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>    
+
+    <div class="searchBox">
+        <input 
+            type="text" 
+            class="search" 
+            id="searchInput" 
+            placeholder="Search"
+            onkeyup="searchFunction()"
+        >
+    </div>
+
+    <ul id="css-js" class="container">
+        <h1 class="heading bottom-margin--small">CSS & JS</h1>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-background/index.html">
+                3D Background
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-book-hover-effect/index.html">
+                3D Book Hover Effect
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-book-mockup/index.html">
+                3D Book Mockup
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-card-flip/index.html">
+                3D Card Flip
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-editable-text/index.html">
+                3D Editable Text
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-isometric-layered-social-media-icon/index.html">
+                3D Isometric Layered Social Media Icon
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-isometric-social-media-icons/index.html">
+                3D Isometric Social Media Icons
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-isometric-text/index.html">
+                3D Isometric Text
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-layered-image/index.html">
+                3D Layered Image
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-layered-social-media-icon/index.html">
+                3D Layered Social Media Icon
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-responsive-flip-card-effect/index.html">
+                3D Responsive Flip Card Effect
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-rotating-image-gallery/index.html">
+                3D Rotating Image Gallery
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-rotating-image-gallery-2/index.html">
+                3D Rotating Image Gallery 2
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-rotating-image-gallery-mousemove/index.html">
+                3D Control Image Rotation On Mousemove
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-rotating-image-gallery-2-mousemove/index.html">
+                3D Control Image Rotation 2 On Mousemove
+            </a>
+        </li>
+
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-swipe-slider-using-materialize/index.html">
+                3D Swipe Slider Using Materialize
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-video-cube/index.html">
+                3D Video Cube
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/3d-video-sphere/index.html">
+                3D Video Sphere
+            </a>
+        </li> 
+
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/animated-bubbles/index.html">
+                Animated Bubbles
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/animated-eyes-follow-cursor/index.html">
+                Animated Eyes Follow Mouse Cursor
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/animated-svg/index.html">
+                Animated SVG icon
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/background-parallax-effect-on-mousemove/index.html">
+                Background Parallax Effect on Mousemove
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/box-shadow-hover-effect/index.html"> 
+                Box Shadow Hover Effect
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/box-shadow-loading-animation/index.html">
+                Box Shadow Loading Animation
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/button-hover-effect-1/index.html">
+                Button Hover Effect 1
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/button-hover-effect-2/index.html">
+                Button Hover Effect 2
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/card-hover-effect/index.html">
+                Card Hover Effect
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/circular-progress-bar/index.html">
+                Circular Progress Bar
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/click-and-hold-effects/index.html">
+                Click And Hold Effects
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/check-list/index.html">
+                Check List
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/circle-shadow-effect/index.html">
+                Circle Shadow Effect
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/clip-path-image-hover/index.html">
+                Clip Path Image Hover
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/clip-path-image-hover-text/index.html">
+                Clip Path Image Hover Text
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/clip-path-mousemove-effect/index.html">
+                Clip Path Mousemove Effect
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/clip-path-multi-image-hover/index.html">
+                Clip Path Multi Image Hover
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/clipped-text-video-banner/index.html">
+                Clipped Text Video Banner
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/cloud-banner-animation/index.html">
+                Cloud Banner Animation
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/color-to-b&w-photo/index.html">
+                Color To Black & White
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/comet-effects-on-mousemove/index.html">
+                Comet Effects on Mousemove
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/curved-header/index.html">
+                Curved Header
+            </a>
+        </li>
+        
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/custom-range-slider/index.html">
+                Custom Range Slider
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/depth-of-field-card-hover-effects/index.html">
+                Depth Of Field Card Hover Effects
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/div-box-design/index.html">
+                Div Box Design
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/events-section-UI/index.html">
+                Events Section UI
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/fadein-and-fadeout-back-to-top-button/index.html">
+                Fadein and Fadeout Back To Top Button
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/falling-leaves/index.html">
+                Falling Leaves
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/flat-long-shadow/index.html">
+                Flat Long Shadow
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/float-an-image-with-css-flex/index.html">
+                Float an Image With CSS Flex
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/floating-action-button/index.html">
+                Floating Action Button 
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/flying-rocket-wth-flames-animation/index.html">
+                Flying Rocket with Flames Animation
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/focus-on-hover/index.html">
+                Focus On Hover
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/fullpage-scrolling/index.html">
+                Full Screen Scrolling
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/fullscreen-video-background-fadeout/index.html">
+                Fullscreen Video Fadeout
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/galaxy-paralax-scrolling/index.html">
+                Galaxy Paralax Scrolling
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/generate-gradient-bg-automatically-using-grade.js/index.html">
+                Generate Gradient BG Automatically using Grade Js
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/glowing-apple-logo-animation/index.html">
+                Glowing Apple Logo Animation
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/glowing-gradient-icon/index.html">
+                Glowing Gradient Icon
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/glowing-loading-page/index.html">
+                Glowing Loading Page
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/glowing-text-on-hover/index.html">
+                Glowing Text On Hover
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/gradient-drop-shadow/index.html">
+                Gradient Drop Shadow
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/horizontal-page-scrolling/index.html">
+                Horizontal Page Scrolling
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/icon-fill-hover-effect/index.html">
+                Icon Fill Hover Effect
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/image-block-reveal/index.html">
+                Image Block Reveal
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/image-liquid-distortion-webGL/index.html">
+                Image Liquid Distortion WebGL
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/image-slider/index.html">
+                Image Slider
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/isometric-cards-hover-effects/index.html">
+                Isometric Cards Hover Effects 
+            </a>
+        </li> 
+        
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/infinite-stack-card-animation/index.html">
+                Infinite Stack Card Animation
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/liquid-button-animation/index.html">
+                Liquid Button Animation
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/liquid-loader-animation/index.html">
+                Liquid Loader Animation
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/list-item-hover-effect/index.html">
+                List Item Hover Effect
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/loading-animation/index.html">
+                Loading Animation
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/menu-item-hover-effect-multi-text/index.html">
+                Menu Item Hover Effect Multi Text
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/menu-item-hover-effect-faded/index.html">
+                Menu Item Hover Effect Faded
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/moonlight-parallax-Scrolling/index.html">
+                Moonlight Paralax Scrolling
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/mousemove-3d-parallax-tilt-effect/index.html">
+                Mousemove 3D Parallax Tilt Effect using Tilt.js
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neon-light-box-loader/index.html">
+                Neon Light Box Loader
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neon-light-button/index.html">
+                Neon Light Button
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neon-light-button-2/index.html">
+                Neon Light Button 2
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neon-light-text-effect/index.html">
+                Neon Light Text Effect
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neumorphism-loading-animation/index.html">
+                Neumorphism Loading Animation 
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neumorphism-working-analog-clock-UI/index.html">
+                Neumorphism Working Analog Clock UI With Dark and Light Mode
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/neumorphism-radio-buttons/index.html">
+                Neumorphism Radio Buttons
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/number-counter-preloader/index.html">
+                Number Counter Preloader
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/p5.js/index.html">
+                p5.js
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/page-scroll-glowing-progress-bar/index.html">
+                Page Scroll Glowing Progress Bar 
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/page-scroll-progress-bar/index.html">
+                Page Scroll Progress Bar 
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/plane-fly-around-the-rotating-earth/index.html">
+                Plane Fly Around the Rotating Earth
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/product-card/index.html">
+                Product Card
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/product-card-responsive-UI/index.html">
+                Product Card Responsive UI
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-box-model/index.html">
+                Responsive Box Model
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-card-hover-effects/index.html">
+                Responsive Card Hover Effects
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-card-UI/index.html">
+                Responsive Card UI
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-glowing-gradient-border-card/index.html">
+                Responsive Glowing Gradient Border Card
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-image-card-album/index.html">
+                Responsive Image Card Album
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-image-card-design/index.html">
+                Responsive Image Card Design
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-layout-food-item/index.html">
+                Responsive layout Food Item
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-layout-images/index.html">
+                Responsive layout Images
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/responsive-sidebar-menu/index.html">
+                Responsive Sidebar Menu
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/ring-of-fire/index.html">
+                Ring Of Fire
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/ripple-animation/index.html">
+                Ripple Animation
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/scratch-effects-ScratchPad.js/index.html">
+                Scratch Effects ScratchPad.js
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/screen-image-change/index.html">
+                Screen Image Change
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/scroll-animation-using-scrollmagic/index.html">
+                Scroll Animation Using Scrollmagic
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/scroll-snap/index.html">
+                Snap Scroll
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/snake-border-button/index.html">
+                Snake Border Button
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/soft-box-shadow/index.html">
+                Soft Box Shadow
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/soft-text-shadow-to-stroke-line-hover-effect/index.html">
+                Soft Text Shadow To Stroke Line Hover Effect
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/splash-image-mask/index.html">
+                Splash Image Mask
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/split-banner-on-page-scroll/index.html">
+                Split Banner On Page Scroll
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/sticky-scrolling-effects/index.html">
+                Sticky Scrolling Effects
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/sticky-section-scrolling/index.html">
+                Sticky Section Scrolling
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/svg-wave-banner-background/index.html">
+                SVG Wave Banner Background
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/text-distortion-animation/index.html">
+                Text Distortion
+            </a>
+        </li>  
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/text-rotator/index.html">
+                Text Rotator
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/text-typing-animation/index.html">
+                Text Typing Animation
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/transform-effects-on-scroll-1/index.html">
+                Transform Effects on Scroll 1
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/transform-effects-on-scroll-2/index.html">
+                Transform Effects on Scroll 2
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/transform-effects-on-scroll-3/index.html">
+                Transform Effects on Scroll 3
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/transform-effects-on-scroll-4/index.html">
+                Transform Effects on Scroll 4
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/transparent-login-form-with-floating-placeholder-text/index.html">
+                Transparent Login Form with floating Placeholder Text
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/video-caption-hover-effects/index.html">
+                Video Caption Hover Effects
+            </a>
+        </li>
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/video-slider/index.html">
+                Video Slider
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/water-wave-menu-item/index.html">
+                Water Wave Menu Item
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/water-wave-text/index.html">
+                Water Wave Text
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/wavy-text/index.html">
+                Wavy Text
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/wooden-text-typography/index.html">
+                Wooden Text Typography
+            </a>
+        </li> 
+
+
+
+        <!-- 
+            <li class="project"><a target="_blank" href="./CSS-Projects"></a></li>
+            <li class="project"><a target="_blank" href="./CSS-Projects"></a></li>
+            <li class="project"><a target="_blank" href="./CSS-Projects"></a></li>
+            <li class="project"><a target="_blank" href="./CSS-Projects"></a></li>
+            <li class="project"><a target="_blank" href="./CSS-Projects"></a></li>
+            <li class="project"><a target="_blank" href="./CSS-Projects"></a></li>
+        -->
+
+
+        <!-- ScrollTrigger  -->
+        <h1 class="heading bottom-margin--small">ScrollTrigger</h1>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/ScrollTrigger/ScrollTrigger-image-scroll/index.html">
+                ScrollTrigger Image Scroll 
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/ScrollTrigger/ScrollTrigger-reveal-elements-on-scroll/index.html">
+                ScrollTrigger Reveal Elements On Page Scroll
+            </a>
+        </li> 
+
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/ScrollTrigger/ScrollTrigger-text-scroll/index.html">
+                ScrollTrigger Text Scroll
+            </a>
+        </li> 
+
+        <!-- Swiper.js Examples -->
+        <h1 class="heading bottom-margin--small">Swiper.js</h1>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/3d-coverflow-effect/index.html">
+                Swiper.js 3D Coverflow Effect 
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/3d-cube-effect/index.html">
+                Swiper.js 3D Cube Effect 
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/3d-flip-effect/index.html">
+                Swiper.js 3D Flip Effect 
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/effect-fade/index.html">
+                Swiper.js Fade Effect
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/pagination-progress/index.html">
+                Swiper.js Pagination Progress
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/slides-per-column/index.html">
+                Swiper.js Slides Per Coloumn
+            </a>
+        </li> 
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/slides-per-view/index.html">
+                Swiper.js Slides Per View
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/thumbs-gallery-with-loop-mode/index.html">
+                Swiper.js Thumbs Gallery With Loop Mode
+            </a>
+        </li>
+        <li class="project">
+            <a target="_blank" href="./CSS-Projects/swiper.js/with-zoom/index.html">
+                Swiper.js With Zoom
+            </a>
+        </li>
+    </ul>
+
+<script type="text/javascript">
+    function searchFunction() {
+    
+        var searchInput = document.getElementById('searchInput');
+
+        var filter = searchInput.value.toUpperCase();
+        
+        var project = document.getElementById('css-js');
+        var projectName = project.getElementsByTagName('li');
+    
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < projectName.length; i++) {
+            var a = projectName[i].getElementsByTagName("a")[0];
+            var txtValue = a.textContent || a.innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                projectName[i].style.display = "";
+            } 
+            else {
+                projectName[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body> 
+</html>
