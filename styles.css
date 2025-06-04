@@ -1012,14 +1012,22 @@ button:hover {
 }
 
 .event-card.tour .event-type {
-  background-color: #2ecc71;
+  background-color: #0F9D58;
 }
 
 .event-type.tour {
-  background-color: #2ecc71;
+  background-color: #0F9D58;
 }
 .event-type.workshop {
   background-color: #e67e22;
+}
+
+.event-card.Certification .event-type {
+  background-color: #DB4437;
+}
+
+.event-type.Certification {
+  background-color: #DB4437;
 }
 
 .event-info h3 {
@@ -1135,7 +1143,7 @@ button:hover {
   display: inline-block;
   padding: 0.3rem 1rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -1180,7 +1188,7 @@ button:hover {
 }
 
 .gallery-main {
-  height: 500px; /* Larger main image */
+  height: 450px; /* Larger main image */
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
