@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambag - Cebuano Symptom Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo svg {
+            width: 50px;
+            height: 50px;
+            fill: #1e40af;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: 700;
+            color: white;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .language-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .symptom-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .symptom-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .symptom-tag:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .symptom-tag.selected {
+            background: #dbeafe;
+            color: #1e40af;
+            border-color: #3b82f6;
+        }
+
+        .severity-slider {
+            margin: 20px 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .analyze-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .condition {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .condition h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .condition p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .confidence {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .symptom-tags {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="language-toggle" onclick="toggleLanguage()">
+                <span id="lang-btn-text">Cebuano</span>
+            </button>
+            <h1 id="title">Tambag</h1>
+            <p id="subtitle">Cebuano-Based Symptom Checker</p>
+        </div>
+
+        <div class="main-content">
+            <form id="symptom-form">
+                <div class="form-group">
+                    <label for="symptoms" id="symptoms-label">Unsa ang imong gibati? (What are you feeling?)</label>
+                    <textarea id="symptoms" name="symptoms" placeholder="Isulti ang imong mga sintomas sa Cebuano... (Tell your symptoms in Cebuano...)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label id="common-symptoms-label">Kasagarang Sintomas (Common Symptoms):</label>
+                    <div class="symptom-tags" id="symptom-tags">
+                        <span class="symptom-tag" data-symptom="sakit sa ulo">Sakit sa ulo</span>
+                        <span class="symptom-tag" data-symptom="hilanat">Hilanat</span>
+                        <span class="symptom-tag" data-symptom="ubo">Ubo</span>
+                        <span class="symptom-tag" data-symptom="sakit sa tiyan">Sakit sa tiyan</span>
+                        <span class="symptom-tag" data-symptom="pagkaluya">Pagkaluya</span>
+                        <span class="symptom-tag" data-symptom="sakit sa tutunlan">Sakit sa tutunlan</span>
+                        <span class="symptom-tag" data-symptom="pagkasuka">Pagkasuka</span>
+                        <span class="symptom-tag" data-symptom="hubag">Hubag</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration" id="duration-label">Pila ka adlaw na? (How many days?)</label>
+                    <select id="duration" name="duration">
+                        <option value="">Pilia...</option>
+                        <option value="1">1 ka adlaw</option>
+                        <option value="2-3">2-3 ka adlaw</option>
+                        <option value="4-7">4-7 ka adlaw</option>
+                        <option value="1-2weeks">1-2 ka semana</option>
+                        <option value="over2weeks">Sobra sa 2 ka semana</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="severity" id="severity-label">Unsa ka grabe? (How severe?) <span id="severity-value">5</span>/10</label>
+                    <div class="severity-slider">
+                        <input type="range" min="1" max="10" value="5" class="slider" id="severity">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" id="age-label">Edad (Age):</label>
+                    <input type="number" id="age" name="age" min="18" max="100" placeholder="25">
+                </div>
+
+                <button type="submit" class="analyze-btn" id="analyze-btn">
+                    <span id="btn-text">Analisaha (Analyze)</span>
+                </button>
+            </form>
+
+            <div class="results" id="results">
+                <h2 id="results-title">Mga Resulta (Results)</h2>
+                <div id="conditions-list"></div>
+                <div class="warning">
+                    <strong id="warning-title">Pahinumdom:</strong>
+                    <span id="warning-text">Kini usa ka digital tool alang sa pagpanabang lamang. Dili kini mopuli sa konsultasyon sa doktor. Kung grabe ang imong gibati, konsultaha dayon ang usa ka healthcare professional.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p id="footer-text">Tambag &copy; 2025 - Developed for the Cebuano community in Davao City</p>
+        </div>
+    </div>
+
+    <script>
+        // Language data
+        const translations = {
+            cebuano: {
+                title: "Tambag",
+                subtitle: "Cebuano-Based Symptom Checker",
+                'symptoms-label': "Unsa ang imong gibati? (What are you feeling?)",
+                'symptoms': "Isulti ang imong mga sintomas sa Cebuano... (Tell your symptoms in Cebuano...)",
+                'common-symptoms-label': "Kasagarang Sintomas (Common Symptoms):",
+                'duration-label': "Pila ka adlaw na? (How many days?)",
+                'severity-label': "Unsa ka grabe? (How severe?)",
+                'age-label': "Edad (Age):",
+                'btn-text': "Analisaha (Analyze)",
+                'results-title': "Mga Resulta (Results)",
+                'warning-title': "Pahinumdom:",
+                'warning-text': "Kini usa ka digital tool alang sa pagpanabang lamang. Dili kini mopuli sa konsultasyon sa doktor. Kung grabe ang imong gibati, konsultaha dayon ang usa ka healthcare professional.",
+                'footer-text': "Tambag © 2025 - Developed for the Cebuano community in Davao City",
+                'lang-btn-text': "English"
+            },
+            english: {
+                title: "Tambag",
+                subtitle: "Cebuano-Based Symptom Checker",
+                'symptoms-label': "What are you feeling?",
+                'symptoms': "Describe your symptoms...",
+                'common-symptoms-label': "Common Symptoms:",
+                'duration-label': "How many days?",
+                'severity-label': "How severe?",
+                'age-label': "Age:",
+                'btn-text': "Analyze",
+                'results-title': "Results",
+                'warning-title': "Reminder:",
+                'warning-text': "This is a digital tool for guidance only. It does not replace consultation with a doctor. If your condition is serious, consult a healthcare professional immediately.",
+                'footer-text': "Tambag © 2025 - Developed for the Cebuano community in Davao City",
+                'lang-btn-text': "Cebuano"
+            }
+        };
+
+        // Disease database with Cebuano terms
+        const diseaseDatabase = {
+            "dengue": {
+                symptoms: ["hilanat", "sakit sa ulo", "sakit sa mata", "sakit sa likod", "pagkaluya", "rash"],
+                name_cebuano: "Dengue",
+                name_english: "Dengue Fever",
+                description_cebuano: "Usa ka sakit nga gikan sa lamok. Kinahanglan dayon nga konsultasyon sa doktor.",
+                description_english: "A mosquito-borne disease. Immediate medical consultation is required.",
+                severity: "high"
+            },
+            "covid": {
+                symptoms: ["hilanat", "ubo", "sakit sa tutunlan", "pagkaluya", "sakit sa ulo", "kawala sa lami"],
+                name_cebuano: "COVID-19",
+                name_english: "COVID-19",
+                description_cebuano: "Sakit sa respiratory system. Isolation ug medical care ang gikinahanglan.",
+                description_english: "Respiratory illness. Isolation and medical care required.",
+                severity: "high"
+            },
+            "hypertension": {
+                symptoms: ["sakit sa ulo", "pagkaluya", "sakit sa dughan", "pagka-dizzy"],
+                name_cebuano: "Taas nga Blood Pressure",
+                name_english: "Hypertension",
+                description_cebuano: "Taas nga blood pressure. Kontrola ang pagkaon ug regular checkup.",
+                description_english: "High blood pressure. Control diet and regular checkup needed.",
+                severity: "medium"
+            },
+            "gastritis": {
+                symptoms: ["sakit sa tiyan", "pagkasuka", "pagkasuya", "sakit sa ibabaw sa tiyan"],
+                name_cebuano: "Gastritis",
+                name_english: "Gastritis",
+                description_cebuano: "Sakit sa tiyan tungod sa acidic. Likayi ang sour nga pagkaon.",
+                description_english: "Stomach inflammation due to acid. Avoid acidic foods.",
+                severity: "low"
+            },
+            "flu": {
+                symptoms: ["hilanat", "ubo", "sakit sa ulo", "pagkaluya", "sakit sa lawas"],
+                name_cebuano: "Trangkaso",
+                name_english: "Flu",
+                description_cebuano: "Common nga sakit. Pagpahuwayg ug inom ug tubig.",
+                description_english: "Common illness. Rest and drink plenty of water.",
+                severity: "low"
+            }
+        };
+
+        let currentLanguage = 'cebuano';
+        let selectedSymptoms = [];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEventListeners();
+            updateSeverityDisplay();
+        });
+
+        function initializeEventListeners() {
+            // Symptom tag selection
+            document.querySelectorAll('.symptom-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const symptom = this.dataset.symptom;
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        selectedSymptoms = selectedSymptoms.filter(s => s !== symptom);
+                    } else {
+                        this.classList.add('selected');
+                        selectedSymptoms.push(symptom);
+                    }
+                    updateSymptomsTextarea();
+                });
+            });
+
+            // Severity slider
+            document.getElementById('severity').addEventListener('input', updateSeverityDisplay);
+
+            // Form submission
+            document.getElementById('symptom-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                analyzeSymptoms();
+            });
+        }
+
+        function updateSymptomsTextarea() {
+            const textarea = document.getElementById('symptoms');
+            const currentText = textarea.value;
+            const newSymptoms = selectedSymptoms.join(', ');
+            
+            if (currentText && !currentText.includes(newSymptoms)) {
+                textarea.value = currentText + (currentText.endsWith('.') ? ' ' : ', ') + newSymptoms;
+            } else if (!currentText) {
+                textarea.value = newSymptoms;
+            }
+        }
+
+        function updateSeverityDisplay() {
+            const severityValue = document.getElementById('severity').value;
+            document.getElementById('severity-value').textContent = severityValue;
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'cebuano' ? 'english' : 'cebuano';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const lang = translations[currentLanguage];
+            
+            Object.keys(lang).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = lang[key];
+                    } else {
+                        element.textContent = lang[key];
+                    }
+                }
+            });
+        }
+
+        function analyzeSymptoms() {
+            const symptoms = document.getElementById('symptoms').value.toLowerCase();
+            const duration = document.getElementById('duration').value;
+            const severity = parseInt(document.getElementById('severity').value);
+            const age = parseInt(document.getElementById('age').value);
+
+            if (!symptoms.trim()) {
+                alert(currentLanguage === 'cebuano' ? 
+                    'Palihug isulti ang imong mga sintomas.' : 
+                    'Please describe your symptoms.');
+                return;
+            }
+
+            // Disable button and show loading
+            const btn = document.getElementById('analyze-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = currentLanguage === 'cebuano' ? 'Nag-analisa...' : 'Analyzing...';
+            btn.disabled = true;
+
+            // Simulate analysis delay
+            setTimeout(() => {
+                const matches = findMatchingConditions(symptoms, severity, duration, age);
+                displayResults(matches);
+                
+                // Re-enable button
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1500);
+        }
+
+        function findMatchingConditions(symptoms, severity, duration, age) {
+            const matches = [];
+            
+            Object.keys(diseaseDatabase).forEach(diseaseKey => {
+                const disease = diseaseDatabase[diseaseKey];
+                let matchCount = 0;
+                let totalSymptoms = disease.symptoms.length;
+                
+                disease.symptoms.forEach(symptom => {
+                    if (symptoms.includes(symptom)) {
+                        matchCount++;
+                    }
+                });
+                
+                if (matchCount > 0) {
+                    let confidence = (matchCount / totalSymptoms) * 100;
+                    
+                    // Adjust confidence based on severity and duration
+                    if (disease.severity === 'high' && severity >= 7) confidence += 10;
+                    if (disease.severity === 'high' && duration === 'over2weeks') confidence += 15;
+                    if (disease.severity === 'low' && severity <= 4) confidence += 5;
+                    
+                    // Age factors
+                    if (diseaseKey === 'hypertension' && age > 40) confidence += 10;
+                    if (diseaseKey === 'dengue' && age < 50) confidence += 5;
+                    
+                    confidence = Math.min(confidence, 95); // Cap at 95%
+                    
+                    matches.push({
+                        disease: diseaseKey,
+                        confidence: Math.round(confidence),
+                        matchedSymptoms: matchCount,
+                        data: disease
+                    });
+                }
+            });
+            
+            // Sort by confidence
+            matches.sort((a, b) => b.confidence - a.confidence);
+            
+            return matches.slice(0, 3); // Return top 3 matches
+        }
+
+        function displayResults(matches) {
+            const resultsDiv = document.getElementById('results');
+            const conditionsList = document.getElementById('conditions-list');
+            
+            conditionsList.innerHTML = '';
+            
+            if (matches.length === 0) {
+                conditionsList.innerHTML = `
+                    <div class="condition">
+                        <h3>${currentLanguage === 'cebuano' ? 'Walay nakita nga tugma' : 'No matches found'}</h3>
+                        <p>${currentLanguage === 'cebuano' ? 
+                            'Palihug konsultaha ang usa ka healthcare professional para sa mas detalyadong diagnosis.' : 
+                            'Please consult a healthcare professional for a detailed diagnosis.'}</p>
+                    </div>
+                `;
+            } else {
+                matches.forEach(match => {
+                    const condition = document.createElement('div');
+                    condition.className = 'condition';
+                    
+                    const name = currentLanguage === 'cebuano' ? 
+                        match.data.name_cebuano : match.data.name_english;
+                    const description = currentLanguage === 'cebuano' ? 
+                        match.data.description_cebuano : match.data.description_english;
+                    
+                    condition.innerHTML = `
+                        <h3>${name}</h3>
+                        <p>${description}</p>
+                        <span class="confidence">${match.confidence}% ${currentLanguage === 'cebuano' ? 'tugma' : 'match'}</span>
+                    `;
+                    
+                    conditionsList.appendChild(condition);
+                });
+            }
+            
+            resultsDiv.classList.add('show');
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

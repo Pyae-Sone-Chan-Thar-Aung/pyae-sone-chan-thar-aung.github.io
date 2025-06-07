@@ -2,32 +2,54 @@
 
 /* Set up light mode colors */
 :root {
-  --header-bg: #fff; /* Light background for header */
-  --header-bgh2: #2c3e50; /* Light background for header h2 */
-  --link-color: #333; /* Dark color for links */
-  --link-hover-bg: #f2f2f2; /* Subtle hover background */
-  --background-color: #f4f4f4; /* Light background color for the body */
-  --text-color: #333; /* Light text color */
-  --link-active-color: #007bff; /* Professional blue for active links */
-  --nav-background-color: #f9f9f9; /* Clean background for the nav */
-  --button-bg: #007bff; /* Button background color */
-  --button-hover-bg: #0056b3; /* Button hover background color */
-  --button-text-color: #fff; /* Button text color */
-  --button-border-radius: 8px; /* Button border radius */
+  --header-bg: #fff;
+  /* Light background for header */
+  --header-bgh2: #2c3e50;
+  /* Light background for header h2 */
+  --link-color: #333;
+  /* Dark color for links */
+  --link-hover-bg: #f2f2f2;
+  /* Subtle hover background */
+  --background-color: #f4f4f4;
+  /* Light background color for the body */
+  --text-color: #333;
+  /* Light text color */
+  --link-active-color: #007bff;
+  /* Professional blue for active links */
+  --nav-background-color: #f9f9f9;
+  /* Clean background for the nav */
+  --button-bg: #007bff;
+  /* Button background color */
+  --button-hover-bg: #0056b3;
+  /* Button hover background color */
+  --button-text-color: #fff;
+  /* Button text color */
+  --button-border-radius: 8px;
+  /* Button border radius */
 }
 
 /* Dark Mode Overrides */
 body.dark-mode {
-  --header-bg: #333; /* Dark background for header */
-  --header-bgh2: #fff; /* Dark background for header h2 */
-  --link-color: #fff; /* Light text for links */
-  --link-hover-bg: #444; /* Darker hover background */
-  --background-color: #222; /* Dark background color for the body */
-  --text-color: #ddd; /* Light text color for body */
-  --link-active-color: #ee6723; /* Active link color for dark mode */
-  --nav-background-color: #222; /* Dark background for the nav */
-  --button-bg: #fdbd39; /* Button background for dark mode */
-  --button-hover-bg: #f69833; /* Button hover color for dark mode */
+  --header-bg: #333;
+  /* Dark background for header */
+  --header-bgh2: #fff;
+  /* Dark background for header h2 */
+  --link-color: #fff;
+  /* Light text for links */
+  --link-hover-bg: #444;
+  /* Darker hover background */
+  --background-color: #222;
+  /* Dark background color for the body */
+  --text-color: #ddd;
+  /* Light text color for body */
+  --link-active-color: #ee6723;
+  /* Active link color for dark mode */
+  --nav-background-color: #222;
+  /* Dark background for the nav */
+  --button-bg: #fdbd39;
+  /* Button background for dark mode */
+  --button-hover-bg: #f69833;
+  /* Button hover color for dark mode */
 }
 
 /* Body Styles */
@@ -86,23 +108,32 @@ nav .logo {
 .nav__link {
   text-decoration: none;
   color: var(--button-text-color);
-  padding: 0.75rem 1.5rem; /* Padding to make the button look bigger */
-  background-color: var(--button-bg); /* Button color */
-  border-radius: var(--button-border-radius); /* Rounded corners */
-  border: 2px solid transparent; /* Border */
+  padding: 0.75rem 1.5rem;
+  /* Padding to make the button look bigger */
+  background-color: var(--button-bg);
+  /* Button color */
+  border-radius: var(--button-border-radius);
+  /* Rounded corners */
+  border: 2px solid transparent;
+  /* Border */
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .nav__link:hover {
-  background-color: var(--button-hover-bg); /* Darker background on hover */
-  color: #fff; /* Text color on hover */
-  transform: scale(1.05); /* Slight scaling effect for hover */
+  background-color: var(--button-hover-bg);
+  /* Darker background on hover */
+  color: #fff;
+  /* Text color on hover */
+  transform: scale(1.05);
+  /* Slight scaling effect for hover */
 }
 
 .nav__link.active {
   color: #fff;
-  background-color: var(--link-active-color); /* Active link color */
-  border-color: var(--link-active-color); /* Border color on active */
+  background-color: var(--link-active-color);
+  /* Active link color */
+  border-color: var(--link-active-color);
+  /* Border color on active */
 }
 
 /* Mobile Navigation (Hamburger) */
@@ -115,13 +146,15 @@ nav .logo {
 .bar {
   width: 30px;
   height: 3px;
-  background-color: var(--link-color); /* Same color as links */
+  background-color: var(--link-color);
+  /* Same color as links */
   margin: 5px 0;
   transition: transform 0.3s ease-in-out;
 }
 
 /* Mobile Navigation (Active) */
 @media (max-width: 767px) {
+
   /* Show Hamburger for mobile */
   .hamburger {
     display: flex;
@@ -149,40 +182,52 @@ nav .logo {
   .hamburger .bar:nth-child(1) {
     transform: translateY(0) rotate(0);
   }
+
   .hamburger .bar:nth-child(2) {
     opacity: 1;
   }
+
   .hamburger .bar:nth-child(3) {
     transform: translateY(0) rotate(0);
   }
 
   /* Hamburger icon animation (X shape) when clicked */
   .hamburger.open .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg); /* Top bar turns */
+    transform: translateY(8px) rotate(45deg);
+    /* Top bar turns */
   }
+
   .hamburger.open .bar:nth-child(2) {
-    opacity: 0; /* Middle bar disappears */
+    opacity: 0;
+    /* Middle bar disappears */
   }
+
   .hamburger.open .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg); /* Bottom bar turns */
+    transform: translateY(-8px) rotate(-45deg);
+    /* Bottom bar turns */
   }
 
   /* Mobile - Improved nav item styles */
   .nav__link {
-    padding: 1rem 2rem; /* Make buttons bigger for mobile */
+    padding: 1rem 2rem;
+    /* Make buttons bigger for mobile */
     background-color: var(--button-bg);
     text-align: center;
-    width: 100%; /* Full width for each item */
+    width: 100%;
+    /* Full width for each item */
     display: block;
-    border-radius: 0; /* No rounded corners for mobile */
+    border-radius: 0;
+    /* No rounded corners for mobile */
   }
 
   .nav__link:hover {
-    background-color: var(--button-hover-bg); /* Ensure consistent hover effect */
+    background-color: var(--button-hover-bg);
+    /* Ensure consistent hover effect */
   }
 
   .nav__link.active {
-    background-color: var(--link-active-color); /* Active state for mobile */
+    background-color: var(--link-active-color);
+    /* Active state for mobile */
   }
 }
 
@@ -205,6 +250,7 @@ nav .logo {
 
 /* Desktop Styles */
 @media (min-width: 1025px) {
+
   /* Ensure the navigation is evenly spaced on larger screens */
   .nav__list {
     display: flex;
@@ -222,13 +268,15 @@ nav .logo {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #ffbd00, #ffec40); /* Light mode */
+  background: linear-gradient(45deg, #ffbd00, #ffec40);
+  /* Light mode */
   transition: background 0.3s ease, transform 0.3s ease;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode-toggle.dark {
-  background: linear-gradient(45deg, #c6b6b6, #2e2e2e); /* Dark mode */
+  background: linear-gradient(45deg, #c6b6b6, #2e2e2e);
+  /* Dark mode */
 }
 
 .dark-mode-toggle:hover {
@@ -285,7 +333,8 @@ section h2 {
 }
 
 #about {
-  padding: 50px 2rem; /* Add padding to create space around the section */
+  padding: 50px 2rem;
+  /* Add padding to create space around the section */
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -298,12 +347,14 @@ section h2 {
   font-weight: bold;
   margin-bottom: 10px;
   color: var(--link-color);
-  display: inline; /* Align inline with the profile picture */
+  display: inline;
+  /* Align inline with the profile picture */
 }
 
 #role span {
   font-weight: bold;
-  color: var(--link-active-color); /* Highlighted name color */
+  color: var(--link-active-color);
+  /* Highlighted name color */
   font-size: 2.8rem;
 }
 
@@ -314,20 +365,23 @@ section h2 {
   justify-content: flex-start;
   margin-top: 20px;
   text-align: left;
-  gap: 2rem; /* Space between profile picture and the role */
+  gap: 2rem;
+  /* Space between profile picture and the role */
 }
 
 /* Profile Picture and Role Container */
 .profile-and-role {
   display: flex;
   align-items: center;
-  gap: 2rem; /* Space between profile picture and role text */
+  gap: 2rem;
+  /* Space between profile picture and role text */
 }
 
 /* Profile Picture */
 .profile-pic {
   border-radius: 50%;
-  width: 250px; /* Bigger size for profile image */
+  width: 250px;
+  /* Bigger size for profile image */
   height: 250px;
   border: 5px solid var(--header-bg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -343,7 +397,8 @@ section h2 {
 
 /* About Info Container */
 .about-info {
-  margin-top: 30px; /* Add some space between the profile section and about me */
+  margin-top: 30px;
+  /* Add some space between the profile section and about me */
 }
 
 /* About Me Paragraph */
@@ -351,7 +406,8 @@ section h2 {
   font-size: 1.1rem;
   line-height: 1.6;
   color: var(--text-color);
-  margin: 0 0.5in; /* 0.5 inch margin on left and right */
+  margin: 0 0.5in;
+  /* 0.5 inch margin on left and right */
   font-weight: 400;
   text-align: justify;
 }
@@ -369,7 +425,8 @@ body.dark-mode .aboutMe {
 
 /* Favourites Section */
 #favorites {
-  padding: 50px 2rem; /* Add padding to create space around the section */
+  padding: 50px 2rem;
+  /* Add padding to create space around the section */
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -379,8 +436,10 @@ body.dark-mode .aboutMe {
 /* Grid Layout for Favourites - 2 rows of 4 items */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
-  gap: 1rem; /* Space between items */
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 items per row */
+  gap: 1rem;
+  /* Space between items */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -390,7 +449,8 @@ body.dark-mode .aboutMe {
 .grid li {
   background-color: var(--header-bg);
   padding: 1rem;
-  border-radius: 8px; /* Rounded corners */
+  border-radius: 8px;
+  /* Rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-size: 1.25rem;
   font-weight: 500;
@@ -403,7 +463,8 @@ body.dark-mode .aboutMe {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   background-color: var(--button-hover-bg);
-  color: #fff; /* Change text color on hover */
+  color: #fff;
+  /* Change text color on hover */
 }
 
 /* Education Section */
@@ -467,22 +528,28 @@ body.dark-mode .aboutMe {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns layout by default */
-  gap: 2rem; /* Space between items */
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columns layout by default */
+  gap: 2rem;
+  /* Space between items */
 }
 
 /* Project List Items */
 .project-list ul li {
   background-color: var(--header-bg);
-  border: 1px solid var(--border-color); /* Thin border for professionalism */
+  border: 1px solid var(--border-color);
+  /* Thin border for professionalism */
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
   font-weight: bold;
   color: var(--text-color);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center; /* Center the text for a clean look */
-  min-height: 200px; /* Ensure uniform height for all items */
+  text-align: center;
+  /* Center the text for a clean look */
+  min-height: 200px;
+  /* Ensure uniform height for all items */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -494,10 +561,14 @@ body.dark-mode .aboutMe {
 /* Project Item Title */
 .project-list ul li strong {
   font-size: 1.3rem;
-  color: var(--link-active-color); /* Highlight the project name */
-  margin-bottom: 10px; /* Space between title and description */
-  text-transform: capitalize; /* Proper case for better readability */
-  font-weight: 600; /* Slightly bolder for emphasis */
+  color: var(--link-active-color);
+  /* Highlight the project name */
+  margin-bottom: 10px;
+  /* Space between title and description */
+  text-transform: capitalize;
+  /* Proper case for better readability */
+  font-weight: 600;
+  /* Slightly bolder for emphasis */
 }
 
 /* Project Description */
@@ -506,21 +577,27 @@ body.dark-mode .aboutMe {
   color: var(--text-color);
   line-height: 1.5;
   font-weight: 400;
-  margin-bottom: 15px; /* Space before the end of the card */
+  margin-bottom: 15px;
+  /* Space before the end of the card */
 }
 
 /* Hover Effect */
 .project-list ul li:hover {
-  transform: translateY(-5px); /* Slight lift effect */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
-  background-color: var(--button-hover-bg); /* Change background on hover */
-  color: #fff; /* Change text color to white */
+  transform: translateY(-5px);
+  /* Slight lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  /* Slightly stronger shadow */
+  background-color: var(--button-hover-bg);
+  /* Change background on hover */
+  color: #fff;
+  /* Change text color to white */
 }
 
 /* Mobile Responsiveness: 1 column layout for small screens */
 @media (max-width: 768px) {
   .project-list ul {
-    grid-template-columns: 1fr; /* 1 column layout */
+    grid-template-columns: 1fr;
+    /* 1 column layout */
   }
 }
 
@@ -536,7 +613,8 @@ body.dark-mode .aboutMe {
 /* Talent List (Grid Layout) */
 #talents .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 items per row */
   gap: 2rem;
   list-style: none;
   padding: 0;
@@ -565,10 +643,13 @@ body.dark-mode .aboutMe {
 
 /* Talent Card Hover Effect */
 #talents .grid li:hover {
-  transform: scale(1.05); /* Slight zoom-in effect */
+  transform: scale(1.05);
+  /* Slight zoom-in effect */
   background-color: var(--button-hover-bg);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for hover */
-  color: white; /* Text becomes white */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  /* Deeper shadow for hover */
+  color: white;
+  /* Text becomes white */
 }
 
 /* Talent Icons */
@@ -590,13 +671,15 @@ body.dark-mode .aboutMe {
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
   #talents .grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 items per row on medium screens */
   }
 }
 
 @media (max-width: 768px) {
   #talents .grid {
-    grid-template-columns: 1fr; /* 1 item per row on small screens */
+    grid-template-columns: 1fr;
+    /* 1 item per row on small screens */
   }
 }
 
@@ -644,8 +727,10 @@ body.dark-mode .aboutMe {
 
 /* Footer Section */
 .footer-container {
-  background-color: #232323; /* Dark background for modern feel */
-  color: #eaeaea; /* Light text color for contrast */
+  background-color: #232323;
+  /* Dark background for modern feel */
+  color: #eaeaea;
+  /* Light text color for contrast */
   padding: 60px 20px;
   display: flex;
   justify-content: space-between;
@@ -665,7 +750,8 @@ body.dark-mode .aboutMe {
 
 .contact-container h3 {
   font-size: 1.8rem;
-  color: #00bcd4; /* Eye-catching color for the CTA */
+  color: #00bcd4;
+  /* Eye-catching color for the CTA */
   margin-bottom: 15px;
   font-weight: bold;
   text-transform: uppercase;
@@ -677,12 +763,14 @@ body.dark-mode .aboutMe {
   color: #eaeaea;
   margin: 0;
   line-height: 1.8;
-  padding: 0 20px; /* Padding for spacing */
+  padding: 0 20px;
+  /* Padding for spacing */
 }
 
 #contact strong {
   font-size: 1.4rem;
-  color: #00bcd4; /* Accent color for name */
+  color: #00bcd4;
+  /* Accent color for name */
   font-weight: 600;
 }
 
@@ -693,7 +781,8 @@ body.dark-mode .aboutMe {
 }
 
 #contact a:hover {
-  color: #00bcd4; /* Hover color for links */
+  color: #00bcd4;
+  /* Hover color for links */
 }
 
 /* Social Media Links */
@@ -710,18 +799,23 @@ body.dark-mode .aboutMe {
   height: 45px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 50%;
-  background-color: #444; /* Dark background for icons */
+  background-color: #444;
+  /* Dark background for icons */
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  filter: brightness(1.2); /* Brighter icons */
+  filter: brightness(1.2);
+  /* Brighter icons */
 }
 
 .social-icon:hover {
-  transform: scale(1.1); /* Zoom effect on hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for hover effect */
-  filter: brightness(1.5); /* Even brighter on hover */
+  transform: scale(1.1);
+  /* Zoom effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  /* Soft shadow for hover effect */
+  filter: brightness(1.5);
+  /* Even brighter on hover */
 }
 
 /* Mobile Responsiveness */
@@ -743,15 +837,18 @@ body.dark-mode .aboutMe {
 /* Weather Section */
 #weather {
   padding: 40px 2rem;
-  background-color: var(--background-color); /* Light/Dark Mode Background */
-  color: var(--text-color); /* Light/Dark Mode Text Color */
+  background-color: var(--background-color);
+  /* Light/Dark Mode Background */
+  color: var(--text-color);
+  /* Light/Dark Mode Text Color */
   transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
 }
 
 #weather h1 {
   font-size: 2.5rem;
-  color: var(--link-active-color); /* Link color for h1 */
+  color: var(--link-active-color);
+  /* Link color for h1 */
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -766,7 +863,8 @@ body.dark-mode .aboutMe {
 }
 
 .location-container {
-  background: var(--header-bg); /* Light/Dark Mode Header Background */
+  background: var(--header-bg);
+  /* Light/Dark Mode Header Background */
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -778,45 +876,55 @@ body.dark-mode .aboutMe {
 }
 
 .location-container:hover {
-  background: var(--link-hover-bg); /* Hover effect */
+  background: var(--link-hover-bg);
+  /* Hover effect */
 }
 
 .location-container h2 {
   font-size: 1.8rem;
   font-weight: bold;
-  color: var(--link-color); /* Light/Dark Mode Link Color */
+  color: var(--link-color);
+  /* Light/Dark Mode Link Color */
 }
 
 .location-container p {
   font-size: 1rem;
-  color: var(--text-color); /* Light/Dark Mode Text Color */
+  color: var(--text-color);
+  /* Light/Dark Mode Text Color */
 }
 
 /* Button Styles */
 button {
   padding: 10px 20px;
-  background-color: var(--button-bg); /* Light/Dark Mode Button Background */
-  color: var(--button-text-color); /* Light/Dark Mode Button Text Color */
+  background-color: var(--button-bg);
+  /* Light/Dark Mode Button Background */
+  color: var(--button-text-color);
+  /* Light/Dark Mode Button Text Color */
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
   cursor: pointer;
   margin-top: 20px;
-  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Transition all relevant properties */
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  /* Transition all relevant properties */
 }
 
 /* Button Hover Effect with 3D Transformation */
 button:hover {
-  background-color: var(--button-hover-bg); /* Button Hover Effect */
-  transform: translateY(-5px); /* Moves the button up to create the "pop" effect */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+  background-color: var(--button-hover-bg);
+  /* Button Hover Effect */
+  transform: translateY(-5px);
+  /* Moves the button up to create the "pop" effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  /* Adds a subtle shadow for depth */
 }
 
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .weather-container {
-    grid-template-columns: 1fr; /* 1 column layout */
+    grid-template-columns: 1fr;
+    /* 1 column layout */
   }
 
   .location-container {
@@ -834,7 +942,7 @@ button:hover {
 }
 
 .seminar-container {
-  display:block;
+  display: block;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
@@ -859,7 +967,8 @@ button:hover {
   margin-bottom: 0.5rem;
 }
 
-.seminar-date, .seminar-location {
+.seminar-date,
+.seminar-location {
   color: var(--text-color);
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
@@ -885,7 +994,7 @@ button:hover {
   .seminar-container {
     grid-template-columns: 1fr;
   }
-  
+
   .seminar-card {
     padding: 1.5rem;
   }
@@ -922,7 +1031,7 @@ button:hover {
   .seminar-gallery {
     grid-template-columns: 1fr;
   }
-  
+
   .gallery-item img {
     height: auto;
   }
@@ -1018,6 +1127,7 @@ button:hover {
 .event-type.tour {
   background-color: #0F9D58;
 }
+
 .event-type.workshop {
   background-color: #e67e22;
 }
@@ -1035,7 +1145,9 @@ button:hover {
   font-size: 1.2rem;
 }
 
-.event-speaker, .event-date, .event-location {
+.event-speaker,
+.event-date,
+.event-location {
   margin: 0.25rem 0;
   font-size: 0.9rem;
   color: var(--text-color);
@@ -1098,11 +1210,11 @@ button:hover {
   .events-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .seminar-gallery {
     grid-template-columns: 1fr;
   }
-  
+
   .seminar-gallery img {
     height: auto;
   }
@@ -1188,7 +1300,8 @@ button:hover {
 }
 
 .gallery-main {
-  height: 450px; /* Larger main image */
+  height: 650px;
+  /* Larger main image */
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -1212,9 +1325,12 @@ button:hover {
 }
 
 .gallery-thumbnails img {
-  width: calc(50% - 0.5rem); /* Half width minus gap */
-  max-width: 400px; /* Maximum size */
-  height: 250px; /* Half height of main image */
+  width: calc(50% - 0.5rem);
+  /* Half width minus gap */
+  max-width: 400px;
+  /* Maximum size */
+  height: 250px;
+  /* Half height of main image */
   object-fit: cover;
   border-radius: 8px;
   cursor: pointer;
@@ -1235,7 +1351,7 @@ button:hover {
   .gallery-main {
     height: 400px;
   }
-  
+
   .gallery-thumbnails img {
     height: 200px;
   }
@@ -1245,12 +1361,12 @@ button:hover {
   .gallery-main {
     height: 300px;
   }
-  
+
   .gallery-thumbnails {
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
+
   .gallery-thumbnails img {
     width: calc(50% - 0.5rem);
     height: 150px;
@@ -1261,7 +1377,7 @@ button:hover {
   .gallery-main {
     height: 250px;
   }
-  
+
   .gallery-thumbnails img {
     width: 100%;
     height: 120px;
@@ -1327,17 +1443,17 @@ button:hover {
   .seminar-header h1 {
     font-size: 1.8rem;
   }
-  
+
   .seminar-meta {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
   }
-  
+
   .gallery-main {
     height: 250px;
   }
-  
+
   .seminar-footer {
     flex-direction: column;
     gap: 1rem;
