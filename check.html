@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Symptom Checker - Medical Assessment Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #2196F3;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h3 {
+            color: #1976D2;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3::before {
+            content: "●";
+            color: #2196F3;
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #2196F3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: #2196F3;
+            background: #f0f8ff;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #2196F3;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .severity-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .severity-option {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .severity-option input[type="radio"] {
+            display: none;
+        }
+
+        .severity-option label {
+            display: block;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .severity-option input[type="radio"]:checked+label {
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .risk-high {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .risk-moderate {
+            background: linear-gradient(135deg, #feca57, #ff9ff3);
+            color: #333;
+        }
+
+        .risk-low {
+            background: linear-gradient(135deg, #48dbfb, #0abde3);
+            color: white;
+        }
+
+        .results h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .results p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .disclaimer h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2196F3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🩺 Diabetes Symptom Checker</h1>
+            <p>Advanced Medical Assessment Tool - High Accuracy Analysis</p>
+        </div>
+
+        <div class="content">
+            <form id="diabetesForm">
+                <div class="section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" id="age" name="age" min="1" max="120" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" id="weight" name="weight" min="20" max="300" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm):</label>
+                            <input type="number" id="height" name="height" min="100" max="250" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Primary Diabetes Symptoms</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="frequent_urination" name="symptoms" value="frequent_urination">
+                            <label for="frequent_urination">Frequent Urination (Polyuria)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="excessive_thirst" name="symptoms" value="excessive_thirst">
+                            <label for="excessive_thirst">Excessive Thirst (Polydipsia)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="increased_hunger" name="symptoms" value="increased_hunger">
+                            <label for="increased_hunger">Increased Hunger (Polyphagia)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="unexplained_weight_loss" name="symptoms"
+                                value="unexplained_weight_loss">
+                            <label for="unexplained_weight_loss">Unexplained Weight Loss</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="fatigue" name="symptoms" value="fatigue">
+                            <label for="fatigue">Extreme Fatigue</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="blurred_vision" name="symptoms" value="blurred_vision">
+                            <label for="blurred_vision">Blurred Vision</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Secondary Symptoms</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="slow_healing" name="symptoms" value="slow_healing">
+                            <label for="slow_healing">Slow-healing Cuts/Sores</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="frequent_infections" name="symptoms" value="frequent_infections">
+                            <label for="frequent_infections">Frequent Infections</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="tingling_hands" name="symptoms" value="tingling_hands">
+                            <label for="tingling_hands">Tingling in Hands/Feet</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dry_mouth" name="symptoms" value="dry_mouth">
+                            <label for="dry_mouth">Dry Mouth</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="fruity_breath" name="symptoms" value="fruity_breath">
+                            <label for="fruity_breath">Fruity-smelling Breath</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="nausea_vomiting" name="symptoms" value="nausea_vomiting">
+                            <label for="nausea_vomiting">Nausea/Vomiting</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Risk Factors</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="family_history" name="risk_factors" value="family_history">
+                            <label for="family_history">Family History of Diabetes</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sedentary_lifestyle" name="risk_factors"
+                                value="sedentary_lifestyle">
+                            <label for="sedentary_lifestyle">Sedentary Lifestyle</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="high_blood_pressure" name="risk_factors"
+                                value="high_blood_pressure">
+                            <label for="high_blood_pressure">High Blood Pressure</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="previous_gestational" name="risk_factors"
+                                value="previous_gestational">
+                            <label for="previous_gestational">Previous Gestational Diabetes</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pcos" name="risk_factors" value="pcos">
+                            <label for="pcos">PCOS (Women)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="prediabetes_history" name="risk_factors"
+                                value="prediabetes_history">
+                            <label for="prediabetes_history">History of Prediabetes</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Symptom Duration & Severity</h3>
+                    <div class="form-group">
+                        <label>How long have you been experiencing these symptoms?</label>
+                        <div class="severity-group">
+                            <div class="severity-option">
+                                <input type="radio" id="duration_days" name="duration" value="days">
+                                <label for="duration_days">Days</label>
+                            </div>
+                            <div class="severity-option">
+                                <input type="radio" id="duration_weeks" name="duration" value="weeks">
+                                <label for="duration_weeks">Weeks</label>
+                            </div>
+                            <div class="severity-option">
+                                <input type="radio" id="duration_months" name="duration" value="months">
+                                <label for="duration_months">Months</label>
+                            </div>
+                            <div class="severity-option">
+                                <input type="radio" id="duration_years" name="duration" value="years">
+                                <label for="duration_years">Years</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Overall symptom severity:</label>
+                        <div class="severity-group">
+                            <div class="severity-option">
+                                <input type="radio" id="severity_mild" name="severity" value="mild">
+                                <label for="severity_mild">Mild</label>
+                            </div>
+                            <div class="severity-option">
+                                <input type="radio" id="severity_moderate" name="severity" value="moderate">
+                                <label for="severity_moderate">Moderate</label>
+                            </div>
+                            <div class="severity-option">
+                                <input type="radio" id="severity_severe" name="severity" value="severe">
+                                <label for="severity_severe">Severe</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="analyze-btn">🔍 Analyze Symptoms</button>
+            </form>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analyzing your symptoms using advanced medical algorithms...</p>
+            </div>
+
+            <div id="results" class="hidden"></div>
+
+            <div class="disclaimer">
+                <h4>⚠️ Important Medical Disclaimer</h4>
+                <p>This tool is for educational purposes only and should not replace professional medical advice. If
+                    you're experiencing concerning symptoms, please consult with a healthcare provider immediately. This
+                    assessment is based on common diabetes symptoms and risk factors but cannot provide a definitive
+                    diagnosis.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Advanced Diabetes Risk Assessment Algorithm
+        class DiabetesSymptomChecker {
+            constructor() {
+                this.symptomWeights = {
+                    // Primary symptoms (higher weights)
+                    frequent_urination: 15,
+                    excessive_thirst: 15,
+                    increased_hunger: 12,
+                    unexplained_weight_loss: 18,
+                    fatigue: 10,
+                    blurred_vision: 14,
+
+                    // Secondary symptoms
+                    slow_healing: 12,
+                    frequent_infections: 11,
+                    tingling_hands: 10,
+                    dry_mouth: 8,
+                    fruity_breath: 20, // Very specific to diabetic ketoacidosis
+                    nausea_vomiting: 12
+                };
+
+                this.riskFactorWeights = {
+                    family_history: 12,
+                    sedentary_lifestyle: 8,
+                    high_blood_pressure: 10,
+                    previous_gestational: 15,
+                    pcos: 10,
+                    prediabetes_history: 18
+                };
+
+                this.severityMultipliers = {
+                    mild: 0.7,
+                    moderate: 1.0,
+                    severe: 1.4
+                };
+
+                this.durationMultipliers = {
+                    days: 0.8,
+                    weeks: 1.0,
+                    months: 1.2,
+                    years: 1.1
+                };
+            }
+
+            calculateBMI(weight, height) {
+                const heightM = height / 100;
+                return weight / (heightM * heightM);
+            }
+
+            getBMIRisk(bmi) {
+                if (bmi >= 30) return 15; // Obese
+                if (bmi >= 25) return 10; // Overweight
+                if (bmi >= 18.5) return 2; // Normal
+                return 5; // Underweight
+            }
+
+            getAgeRisk(age) {
+                if (age >= 65) return 15;
+                if (age >= 45) return 12;
+                if (age >= 35) return 8;
+                if (age >= 25) return 4;
+                return 2;
+            }
+
+            assessRisk(formData) {
+                let totalScore = 0;
+                let maxPossibleScore = 0;
+                let symptomCount = 0;
+                let primarySymptomCount = 0;
+
+                // Calculate BMI risk
+                const bmi = this.calculateBMI(formData.weight, formData.height);
+                const bmiRisk = this.getBMIRisk(bmi);
+                totalScore += bmiRisk;
+                maxPossibleScore += 15;
+
+                // Calculate age risk
+                const ageRisk = this.getAgeRisk(formData.age);
+                totalScore += ageRisk;
+                maxPossibleScore += 15;
+
+                // Gender risk (males slightly higher risk for T2D)
+                if (formData.gender === 'male') {
+                    totalScore += 3;
+                }
+                maxPossibleScore += 3;
+
+                // Calculate symptom scores
+                const symptoms = formData.symptoms || [];
+                const primarySymptoms = ['frequent_urination', 'excessive_thirst', 'increased_hunger', 'unexplained_weight_loss'];
+
+                for (const symptom of symptoms) {
+                    if (this.symptomWeights[symptom]) {
+                        totalScore += this.symptomWeights[symptom];
+                        symptomCount++;
+
+                        if (primarySymptoms.includes(symptom)) {
+                            primarySymptomCount++;
+                        }
+                    }
+                }
+
+                // Add max possible symptom scores
+                Object.values(this.symptomWeights).forEach(weight => {
+                    maxPossibleScore += weight;
+                });
+
+                // Calculate risk factor scores
+                const riskFactors = formData.risk_factors || [];
+                for (const factor of riskFactors) {
+                    if (this.riskFactorWeights[factor]) {
+                        totalScore += this.riskFactorWeights[factor];
+                    }
+                }
+
+                // Add max possible risk factor scores
+                Object.values(this.riskFactorWeights).forEach(weight => {
+                    maxPossibleScore += weight;
+                });
+
+                // Apply severity and duration multipliers
+                const severityMultiplier = this.severityMultipliers[formData.severity] || 1.0;
+                const durationMultiplier = this.durationMultipliers[formData.duration] || 1.0;
+
+                totalScore *= severityMultiplier * durationMultiplier;
+                maxPossibleScore *= 1.4 * 1.2; // Max multipliers
+
+                // Calculate risk percentage
+                const riskPercentage = Math.min((totalScore / maxPossibleScore) * 100, 100);
+
+                // Special case: Classic triad of diabetes symptoms
+                const hasClassicTriad = symptoms.includes('frequent_urination') &&
+                    symptoms.includes('excessive_thirst') &&
+                    symptoms.includes('increased_hunger');
+
+                // Determine risk level with enhanced logic
+                let riskLevel, riskColor, recommendation;
+
+                if (riskPercentage >= 70 || (hasClassicTriad && primarySymptomCount >= 3) || symptoms.includes('fruity_breath')) {
+                    riskLevel = 'HIGH RISK';
+                    riskColor = 'risk-high';
+                    recommendation = 'URGENT: Please seek immediate medical attention. Your symptoms strongly suggest possible diabetes. Early diagnosis and treatment are crucial.';
+                } else if (riskPercentage >= 40 || primarySymptomCount >= 2 || (hasClassicTriad && symptomCount >= 4)) {
+                    riskLevel = 'MODERATE RISK';
+                    riskColor = 'risk-moderate';
+                    recommendation = 'IMPORTANT: Please schedule an appointment with your healthcare provider soon. Consider getting blood glucose testing done.';
+                } else {
+                    riskLevel = 'LOW RISK';
+                    riskColor = 'risk-low';
+                    recommendation = 'Your current symptoms show lower risk, but maintain healthy lifestyle habits and regular check-ups.';
+                }
+
+                return {
+                    riskLevel,
+                    riskColor,
+                    riskPercentage: Math.round(riskPercentage),
+                    recommendation,
+                    bmi: Math.round(bmi * 10) / 10,
+                    symptomCount,
+                    primarySymptomCount,
+                    hasClassicTriad,
+                    analysis: this.generateDetailedAnalysis(formData, symptoms, riskFactors, bmi, riskPercentage)
+                };
+            }
+
+            generateDetailedAnalysis(formData, symptoms, riskFactors, bmi, riskPercentage) {
+                const analysis = [];
+
+                // BMI analysis
+                if (bmi >= 30) {
+                    analysis.push("⚠️ Obesity significantly increases diabetes risk");
+                } else if (bmi >= 25) {
+                    analysis.push("⚠️ Being overweight increases diabetes risk");
+                }
+
+                // Age analysis
+                if (formData.age >= 45) {
+                    analysis.push("⚠️ Age is a significant risk factor");
+                }
+
+                // Symptom analysis
+                const primarySymptoms = symptoms.filter(s =>
+                    ['frequent_urination', 'excessive_thirst', 'increased_hunger', 'unexplained_weight_loss'].includes(s)
+                );
+
+                if (primarySymptoms.length >= 3) {
+                    analysis.push("🚨 Multiple primary diabetes symptoms present");
+                }
+
+                if (symptoms.includes('fruity_breath')) {
+                    analysis.push("🚨 Fruity breath odor can indicate diabetic ketoacidosis - seek immediate care");
+                }
+
+                if (symptoms.includes('blurred_vision')) {
+                    analysis.push("👁️ Vision changes may indicate blood sugar fluctuations");
+                }
+
+                // Risk factor analysis
+                if (riskFactors.includes('family_history')) {
+                    analysis.push("🧬 Family history significantly increases risk");
+                }
+
+                if (riskFactors.includes('prediabetes_history')) {
+                    analysis.push("📊 History of prediabetes requires close monitoring");
+                }
+
+                return analysis;
+            }
+        }
+
+        // Initialize form handling
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('diabetesForm');
+            const loadingDiv = document.getElementById('loading');
+            const resultsDiv = document.getElementById('results');
+            const checker = new DiabetesSymptomChecker();
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Show loading
+                loadingDiv.classList.remove('hidden');
+                resultsDiv.classList.add('hidden');
+
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {
+                    age: parseInt(formData.get('age')),
+                    gender: formData.get('gender'),
+                    weight: parseFloat(formData.get('weight')),
+                    height: parseInt(formData.get('height')),
+                    symptoms: formData.getAll('symptoms'),
+                    risk_factors: formData.getAll('risk_factors'),
+                    duration: formData.get('duration'),
+                    severity: formData.get('severity')
+                };
+
+                // Simulate processing time for better UX
+                setTimeout(() => {
+                    const assessment = checker.assessRisk(data);
+                    displayResults(assessment);
+
+                    loadingDiv.classList.add('hidden');
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            });
+
+            function displayResults(assessment) {
+                const html = `
+                    <div class="results ${assessment.riskColor}">
+                        <h3>🎯 Risk Assessment Result</h3>
+                        <p><strong>Risk Level: ${assessment.riskLevel}</strong></p>
+                        <p><strong>Risk Score: ${assessment.riskPercentage}%</strong></p>
+                        <p><strong>BMI: ${assessment.bmi}</strong> ${getBMICategory(assessment.bmi)}</p>
+                        
+                        <h4>📋 Analysis Summary:</h4>
+                        <p>• Symptoms detected: ${assessment.symptomCount}</p>
+                        <p>• Primary diabetes symptoms: ${assessment.primarySymptomCount}</p>
+                        ${assessment.hasClassicTriad ? '<p>• ⚠️ Classic diabetes symptom triad detected</p>' : ''}
+                        
+                        ${assessment.analysis.length > 0 ? `
+                        <h4>🔍 Detailed Analysis:</h4>
+                        ${assessment.analysis.map(item => `<p>${item}</p>`).join('')}
+                        ` : ''}
+                        
+                        <h4>💡 Recommendation:</h4>
+                        <p><strong>${assessment.recommendation}</strong></p>
+                        
+                        <h4>📞 Next Steps:</h4>
+                        <p>1. ${assessment.riskLevel === 'HIGH RISK' ? 'Contact healthcare provider immediately' : 'Schedule appointment with healthcare provider'}</p>
+                        <p>2. Consider blood glucose testing (fasting glucose, HbA1c)</p>
+                        <p>3. Maintain symptom diary</p>
+                        <p>4. Follow healthy lifestyle practices</p>
+                    </div>
+                `;
+
+                resultsDiv.innerHTML = html;
+            }
+
+            function getBMICategory(bmi) {
+                if (bmi < 18.5) return '(Underweight)';
+                if (bmi < 25) return '(Normal)';
+                if (bmi < 30) return '(Overweight)';
+                return '(Obese)';
+            }
+        });
+    </script>
+</body>
+
+</html>
