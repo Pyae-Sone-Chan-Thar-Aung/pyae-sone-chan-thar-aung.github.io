@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Diabetes Health Center - Symptom Assessment & Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Search Bar */
+        .search-section {
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 18px 60px 18px 24px;
+            border: 3px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 4px 25px rgba(37, 99, 235, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            margin-top: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .suggestion-item:hover {
+            background: #f8fafc;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 40px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h3 {
+            color: #1e40af;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Form Styling */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="number"]:focus, input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Enhanced Checkbox Design */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkbox-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+            transform: translateY(-2px);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label {
+            color: white;
+            font-weight: 600;
+        }
+
+        .checkbox-item:has(input[type="checkbox"]:checked)::before {
+            opacity: 1;
+        }
+
+        .checkbox-item:has(input[type="checkbox"]:checked) {
+            border-color: #1d4ed8;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: #3b82f6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Radio Button Styling */
+        .radio-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .radio-option label {
+            display: block;
+            padding: 12px 20px;
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .radio-option input[type="radio"]:checked + label {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Button Styling */
+        .analyze-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(5, 150, 105, 0.4);
+        }
+
+        /* Results Styling */
+        .results {
+            margin-top: 40px;
+            padding: 35px;
+            border-radius: 20px;
+            animation: slideIn 0.6s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .risk-high {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+        }
+
+        .risk-moderate {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .risk-low {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .results h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .results p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* Education Cards */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .education-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .education-card h4 {
+            color: #1e40af;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .education-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Prevention Tips */
+        .prevention-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .prevention-tip {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 1px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .prevention-tip:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .prevention-tip .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .prevention-tip h5 {
+            color: #047857;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .prevention-tip p {
+            color: #065f46;
+            font-size: 0.95rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e5e7eb;
+            border-top: 5px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .disclaimer h4 {
+            color: #92400e;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .disclaimer p {
+            color: #92400e;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+
+            .radio-option {
+                min-width: auto;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>🩺 Advanced Diabetes Health Center</h1>
+                <p>Comprehensive Symptom Assessment, Education & Prevention</p>
+                
+                <div class="nav-tabs">
+                    <div class="nav-tab active" data-tab="assessment">🔍 Symptom Assessment</div>
+                    <div class="nav-tab" data-tab="education">📚 Education Center</div>
+                    <div class="nav-tab" data-tab="prevention">🛡️ Prevention Guide</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Assessment Tab -->
+            <div class="tab-content active" id="assessment">
+                <form id="diabetesForm">
+                    <div class="section">
+                        <h3><span class="section-icon">👤</span>Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age (years):</label>
+                                <input type="number" id="age" name="age" min="1" max="120" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender:</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Weight (kg):</label>
+                                <input type="number" id="weight" name="weight" min="20" max="300" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="height">Height (cm):</label>
+                                <input type="number" id="height" name="height" min="100" max="250" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3><span class="section-icon">🚨</span>Primary Diabetes Symptoms</h3>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="frequent_urination" name="symptoms" value="frequent_urination">
+                                <label for="frequent_urination">Frequent Urination (Polyuria)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="excessive_thirst" name="symptoms" value="excessive_thirst">
+                                <label for="excessive_thirst">Excessive Thirst (Polydipsia)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="increased_hunger" name="symptoms" value="increased_hunger">
+                                <label for="increased_hunger">Increased Hunger (Polyphagia)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="unexplained_weight_loss" name="symptoms" value="unexplained_weight_loss">
+                                <label for="unexplained_weight_loss">Unexplained Weight Loss</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fatigue" name="symptoms" value="fatigue">
+                                <label for="fatigue">Extreme Fatigue & Weakness</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="blurred_vision" name="symptoms" value="blurred_vision">
+                                <label for="blurred_vision">Blurred Vision</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3><span class="section-icon">⚠️</span>Secondary Symptoms</h3>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="slow_healing" name="symptoms" value="slow_healing">
+                                <label for="slow_healing">Slow-healing Cuts/Sores</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="frequent_infections" name="symptoms" value="frequent_infections">
+                                <label for="frequent_infections">Frequent Infections</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tingling_hands" name="symptoms" value="tingling_hands">
+                                <label for="tingling_hands">Tingling in Hands/Feet</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="dry_mouth" name="symptoms" value="dry_mouth">
+                                <label for="dry_mouth">Dry Mouth</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fruity_breath" name="symptoms" value="fruity_breath">
+                                <label for="fruity_breath">Fruity-smelling Breath</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="nausea_vomiting" name="symptoms" value="nausea_vomiting">
+                                <label for="nausea_vomiting">Nausea/Vomiting</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3><span class="section-icon">📊</span>Risk Factors</h3>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="family_history" name="risk_factors" value="family_history">
+                                <label for="family_history">Family History of Diabetes</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sedentary_lifestyle" name="risk_factors" value="sedentary_lifestyle">
+                                <label for="sedentary_lifestyle">Sedentary Lifestyle</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="high_blood_pressure" name="risk_factors" value="high_blood_pressure">
+                                <label for="high_blood_pressure">High Blood Pressure</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="previous_gestational" name="risk_factors" value="previous_gestational">
+                                <label for="previous_gestational">Previous Gestational Diabetes</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pcos" name="risk_factors" value="pcos">
+                                <label for="pcos">PCOS (Women)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="prediabetes_history" name="risk_factors" value="prediabetes_history">
+                                <label for="prediabetes_history">History of Prediabetes</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3><span class="section-icon">⏱️</span>Symptom Duration & Severity</h3>
+                        <div class="form-group">
+                            <label>How long have you been experiencing these symptoms?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="duration_days" name="duration" value="days">
+                                    <label for="duration_days">Days</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="duration_weeks" name="duration" value="weeks">
+                                    <label for="duration_weeks">Weeks</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="duration_months" name="duration" value="months">
+                                    <label for="duration_months">Months</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="duration_years" name="duration" value="years">
+                                    <label for="duration_years">Years</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Overall symptom severity:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="severity_mild" name="severity" value="mild">
+                                    <label for="severity_mild">Mild</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="severity_moderate" name="severity" value="moderate">
+                                    <label for="severity_moderate">Moderate</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="severity_severe" name="severity" value="severe">
+                                    <label for="severity_severe">Severe</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="analyze-btn">🔍 Analyze Symptoms</button>
+                </form>
+
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing your symptoms using advanced medical algorithms...</p>
+                </div>
+
+                <div id="results" class="hidden"></div>
+            </div>
+
+         
+<!-- Education Tab -->
+<div class="tab-content" id="education">
+    <div class="section">
+        <h3><span class="section-icon">📚</span>Understanding Diabetes</h3>
+        <div class="education-grid">
+            <div class="education-card">
+                <h4>🔬 What is Diabetes?</h4>
+                <p>Diabetes is a group of metabolic disorders characterized by high blood sugar levels over a prolonged period. It occurs when your body either doesn't make enough insulin or can't effectively use the insulin it makes. Insulin is a hormone produced by the pancreas that regulates blood glucose levels, enabling the body to use sugar for energy. Without proper insulin function, glucose accumulates in the bloodstream, leading to serious health complications if untreated.</p>
+                <ul>
+                    <li><strong>Symptoms:</strong> Increased thirst, frequent urination, unexplained weight loss, fatigue, blurry vision, slow-healing sores, and tingling or numbness in hands or feet.</li>
+                    <li><strong>Causes:</strong> Genetic factors, autoimmune destruction of insulin-producing cells, insulin resistance, and lifestyle factors such as poor diet and lack of exercise.</li>
+                    <li><strong>What to do:</strong> Consult a healthcare provider for diagnosis. Manage blood sugar through diet, exercise, medication, and regular monitoring.</li>
+                    <li><strong>Interventions:</strong> Lifestyle changes, blood sugar monitoring, medications including insulin or oral agents, and education on diabetes management.</li>
+                </ul>
+            </div>
+            <div class="education-card">
+                <h4>🔴 Type 1 Diabetes</h4>
+                <p>An autoimmune condition where the body's immune system attacks and destroys insulin-producing beta cells in the pancreas. Usually diagnosed in children and young adults, it results in little to no insulin production, requiring lifelong insulin therapy through injections or pumps. Symptoms often develop rapidly and include increased thirst, frequent urination, weight loss, and fatigue.</p>
+                <ul>
+                    <li><strong>Symptoms:</strong> Excessive thirst and urination, constant hunger, weight loss despite eating, fatigue, blurred vision, and irritability.</li>
+                    <li><strong>Causes:</strong> Autoimmune destruction of pancreatic beta cells, possibly triggered by genetic and environmental factors such as viral infections.</li>
+                    <li><strong>What to do:</strong> Immediate medical evaluation. Lifelong insulin therapy is essential to control blood sugar and prevent complications.</li>
+                    <li><strong>Interventions:</strong> Insulin therapy (injections or pump), blood glucose monitoring, carbohydrate counting, and education on managing hypoglycemia and hyperglycemia.</li>
+                </ul>
+            </div>
+            <div class="education-card">
+                <h4>🔵 Type 2 Diabetes</h4>
+                <p>The most common form of diabetes, where the body becomes resistant to insulin or doesn't produce enough insulin to maintain normal blood sugar levels. It is often linked to lifestyle factors such as obesity, physical inactivity, and poor diet. Type 2 diabetes typically develops gradually and can sometimes be prevented or delayed through healthy lifestyle changes including diet, exercise, and weight management.</p>
+                <ul>
+                    <li><strong>Symptoms:</strong> Increased thirst and urination, fatigue, blurred vision, slow-healing wounds, frequent infections, and numbness or tingling in hands or feet.</li>
+                    <li><strong>Causes:</strong> Insulin resistance often caused by excess weight, inactivity, genetic predisposition, and aging.</li>
+                    <li><strong>What to do:</strong> Early diagnosis through screening tests. Manage with lifestyle changes and medications as prescribed.</li>
+                    <li><strong>Interventions:</strong> Healthy diet, regular physical activity, weight loss, oral medications, injectable therapies, and blood sugar monitoring.</li>
+                </ul>
+            </div>
+            <div class="education-card">
+                <h4>🤰 Gestational Diabetes</h4>
+                <p>Develops during pregnancy due to hormonal changes that cause insulin resistance. It usually disappears after giving birth but increases the risk of developing Type 2 diabetes later in life for both mother and child. Managing blood sugar levels during pregnancy is important to reduce risks to both mother and baby, including high birth weight and preterm delivery.</p>
+                <ul>
+                    <li><strong>Symptoms:</strong> Often no noticeable symptoms; sometimes increased thirst or urination.</li>
+                    <li><strong>Causes:</strong> Hormonal changes during pregnancy that impair insulin effectiveness, combined with genetic and lifestyle factors.</li>
+                    <li><strong>What to do:</strong> Routine screening during pregnancy. Manage blood sugar through diet, exercise, and sometimes medication.</li>
+                    <li><strong>Interventions:</strong> Nutritional counseling, physical activity, blood glucose monitoring, and insulin or oral medications if needed.</li>
+                </ul>
+            </div>
+            <div class="education-card">
+                <h4>📈 Prediabetes</h4>
+                <p>A condition where blood sugar levels are higher than normal but not high enough to be diagnosed as Type 2 diabetes. Prediabetes is a warning sign that you are at increased risk of developing diabetes and cardiovascular disease. With timely lifestyle changes such as improved diet, increased physical activity, and weight loss, progression to diabetes can often be prevented or delayed.</p>
+                <ul>
+                    <li><strong>Symptoms:</strong> Usually none; may have signs of insulin resistance such as darkened skin patches (acanthosis nigricans).</li>
+                    <li><strong>Causes:</strong> Insulin resistance due to overweight, inactivity, genetics, and aging.</li>
+                    <li><strong>What to do:</strong> Get regular blood sugar testing if at risk. Implement lifestyle changes to prevent progression.</li>
+                    <li><strong>Interventions:</strong> Weight loss, healthy diet, increased exercise, and regular monitoring of blood glucose levels.</li>
+                </ul>
+            </div>
+            <div class="education-card">
+                <h4>⚡ Diabetic Ketoacidosis (DKA)</h4>
+                <p>A serious and potentially life-threatening complication that occurs when your body produces high levels of blood acids called ketones. It's most common in people with Type 1 diabetes but can also occur in those with Type 2 diabetes under certain conditions. DKA develops when the body cannot produce enough insulin, causing glucose to build up in the blood while the body breaks down fat for energy, producing ketones as a byproduct.</p>
+                <ul>
+                    <li><strong>Symptoms:</strong> Nausea, vomiting, abdominal pain, rapid and deep breathing (Kussmaul respirations), fruity-scented breath, excessive thirst, frequent urination, confusion, and fatigue.</li>
+                    <li><strong>Causes:</strong> Missed or insufficient insulin doses, infections, illness, physical or emotional stress, or severe dehydration.</li>
+                    <li><strong>What to do:</strong> DKA is a medical emergency. If you suspect DKA, check your blood sugar and ketone levels immediately and seek urgent medical attention. Treatment usually requires hospitalization with intravenous fluids, insulin therapy, and electrolyte replacement.</li>
+                    <li><strong>Interventions:</strong> Immediate medical treatment including IV fluids, insulin administration, electrolyte correction, and close monitoring in a hospital setting.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Prevention Tab Content -->
+<div class="tab-content" id="prevention">
+    <div class="section">
+        <h3><span class="section-icon">&#127793;</span>Prevention Tips</h3>
+        <div class="prevention-tips">
+            <div class="prevention-tip">
+                <span class="icon">&#127947;&#8205;&#9792;&#65039;</span>
+                <h5>Stay Active</h5>
+                <p>Regular physical activity helps improve insulin sensitivity and lowers blood sugar levels, reducing the risk of developing diabetes.</p>
+                <ul>
+                    <li><strong>Symptoms of inactivity risk:</strong> Weight gain, fatigue, increased blood sugar levels.</li>
+                    <li><strong>Causes:</strong> Sedentary lifestyle, lack of exercise.</li>
+                    <li><strong>What to do:</strong> Aim for at least 150 minutes of moderate-intensity aerobic exercise per week, including activities like brisk walking, cycling, or swimming.</li>
+                    <li><strong>Interventions:</strong> Incorporate strength training exercises twice a week, use activity trackers, and set achievable fitness goals.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#127828;</span>
+                <h5>Eat Healthy</h5>
+                <p>Focus on a balanced diet rich in whole foods such as fruits, vegetables, whole grains, lean proteins, and healthy fats to maintain stable blood sugar levels.</p>
+                <ul>
+                    <li><strong>Symptoms of poor diet:</strong> Weight gain, blood sugar spikes, fatigue.</li>
+                    <li><strong>Causes:</strong> High intake of sugary drinks, processed foods, and refined carbohydrates.</li>
+                    <li><strong>What to do:</strong> Limit sugary beverages and processed foods. Choose high-fiber carbohydrates and healthy fats.</li>
+                    <li><strong>Interventions:</strong> Plan meals with portion control, increase intake of vegetables and whole grains, and replace sugary drinks with water.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#127860;</span>
+                <h5>Maintain a Healthy Weight</h5>
+                <p>Excess weight, especially around the abdomen, increases the risk of insulin resistance and type 2 diabetes.</p>
+                <ul>
+                    <li><strong>Symptoms of excess weight risk:</strong> Increased waist circumference, fatigue, elevated blood sugar.</li>
+                    <li><strong>Causes:</strong> Overeating, sedentary lifestyle, genetic factors.</li>
+                    <li><strong>What to do:</strong> Aim for a 5-7% reduction in body weight through diet and exercise to significantly reduce diabetes risk.</li>
+                    <li><strong>Interventions:</strong> Adopt a calorie-controlled diet, increase physical activity, and seek support from healthcare providers or weight management programs.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#127861;</span>
+                <h5>Drink Water as Primary Beverage</h5>
+                <p>Replacing sugary drinks with water helps control calorie intake and blood sugar levels.</p>
+                <ul>
+                    <li><strong>Symptoms of sugary drink overconsumption:</strong> Weight gain, blood sugar spikes.</li>
+                    <li><strong>Causes:</strong> Frequent consumption of sodas, sweetened juices, and energy drinks.</li>
+                    <li><strong>What to do:</strong> Choose water or unsweetened beverages instead of sugary drinks.</li>
+                    <li><strong>Interventions:</strong> Carry a water bottle, flavor water with lemon or herbs, and limit availability of sugary drinks at home.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#127790;</span>
+                <h5>Follow a High-Fiber Diet</h5>
+                <p>Eating fiber-rich foods slows digestion and helps maintain steady blood sugar levels.</p>
+                <ul>
+                    <li><strong>Symptoms of low fiber intake:</strong> Blood sugar spikes, digestive issues.</li>
+                    <li><strong>Causes:</strong> Diets low in fruits, vegetables, and whole grains.</li>
+                    <li><strong>What to do:</strong> Include soluble and insoluble fiber sources in every meal.</li>
+                    <li><strong>Interventions:</strong> Eat more legumes, whole fruits, vegetables, oats, and nuts.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#127774;</span>
+                <h5>Optimize Vitamin D Levels</h5>
+                <p>Vitamin D supports blood sugar regulation and insulin sensitivity.</p>
+                <ul>
+                    <li><strong>Symptoms of deficiency:</strong> Fatigue, muscle weakness, impaired glucose metabolism.</li>
+                    <li><strong>Causes:</strong> Limited sun exposure, poor dietary intake.</li>
+                    <li><strong>What to do:</strong> Get your vitamin D levels checked and maintain adequate levels through diet and sunlight.</li>
+                    <li><strong>Interventions:</strong> Consume fatty fish, fortified foods, and consider supplements if recommended by a healthcare provider.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#128176;</span>
+                <h5>Minimize Highly Processed Foods</h5>
+                <p>Reducing intake of ultra-processed foods helps lower the risk of diabetes by avoiding added sugars, unhealthy fats, and preservatives.</p>
+                <ul>
+                    <li><strong>Symptoms of high processed food intake:</strong> Weight gain, blood sugar fluctuations.</li>
+                    <li><strong>Causes:</strong> Frequent consumption of packaged snacks, fast food, and sugary desserts.</li>
+                    <li><strong>What to do:</strong> Choose whole, minimally processed foods whenever possible.</li>
+                    <li><strong>Interventions:</strong> Prepare meals at home, read food labels, and limit fast food consumption.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#9749;</span>
+                <h5>Drink Coffee or Tea</h5>
+                <p>Moderate consumption of coffee or tea may reduce diabetes risk due to antioxidant properties.</p>
+                <ul>
+                    <li><strong>Symptoms of inadequate antioxidants:</strong> Increased oxidative stress, inflammation.</li>
+                    <li><strong>Causes:</strong> Low intake of antioxidant-rich beverages.</li>
+                    <li><strong>What to do:</strong> Include plain coffee or tea in your diet without added sugars.</li>
+                    <li><strong>Interventions:</strong> Limit sweeteners and creamers to maximize benefits.</li>
+                </ul>
+            </div>
+            <div class="prevention-tip">
+                <span class="icon">&#128563;</span>
+                <h5>Regular Medical Checkups</h5>
+                <p>Routine health screenings help detect early signs of diabetes and related conditions.</p>
+                <ul>
+                    <li><strong>Symptoms to monitor:</strong> Elevated blood sugar, blood pressure, cholesterol.</li>
+                    <li><strong>Causes:</strong> Undiagnosed or unmanaged risk factors.</li>
+                    <li><strong>What to do:</strong> Schedule regular visits with your healthcare provider for comprehensive assessments.</li>
+                    <li><strong>Interventions:</strong> Blood glucose testing, blood pressure monitoring, cholesterol checks, and personalized advice.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+          <div class="disclaimer">
+                <h4>⚠️ Important Medical Disclaimer</h4>
+                <p>This tool is for educational purposes only and should not replace professional medical advice. If
+                    you're experiencing concerning symptoms, please consult with a healthcare provider immediately. This
+                    assessment is based on common diabetes symptoms and risk factors but cannot provide a definitive
+                    diagnosis.</p>
+            </div>
+    <script>
+        // Advanced Diabetes Risk Assessment Algorithm
+        class DiabetesSymptomChecker {
+            constructor() {
+                this.symptomWeights = {
+                    // Primary symptoms (higher weights)
+                    frequent_urination: 15,
+                    excessive_thirst: 15,
+                    increased_hunger: 12,
+                    unexplained_weight_loss: 18,
+                    fatigue: 10,
+                    blurred_vision: 14,
+
+                    // Secondary symptoms
+                    slow_healing: 12,
+                    frequent_infections: 11,
+                    tingling_hands: 10,
+                    dry_mouth: 8,
+                    fruity_breath: 20, // Very specific to diabetic ketoacidosis
+                    nausea_vomiting: 12
+                };
+
+                this.riskFactorWeights = {
+                    family_history: 12,
+                    sedentary_lifestyle: 8,
+                    high_blood_pressure: 10,
+                    previous_gestational: 15,
+                    pcos: 10,
+                    prediabetes_history: 18
+                };
+
+                this.severityMultipliers = {
+                    mild: 0.7,
+                    moderate: 1.0,
+                    severe: 1.4
+                };
+
+                this.durationMultipliers = {
+                    days: 0.8,
+                    weeks: 1.0,
+                    months: 1.2,
+                    years: 1.1
+                };
+            }
+
+            calculateBMI(weight, height) {
+                const heightM = height / 100;
+                return weight / (heightM * heightM);
+            }
+
+            getBMIRisk(bmi) {
+                if (bmi >= 30) return 15; // Obese
+                if (bmi >= 25) return 10; // Overweight
+                if (bmi >= 18.5) return 2; // Normal
+                return 5; // Underweight
+            }
+
+            getAgeRisk(age) {
+                if (age >= 65) return 15;
+                if (age >= 45) return 12;
+                if (age >= 35) return 8;
+                if (age >= 25) return 4;
+                return 2;
+            }
+
+            assessRisk(formData) {
+                let totalScore = 0;
+                let maxPossibleScore = 0;
+                let symptomCount = 0;
+                let primarySymptomCount = 0;
+
+                // Calculate BMI risk
+                const bmi = this.calculateBMI(formData.weight, formData.height);
+                const bmiRisk = this.getBMIRisk(bmi);
+                totalScore += bmiRisk;
+                maxPossibleScore += 15;
+
+                // Calculate age risk
+                const ageRisk = this.getAgeRisk(formData.age);
+                totalScore += ageRisk;
+                maxPossibleScore += 15;
+
+                // Gender risk (males slightly higher risk for T2D)
+                if (formData.gender === 'male') {
+                    totalScore += 3;
+                }
+                maxPossibleScore += 3;
+
+                // Calculate symptom scores
+                const symptoms = formData.symptoms || [];
+                const primarySymptoms = ['frequent_urination', 'excessive_thirst', 'increased_hunger', 'unexplained_weight_loss'];
+
+                for (const symptom of symptoms) {
+                    if (this.symptomWeights[symptom]) {
+                        totalScore += this.symptomWeights[symptom];
+                        symptomCount++;
+
+                        if (primarySymptoms.includes(symptom)) {
+                            primarySymptomCount++;
+                        }
+                    }
+                }
+
+                // Add max possible symptom scores
+                Object.values(this.symptomWeights).forEach(weight => {
+                    maxPossibleScore += weight;
+                });
+
+                // Calculate risk factor scores
+                const riskFactors = formData.risk_factors || [];
+                for (const factor of riskFactors) {
+                    if (this.riskFactorWeights[factor]) {
+                        totalScore += this.riskFactorWeights[factor];
+                    }
+                }
+
+                // Add max possible risk factor scores
+                Object.values(this.riskFactorWeights).forEach(weight => {
+                    maxPossibleScore += weight;
+                });
+
+                // Apply severity and duration multipliers
+                const severityMultiplier = this.severityMultipliers[formData.severity] || 1.0;
+                const durationMultiplier = this.durationMultipliers[formData.duration] || 1.0;
+
+                totalScore *= severityMultiplier * durationMultiplier;
+                maxPossibleScore *= 1.4 * 1.2; // Max multipliers
+
+                // Calculate risk percentage
+                const riskPercentage = Math.min((totalScore / maxPossibleScore) * 100, 100);
+
+                // Special case: Classic triad of diabetes symptoms
+                const hasClassicTriad = symptoms.includes('frequent_urination') &&
+                    symptoms.includes('excessive_thirst') &&
+                    symptoms.includes('increased_hunger');
+
+                // Determine risk level with enhanced logic
+                let riskLevel, riskColor, recommendation;
+
+                if (riskPercentage >= 70 || (hasClassicTriad && primarySymptomCount >= 3) || symptoms.includes('fruity_breath')) {
+                    riskLevel = 'HIGH RISK';
+                    riskColor = 'risk-high';
+                    recommendation = 'URGENT: Please seek immediate medical attention. Your symptoms strongly suggest possible diabetes. Early diagnosis and treatment are crucial.';
+                } else if (riskPercentage >= 40 || primarySymptomCount >= 2 || (hasClassicTriad && symptomCount >= 4)) {
+                    riskLevel = 'MODERATE RISK';
+                    riskColor = 'risk-moderate';
+                    recommendation = 'IMPORTANT: Please schedule an appointment with your healthcare provider soon. Consider getting blood glucose testing done.';
+                } else {
+                    riskLevel = 'LOW RISK';
+                    riskColor = 'risk-low';
+                    recommendation = 'Your current symptoms show lower risk, but maintain healthy lifestyle habits and regular check-ups.';
+                }
+
+                return {
+                    riskLevel,
+                    riskColor,
+                    riskPercentage: Math.round(riskPercentage),
+                    recommendation,
+                    bmi: Math.round(bmi * 10) / 10,
+                    symptomCount,
+                    primarySymptomCount,
+                    hasClassicTriad,
+                    analysis: this.generateDetailedAnalysis(formData, symptoms, riskFactors, bmi, riskPercentage)
+                };
+            }
+
+            generateDetailedAnalysis(formData, symptoms, riskFactors, bmi, riskPercentage) {
+                const analysis = [];
+
+                // BMI analysis
+                if (bmi >= 30) {
+                    analysis.push("⚠️ Obesity significantly increases diabetes risk");
+                } else if (bmi >= 25) {
+                    analysis.push("⚠️ Being overweight increases diabetes risk");
+                }
+
+                // Age analysis
+                if (formData.age >= 45) {
+                    analysis.push("⚠️ Age is a significant risk factor");
+                }
+
+                // Symptom analysis
+                const primarySymptoms = symptoms.filter(s =>
+                    ['frequent_urination', 'excessive_thirst', 'increased_hunger', 'unexplained_weight_loss'].includes(s)
+                );
+
+                if (primarySymptoms.length >= 3) {
+                    analysis.push("🚨 Multiple primary diabetes symptoms present");
+                }
+
+                if (symptoms.includes('fruity_breath')) {
+                    analysis.push("🚨 Fruity breath odor can indicate diabetic ketoacidosis - seek immediate care");
+                }
+
+                if (symptoms.includes('blurred_vision')) {
+                    analysis.push("👁️ Vision changes may indicate blood sugar fluctuations");
+                }
+
+                // Risk factor analysis
+                if (riskFactors.includes('family_history')) {
+                    analysis.push("🧬 Family history significantly increases risk");
+                }
+
+                if (riskFactors.includes('prediabetes_history')) {
+                    analysis.push("📊 History of prediabetes requires close monitoring");
+                }
+
+                return analysis;
+            }
+        }
+
+        // Initialize form handling
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('diabetesForm');
+            const loadingDiv = document.getElementById('loading');
+            const resultsDiv = document.getElementById('results');
+            const checker = new DiabetesSymptomChecker();
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Show loading
+                loadingDiv.classList.remove('hidden');
+                resultsDiv.classList.add('hidden');
+
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {
+                    age: parseInt(formData.get('age')),
+                    gender: formData.get('gender'),
+                    weight: parseFloat(formData.get('weight')),
+                    height: parseInt(formData.get('height')),
+                    symptoms: formData.getAll('symptoms'),
+                    risk_factors: formData.getAll('risk_factors'),
+                    duration: formData.get('duration'),
+                    severity: formData.get('severity')
+                };
+
+                // Simulate processing time for better UX
+                setTimeout(() => {
+                    const assessment = checker.assessRisk(data);
+                    displayResults(assessment);
+
+                    loadingDiv.classList.add('hidden');
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            });
+
+            function displayResults(assessment) {
+                const html = `
+                    <div class="results ${assessment.riskColor}">
+                        <h3>🎯 Risk Assessment Result</h3>
+                        <p><strong>Risk Level: ${assessment.riskLevel}</strong></p>
+                        <p><strong>Risk Score: ${assessment.riskPercentage}%</strong></p>
+                        <p><strong>BMI: ${assessment.bmi}</strong> ${getBMICategory(assessment.bmi)}</p>
+                        
+                        <h4>📋 Analysis Summary:</h4>
+                        <p>• Symptoms detected: ${assessment.symptomCount}</p>
+                        <p>• Primary diabetes symptoms: ${assessment.primarySymptomCount}</p>
+                        ${assessment.hasClassicTriad ? '<p>• ⚠️ Classic diabetes symptom triad detected</p>' : ''}
+                        
+                        ${assessment.analysis.length > 0 ? `
+                        <h4>🔍 Detailed Analysis:</h4>
+                        ${assessment.analysis.map(item => `<p>${item}</p>`).join('')}
+                        ` : ''}
+                        
+                        <h4>💡 Recommendation:</h4>
+                        <p><strong>${assessment.recommendation}</strong></p>
+                        
+                        <h4>📞 Next Steps:</h4>
+                        <p>1. ${assessment.riskLevel === 'HIGH RISK' ? 'Contact healthcare provider immediately' : 'Schedule appointment with healthcare provider'}</p>
+                        <p>2. Consider blood glucose testing (fasting glucose, HbA1c)</p>
+                        <p>3. Maintain symptom diary</p>
+                        <p>4. Follow healthy lifestyle practices</p>
+                    </div>
+                `;
+
+                resultsDiv.innerHTML = html;
+            }
+
+            function getBMICategory(bmi) {
+                if (bmi < 18.5) return '(Underweight)';
+                if (bmi < 25) return '(Normal)';
+                if (bmi < 30) return '(Overweight)';
+                return '(Obese)';
+            }
+        });
+
+        
+    </script>
+    <script>
+        // Tab switching logic
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Example: Assessment form submission logic (expand as needed)
+        document.getElementById('assessment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const results = document.getElementById('results');
+            results.style.display = 'block';
+            results.className = 'results risk-moderate'; // Example: set risk level class
+            results.innerHTML = `
+                <h3><span>&#9888;&#65039;</span> Moderate Risk</h3>
+                <p>Based on your inputs, you may be at moderate risk for diabetes. Please consult a healthcare professional for a full assessment.</p>
+            `;
+        });
+    </script>
+</body>
+</html>
+
+</body>
+
+</html>
