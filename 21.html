@@ -366,6 +366,60 @@
             margin: 5px;
         }
 
+        .memory-area {
+            background: rgba(255,255,255,0.08);
+            padding: 30px 10px;
+            border-radius: 18px;
+            margin: 20px 0;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            grid-gap: 14px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .memory-card {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 12px;
+            font-size: 2em;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-weight: bold;
+        }
+        .memory-card.revealed, .memory-card.matched {
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            color: #fff;
+            transform: scale(1.08);
+            cursor: default;
+        }
+        .memory-card.matched {
+            opacity: 0.7;
+        }
+        @media (max-width: 600px) {
+            #memory-grid {
+                grid-template-columns: repeat(4, 40px);
+                grid-gap: 8px;
+            }
+            .memory-card {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -487,7 +541,20 @@
                 <button class="btn" onclick="backToGame()">Back to Game</button>
             </div>
         </div>
+        <div class="screen" id="memory-screen">
+            <div class="game-board">
+                <h2>🧠 Memory Test</h2>
+                <div id="memory-players" style="margin-bottom: 20px;"></div>
+                <div class="memory-area">
+                    <p id="memory-status" style="margin-bottom: 18px;">Click "Start Memory Game" to begin!</p>
+                    <div id="memory-grid"></div>
+                </div>
+                <button class="btn" onclick="startMemoryGame()">Start Memory Game</button>
+                <button class="btn" onclick="backToGame()">Back to Game</button>
+            </div>
+        </div>
 
+        
         <div class="screen" id="truth-dare-screen">
             <div class="game-board">
                 <h2>💋 Truth or Dare</h2>
@@ -534,11 +601,11 @@
             intimate: [
                 "Give someone a sensual 3-minutes shoulder massage 💆‍♀️",
                 "Whisper something seductive in someone's ear 😘",
-                "Do a slow, sultry dance for 45 seconds 💃",
+                "Do a slow sexy dance move for 45 seconds 💃",
                 "Give the other player a passionate look  💋",
                 "Share your most romantic fantasy (keep it classy!) 🌹",
                 "Do 10 slow, sexy push-ups 💪",
-                "Compliment everyone in the group in a flirty way 😍",
+                "Compliment everyone here in a flirty way 😍",
                 "Describe your ideal romantic evening in detail 🕯️",
                 "Measure the other player's weight with your hands (consensual) ⚖️",
             ],
@@ -990,95 +1057,90 @@
            document.getElementById('math-results').innerHTML = resultText;
        }
 
-       // Memory Game
-       function playMemoryGame() {
+       
+
+      let memoryItems = ["💦", "🍒", "🍆", "🍌", "💋", "👅", "🔥", "🍑", "💦", "🍒", "🍆", "🍌", "💋", "👅", "🔥", "🍑"]; // Duplicate for pairs
+let firstCard = null, secondCard = null, lockBoard = false;
+
+function playMemoryGame() {
+
+    
            showScreen('memory-screen');
-           document.getElementById('memory-players').innerHTML = `<h3>Memory Challenge: ${players[currentPlayerIndex]}</h3>`;
-       }
-
-       let memorySequence = [];
-       let playerSequence = [];
-       let memoryLevel = 1;
-
-       function startMemoryGame() {
-           memorySequence = [];
-           playerSequence = [];
-           memoryLevel = 1;
-           generateMemorySequence();
-           showMemorySequence();
-       }
-
-       function generateMemorySequence() {
-           for (let i = 0; i < memoryLevel + 2; i++) {
-               memorySequence.push(Math.floor(Math.random() * 16));
-           }
-       }
-
-       function showMemorySequence() {
-           const grid = document.getElementById('memory-grid');
-           grid.innerHTML = '';
-           
-           for (let i = 0; i < 16; i++) {
-               const card = document.createElement('button');
-               card.className = 'memory-card';
-               card.onclick = () => selectMemoryCard(i);
-               grid.appendChild(card);
-           }
-           
-           document.getElementById('memory-info').textContent = 'Watch carefully! Memorize the sequence...';
-           
-           let sequenceIndex = 0;
-           const showNext = () => {
-               if (sequenceIndex < memorySequence.length) {
-                   const cardIndex = memorySequence[sequenceIndex];
-                   const card = grid.children[cardIndex];
-                   
-                   card.style.background = '#ff6b6b';
-                   setTimeout(() => {
-                       card.style.background = 'rgba(255,255,255,0.2)';
-                       sequenceIndex++;
-                       setTimeout(showNext, 300);
-                   }, 600);
-               } else {
-                   document.getElementById('memory-info').textContent = 'Now click the cards in the same order!';
-               }
-           };
-           
-           setTimeout(showNext, 1000);
-       }
-
-       function selectMemoryCard(index) {
-           playerSequence.push(index);
-           const card = document.getElementById('memory-grid').children[index];
-           card.style.background = '#4ecdc4';
-           
-           setTimeout(() => {
-               card.style.background = 'rgba(255,255,255,0.2)';
-           }, 200);
-           
-           if (playerSequence.length === memorySequence.length) {
-               checkMemorySequence();
-           }
-       }
-
-       function checkMemorySequence() {
-           const isCorrect = playerSequence.every((val, index) => val === memorySequence[index]);
-           
-           if (isCorrect) {
-               document.getElementById('memory-results').innerHTML = `
-                   <h3>🧠 Perfect Memory! ${players[currentPlayerIndex]} wins!</h3>
-                   <p>You remembered all ${memorySequence.length} cards correctly!</p>
-               `;
-               gameStats[players[currentPlayerIndex]].wins++;
+           if (gameMode === 'competitive') {
+               document.getElementById('ttt-players').innerHTML = `<h3>${players[0]} (X) vs ${players[1]} (O)</h3>`;
            } else {
-               document.getElementById('memory-results').innerHTML = `
-                   <h3>😅 Oops! Memory failed you...</h3>
-                   <p>Better luck next time, ${players[currentPlayerIndex]}!</p>
-               `;
-               setTimeout(() => showPunishment(players[currentPlayerIndex], 'creative'), 1500);
+               document.getElementById('ttt-players').innerHTML = `<h3>${players[currentPlayerIndex]} vs AI</h3>`;
            }
-       }
+       
+}
 
+
+function startMemoryGame() {
+    const grid = document.getElementById('memory-grid');
+    const status = document.getElementById('memory-status');
+    grid.innerHTML = '';
+    status.textContent = "Game started! Match the cards.";
+    lockBoard = false;
+    firstCard = null;
+    secondCard = null;
+
+    // Shuffle
+    const shuffled = memoryItems.sort(() => 0.5 - Math.random());
+
+    shuffled.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.value = item;
+        card.onclick = () => revealCard(card);
+        card.textContent = "❓";
+        grid.appendChild(card);
+    });
+}
+
+function revealCard(card) {
+    if (lockBoard || card.classList.contains('revealed')) return;
+
+    card.textContent = card.dataset.value;
+    card.classList.add('revealed');
+
+    if (!firstCard) {
+        firstCard = card;
+    } else {
+        secondCard = card;
+        lockBoard = true;
+
+        if (firstCard.dataset.value === secondCard.dataset.value) {
+            // Match found
+            setTimeout(() => {
+                firstCard = null;
+                secondCard = null;
+                lockBoard = false;
+                checkWin();
+            }, 500);
+        } else {
+            // Not a match
+            setTimeout(() => {
+                firstCard.textContent = "❓";
+                secondCard.textContent = "❓";
+                firstCard.classList.remove('revealed');
+                secondCard.classList.remove('revealed');
+                firstCard = null;
+                secondCard = null;
+                lockBoard = false;
+            }, 1000);
+        }
+    }
+}
+
+function checkWin() {
+    const allCards = document.querySelectorAll('.memory-card');
+    const revealed = Array.from(allCards).every(card => card.classList.contains('revealed'));
+    if (revealed) {
+        document.getElementById('memory-status').textContent = "🎉 You’ve matched all the pairs!";
+        setTimeout(() => showPunishment(players[currentPlayerIndex], 'wild'), 1500);
+    } 
+    
+}
        // Truth or Dare
        function playTruthOrDare() {
            showScreen('truth-dare-screen');
