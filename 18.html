@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spicy Party Challenge - 21+ Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ff6b6b);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .game-container {
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border: 2px solid #ff6b6b;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      color: #ff6b6b;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .game-setup {
+      margin-bottom: 2rem;
+    }
+
+    .player-input {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input[type="text"] {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 2px solid #ff6b6b;
+      outline: none;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .game-board {
+      display: none;
+    }
+
+    .current-player {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: rgba(255, 107, 107, 0.2);
+      border-radius: 10px;
+      border: 2px solid #ff6b6b;
+    }
+
+    .challenge-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 1rem 0;
+      border: 2px solid #ff6b6b;
+      backdrop-filter: blur(10px);
+    }
+
+    .challenge-text {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .challenge-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .score-board {
+      display: flex;
+      justify-content: space-around;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: rgba(255, 107, 107, 0.1);
+      border-radius: 10px;
+    }
+
+    .player-score {
+      text-align: center;
+    }
+
+    .score-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff6b6b;
+    }
+
+    .punishment-card {
+      background: linear-gradient(45deg, #ff4757, #ff6b6b);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border: 2px solid #fff;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .warning {
+      background: rgba(255, 193, 7, 0.2);
+      border: 2px solid #ffc107;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="game-container">
+    <h1>🌶️ Spicy Party Challenge</h1>
+    <p class="subtitle">21+ Adult Party Game</p>
+
+    <div class="warning">
+      ⚠️ This game is intended for adults 21+ only. Please play responsibly!
+    </div>
+
+    <div class="game-setup" id="gameSetup">
+      <div class="player-input">
+        <input type="text" id="player1Name" placeholder="Player 1 Name" maxlength="20">
+        <input type="text" id="player2Name" placeholder="Player 2 Name" maxlength="20">
+      </div>
+      <button onclick="startGame()">🎮 Start Game</button>
+    </div>
+
+    <div class="game-board" id="gameBoard">
+      <div class="score-board">
+        <div class="player-score">
+          <div id="player1Display">Player 1</div>
+          <div class="score-value" id="player1Score">0</div>
+        </div>
+        <div class="player-score">
+          <div id="player2Display">Player 2</div>
+          <div class="score-value" id="player2Score">0</div>
+        </div>
+      </div>
+
+      <div class="current-player" id="currentPlayer">
+        Current Player: Player 1
+      </div>
+
+      <div class="challenge-card" id="challengeCard">
+        <div class="challenge-text" id="challengeText">
+          Click "New Challenge" to start!
+        </div>
+        <div class="challenge-actions">
+          <button onclick="newChallenge()">🎲 New Challenge</button>
+          <button onclick="completeChallenge()">✅ Completed</button>
+          <button onclick="failChallenge()">❌ Failed</button>
+        </div>
+      </div>
+
+      <div class="punishment-card hidden" id="punishmentCard">
+        <div class="challenge-text" id="punishmentText">
+          Punishment appears here
+        </div>
+        <button onclick="completePunishment()">Done with Punishment</button>
+      </div>
+
+      <button onclick="resetGame()">🔄 Reset Game</button>
+    </div>
+  </div>
+
+  <script>
+    const challenges = [
+      "Share your most embarrassing moment in detail 😳",
+      "Give the other player a sexy massage for 1 minute 💆",
+      "Remove one piece of clothing (your choice) 👕",
+      "Let the other player take off your clothe with foot technique 👣",
+      "Share your most embarrassing bedroom story 😳",
+      "Do a strip tease to your favorite song (keep underwear on!) 🎵",
+      "Let the other player give you a sexy nickname for the night 🔥",
+      "Describe your biggest turn-on in detail 😈",
+      "Act out your favorite romantic movie scene 🎬",
+      "Give someone a lap dance for 30 seconds 💺",
+      "Let someone else choose a body part for you to kiss (consensual) 💋",
+      "Do your best sexy walk across the room in slow motion 🚶‍♂️",
+      "Take your shirt off and let the other player see your best sexy pose 💪",
+      "Half Naked",
+      "Take off your pants",
+      "Stay with your underwear for the next 3 rounds",
+      "Hold the other player's thigh tighly for next 1 round",
+      "Act and demostrate your favourite masturbation technique for 30 seconds 🍑",
+      "What's the kinkiest thing you've ever done?",
+      "Who in this room would you most want to sleep with?",
+      "What's your biggest sexual fantasy?",
+      "Have you ever had a one-night stand?",
+      "What's the most adventurous place you've been intimate?",
+      "What's your favorite position and why?",
+      "Have you ever sent nudes to the wrong person?",
+      "What's the longest you've gone without sex?",
+      "What's your most embarrassing bedroom moment?",
+      "Who was your best kiss and why?",
+      "Have you ever been caught in a compromising position?",
+      "What's your biggest turn-off in bed?",
+      "Have you ever fantasized about someone in this room?",
+      "What's the most number of people you've been with in one day?",
+      "What's your guilty pleasure when it comes to porn?",
+    ];
+
+    const punishments = [
+      "Take a cold shower (or splash cold water on your face)",
+      "Do 20 jumping jacks",
+      "Give someone a sensual 3-minutes shoulder massage 💆‍♀️",
+      "Eat a spoonful of hot sauce (if available)",
+      "Do the chicken dance for 1 minute",
+      "Wear your shirt inside out for the rest of the game",
+      "Speak in a funny accent for the next 3 rounds",
+      "Take off your clothes until you're in your underwear 🩲",
+      "Talk in a sexy voice",
+      "Take off your clothes until you're in your underwear 🩲",
+      "Wear underwear on your hands for the next 1 rounds",
+      "Do the robot dance for 20 seconds",
+      "Do 5 sit-ups",
+      "Speak only in questions for the next 2 rounds",
+      "Wear socks on your hands for the next 1 rounds",
+      "Do a wall sit for 15 seconds",
+      "Measure the other player's weight with your hands (consensual) ⚖️",
+      "Switch clothes with someone for the next round 👔",
+      "Take off your clothes until you're in your underwear 🩲",
+      "Do a body shot off yourself 🍋",
+      "Share a secret you've never told anyone 🤫",
+      "Let someone pick your next drink AND how you drink it 🍹",
+      "Recreate the last intimate moment you had (PG-13 version) 💕",
+      "Text your ex something flirty (or skip if you prefer) 📱",
+      "Do your best orgasm impression from a movie 🎭",
+      "Take off your clothes until you're in your underwear 🩲",
+      "Let the group ask you 3 very personal questions 🔍",
+      "Sensual massage without clothes for 3 minutes with no talking 💆",
+      "Give the person to your left a sensual massage for 2 minutes",
+      "Let someone blindfold you and feed you something",
+      "Kiss the most attractive person in the room",
+      "Let someone hold your private parts for 10 seconds (consensual) ✋",
+      "Do your best sexy crawl across the room",
+      "Let the group choose a body part to lick whipped cream off of",
+      "Wear something sexy that belongs to someone else",
+      "Give someone a lap dance for a full song",
+      "Let someone write something on your body with their finger",
+      "Make out with your hand for 30 seconds",
+      "Do your most seductive dance move",
+      "Let someone spank you 5 times",
+      "Whisper something dirty to everyone in the room",
+      "Act out your favorite scene from an adult movie"
+
+    ];
+
+    let currentPlayerIndex = 0;
+    let player1Name = "";
+    let player2Name = "";
+    let scores = [0, 0];
+
+    function startGame() {
+      player1Name = document.getElementById('player1Name').value || "Player 1";
+      player2Name = document.getElementById('player2Name').value || "Player 2";
+
+      document.getElementById('player1Display').textContent = player1Name;
+      document.getElementById('player2Display').textContent = player2Name;
+
+      document.getElementById('gameSetup').style.display = 'none';
+      document.getElementById('gameBoard').style.display = 'block';
+
+      updateCurrentPlayer();
+    }
+
+    function updateCurrentPlayer() {
+      const currentName = currentPlayerIndex === 0 ? player1Name : player2Name;
+      document.getElementById('currentPlayer').textContent = `Current Player: ${currentName}`;
+    }
+
+    function newChallenge() {
+      const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+      document.getElementById('challengeText').textContent = randomChallenge;
+      document.getElementById('punishmentCard').classList.add('hidden');
+    }
+
+    function completeChallenge() {
+      scores[currentPlayerIndex]++;
+      updateScores();
+      nextPlayer();
+    }
+
+    function failChallenge() {
+      const randomPunishment = punishments[Math.floor(Math.random() * punishments.length)];
+      document.getElementById('punishmentText').textContent = randomPunishment;
+      document.getElementById('punishmentCard').classList.remove('hidden');
+    }
+
+    function completePunishment() {
+      document.getElementById('punishmentCard').classList.add('hidden');
+      nextPlayer();
+    }
+
+    function nextPlayer() {
+      currentPlayerIndex = (currentPlayerIndex + 1) % 2;
+      updateCurrentPlayer();
+      document.getElementById('challengeText').textContent = "Click 'New Challenge' for the next challenge!";
+    }
+
+    function updateScores() {
+      document.getElementById('player1Score').textContent = scores[0];
+      document.getElementById('player2Score').textContent = scores[1];
+    }
+
+    function resetGame() {
+      scores = [0, 0];
+      currentPlayerIndex = 0;
+      updateScores();
+      updateCurrentPlayer();
+      document.getElementById('challengeText').textContent = "Click 'New Challenge' to start!";
+      document.getElementById('punishmentCard').classList.add('hidden');
+    }
+  </script>
+</body>
+
+</html>
