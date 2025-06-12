@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTLC Private School Kyaing Tong</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a365d;
+            --secondary-navy: #2c5282;
+            --gold: #b8860b;
+            --light-gold: #daa520;
+            --cream: #f7f3e9;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #2d3748;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(26, 54, 93, 0.15);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background-image: url('main/photo/ktlc.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Remove this part since we're replacing the icon with an image */
+.logo-icon::before {
+    content: none;
+}
+
+        .logo-text h1 {
+            color: var(--primary-navy);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .logo-text p {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon-on-text {
+            width: 150px; /* adjust as needed */
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-navy);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.5), rgba(44, 82, 130, 0.5)),
+                        url(main/photo/ktlcBldg.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            color: var(--light-gold);
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            color: var(--cream);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--light-gold));
+            color: var(--primary-navy);
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+            box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            background: linear-gradient(45deg, var(--light-gold), var(--gold));
+        }
+
+        .section {
+            padding: 100px 0;
+            background: var(--white);
+            margin: 30px 0;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(26, 54, 93, 0.1);
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            border-radius: 25px 25px 0 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--primary-navy);
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--gold), var(--light-gold));
+            border-radius: 2px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 25px rgba(26, 54, 93, 0.1);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(26, 54, 93, 0.2);
+            border-color: var(--gold);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 28px;
+            color: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .announcements {
+            background: linear-gradient(135deg, var(--primary-navy), var(--secondary-navy));
+            color: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcements::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+        }
+
+        .announcements h2 {
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .announcements h2::after {
+            background: var(--gold);
+        }
+
+        .announcement-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--gold);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .announcement-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(10px);
+        }
+
+        .announcement-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.8rem;
+            color: var(--light-gold);
+            font-weight: 600;
+        }
+
+        .announcement-item h3 {
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-item:hover {
+            background: var(--cream);
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 25px rgba(26, 54, 93, 0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+        }
+
+        .contact-item h4 {
+            color: var(--primary-navy);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        footer {
+            background: var(--primary-navy);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-navy);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .live-updates {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-navy), var(--secondary-navy));
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(26, 54, 93, 0.3);
+            z-index: 1000;
+            max-width: 320px;
+            border: 2px solid var(--gold);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .school-values {
+            background: linear-gradient(135deg, var(--cream), var(--white));
+            padding: 80px 0;
+            margin: 30px 0;
+            border-radius: 25px;
+            border: 3px solid var(--gold);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(26, 54, 93, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(26, 54, 93, 0.15);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .value-item h3 {
+            color: var(--primary-navy);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .activities-section {
+            background: linear-gradient(135deg, var(--cream), var(--white));
+            padding: 80px 0;
+            margin: 30px 0;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            border-radius: 25px 25px 0 0;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .activity-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(26, 54, 93, 0.1);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(26, 54, 93, 0.2);
+            border-color: rgba(184, 134, 11, 0.5);
+        }
+
+        .activity-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .activity-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(26, 54, 93, 0.3), rgba(44, 82, 130, 0.3));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .activity-content {
+            padding: 2rem;
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .activity-title {
+            color: var(--primary-navy);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-description {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, rgba(184, 134, 11, 0.2), rgba(218, 165, 32, 0.2));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(184, 134, 11, 0.3);
+            border-radius: 50px;
+            color: var(--primary-navy);
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .glass-button:hover {
+            background: linear-gradient(135deg, rgba(184, 134, 11, 0.3), rgba(218, 165, 32, 0.3));
+            border-color: rgba(184, 134, 11, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(184, 134, 11, 0.2);
+            color: var(--primary-navy);
+        }
+
+        .glass-button:hover::before {
+            left: 100%;
+        }
+
+        .activity-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(184, 134, 11, 0.9);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        .activity-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            border: 2px solid rgba(184, 134, 11, 0.3);
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(26, 54, 93, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section h2 {
+                font-size: 2.2rem;
+            }
+
+            .live-updates {
+                position: static;
+                margin: 1rem 0;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <h1>KTLC Private School</h1>
+                    <p>Excellence in Education</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#values">Values</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img class="logo-icon-on-text" src="main/photo/KTLC.png" alt="KTLC Logo">
+                <h1>KTLC Private School</h1>
+                <div class="subtitle">Excellence • Integrity • Innovation</div>
+                <p>Empowering minds, shaping futures in Kyaing Tong, Myanmar</p>
+                <a href="#about" class="cta-button">Discover Excellence</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About KTLC Private School</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Academic Excellence</h3>
+                    <p>We provide world-class education with a rigorous curriculum designed to develop critical thinking, creativity, and academic excellence. Our comprehensive programs prepare students for success in higher education and beyond.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👨‍🏫</div>
+                    <h3>Expert Faculty</h3>
+                    <p>Our dedicated team of highly qualified educators brings passion, expertise, and innovative teaching methods to create an engaging learning environment that nurtures each student's unique potential.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Modern Facilities</h3>
+                    <p>State-of-the-art classrooms, well-equipped laboratories, comprehensive library, computer labs, and recreational facilities provide students with the optimal environment for learning and growth.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌟</div>
+                    <h3>Character Development</h3>
+                    <p>Beyond academics, we focus on building strong moral character, leadership skills, social responsibility, and global citizenship to develop well-rounded individuals ready for tomorrow's challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs" class="section">
+        <div class="container">
+            <h2>Academic Programs</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Primary Education (K-5)</h3>
+                    <p>Foundation years focusing on fundamental literacy, numeracy, and essential life skills. Our nurturing environment helps young learners develop confidence, curiosity, and a love for learning through interactive and engaging methods.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎒</div>
+                    <h3>Middle School (6-8)</h3>
+                    <p>Comprehensive curriculum building upon primary foundations with increased academic rigor. Students explore diverse subjects while developing critical thinking skills and preparing for advanced secondary education.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏆</div>
+                    <h3>High School (9-12)</h3>
+                    <p>Advanced academic programs preparing students for university admission and career success. Rigorous coursework, college counseling, and leadership opportunities ensure graduates are ready for the next chapter.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>English Language Program</h3>
+                    <p>Specialized English language instruction enhancing communication skills and global competency. Our comprehensive program includes literature, writing, speaking, and cultural understanding components.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Technology Integration</h3>
+                    <p>Modern computer science education covering digital literacy, programming, robotics, and emerging technologies. Students develop technical skills essential for success in the digital age.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Arts & Enrichment</h3>
+                    <p>Creative programs including visual arts, music, drama, and cultural activities. These programs foster creativity, self-expression, and cultural appreciation while developing well-rounded individuals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="values" class="school-values">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">💡</div>
+                    <h3>Excellence</h3>
+                    <p>Striving for the highest standards in education and personal growth</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🤝</div>
+                    <h3>Integrity</h3>
+                    <p>Building character through honesty, respect, and moral responsibility</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🚀</div>
+                    <h3>Innovation</h3>
+                    <p>Embracing creativity and forward-thinking approaches to learning</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🌍</div>
+                    <h3>Global Citizenship</h3>
+                    <p>Preparing students to be responsible leaders in a connected world</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="activities-section">
+    <div class="container">
+        <h2>School Activities & Events</h2>
+        <div class="activities-grid">
+                       <div class="activity-card">
+                <div class="activity-image" style="background-image: url('main/photo/grad.jpg');">
+                    <div class="activity-tag">Milestone</div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">🎓 Graduation Ceremony</h3>
+                    <p class="activity-description">Celebrating academic achievements and milestones as our students transition to the next level of their educational journey with pride and accomplishment.</p>
+                    <a href="#" class="glass-button" onclick="openActivityModal('graduation')">
+                        View Gallery 📸
+                    </a>
+                </div>
+            </div> 
+
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('main/photo/ktlcsportsimg.jpg');">
+                    <div class="activity-tag">Sports</div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">🏃‍♂️ Annual Sports Day</h3>
+                    <p class="activity-description">Our exciting annual sports championship featuring athletics, team sports, and competitions that promote physical fitness, teamwork, and healthy competition among students.</p>
+                    <a href="#" class="glass-button" onclick="openActivityModal('sports')">
+                        View Gallery 📸
+                    </a>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('main/photo/science-fair.jpg');">
+                    <div class="activity-tag">Academic</div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">🔬 Science Fair</h3>
+                    <p class="activity-description">Students showcase innovative projects and experiments, demonstrating their scientific knowledge and creativity while developing research and presentation skills.</p>
+                    <a href="#" class="glass-button" onclick="openActivityModal('science')">
+                        View Gallery 📸
+                    </a>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('main/photo/cultural-fest.jpg');">
+                    <div class="activity-tag">Cultural</div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">🎭 Cultural Festival</h3>
+                    <p class="activity-description">Celebrating diversity through traditional performances, cultural exhibitions, and artistic expressions that promote understanding and appreciation of different cultures.</p>
+                    <a href="#" class="glass-button" onclick="openActivityModal('cultural')">
+                        View Gallery 📸
+                    </a>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('main/photo/art-exhibition.jpg');">
+                    <div class="activity-tag">Creative</div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">🎨 Art Exhibition</h3>
+                    <p class="activity-description">Showcasing student creativity through visual arts, crafts, and creative projects that demonstrate artistic talent and self-expression capabilities.</p>
+                    <a href="#" class="glass-button" onclick="openActivityModal('art')">
+                        View Gallery 📸
+                    </a>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('main/photo/community-service.jpg');">
+                    <div class="activity-tag">Service</div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">🤝 Community Service</h3>
+                    <p class="activity-description">Students engage in meaningful community service projects, developing social responsibility and contributing positively to society through volunteer work.</p>
+                    <a href="#" class="glass-button" onclick="openActivityModal('community')">
+                        View Gallery 📸
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal for Activity Images -->
+<div id="activityModal" class="activity-modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeActivityModal()">&times;</button>
+        <img id="modalImage" class="modal-image" src="" alt="Activity Image">
+        <div style="padding: 2rem;">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+</div>
+
+    <section id="news" class="section">
+        <div class="container">
+            <div class="announcements">
+                <h2>Latest News & Announcements</h2>
+                <div class="announcement-item">
+                    <div class="announcement-date">June 10, 2025</div>
+                    <h3>🎉 New Academic Year 2025-2026 Registration</h3>
+                    <p>We are now accepting applications for the upcoming academic year. Join the KTLC family and experience excellence in education. Visit our admissions office or contact us for detailed information about enrollment procedures, requirements, and available programs.</p>
+                </div>
+                <div class="announcement-item">
+                    <div class="announcement-date">June 8, 2025</div>
+                    <h3>☀️ Summer Enrichment Programs</h3>
+                    <p>Exciting summer learning opportunities are available for skill enhancement and academic advancement. Our programs include English language immersion, STEM workshops, creative arts, and computer programming courses designed to keep students engaged during the break.</p>
+                </div>
+                <div class="announcement-item">
+                    <div class="announcement-date">June 5, 2025</div>
+                    <h3>🏃‍♂️ Annual Sports Day Championship</h3>
+                    <p>Mark your calendars! Our grand annual sports day will be held on June 20th, featuring exciting competitions, team sports, and individual events. This celebration promotes teamwork, sportsmanship, and healthy competition among our students.</p>
+                </div>
+                <div class="announcement-item">
+                    <div class="announcement-date">June 3, 2025</div>
+                    <h3>📖 New Library Resources Available</h3>
+                    <p>Our library has been enhanced with new books, digital resources, and study materials. Students now have access to an expanded collection of academic texts, literature, and research materials to support their educational journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>School Address</h4>
+                        <p>Kyaing Tong, Shan State<br>Myanmar</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>Phone Numbers</h4>
+                        <p>Main Office: +95 9 45803 0188<br>Admissions: +95 9 45803 0188</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>Email Addresses</h4>
+                        <p><a href="mailto:ktlcprivateschool.kengtung@gmail.com">  <strong>Gmail</strong></a> </p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <h4>Office Hours</h4>
+                        <p> <strong>7:30 AM - 4:30 PM</strong><br> (Monday - Friday) <br> <strong>8:00 AM - 12:00 PM</strong><br> (Saturday)</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Social Media</h4>
+                        <p>Follow us on Facebook<br> <a href="https://www.facebook.com/KTLCPrivateSchool"> <strong>KTLC Private School</strong> </a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div>
+                        <h4>Website</h4>
+                        <p>www.<br>Online Portal Available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="live-updates">
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <strong>Live Updates</strong>
+        </div>
+        <p id="live-text">School information updated in real-time</p>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 KTLC Private School Kyaing Tong. All rights reserved.</p>
+            <p><strong>Excellence • Integrity • Innovation</strong></p>
+            <p>Shaping Tomorrow's Leaders Today</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+              // Activity modal functionality
+              const activityData = {
+                  sports: {
+                      title: "Annual Sports Day Gallery",
+                      description: "Exciting moments from our annual sports championship featuring various athletic competitions, team spirit, and outstanding performances by our students.",
+                      image: "main/photo/ktlcsportsimg.jpg"
+                  },
+                  science: {
+                      title: "Science Fair Showcase",
+                      description: "Innovative student projects demonstrating scientific knowledge, creativity, and research skills across various disciplines.",
+                      image: "main/photo/science-fair.jpg"
+                  },
+                  cultural: {
+                      title: "Cultural Festival Highlights",
+                      description: "Vibrant celebrations showcasing diverse cultures through traditional performances, exhibitions, and artistic expressions.",
+                      image: "main/photo/cultural-fest.jpg"
+                  },
+                  graduation: {
+                      title: "Graduation Ceremony Moments",
+                      description: "Proud moments celebrating academic achievements and milestones as students advance in their educational journey.",
+                      image: "main/photo/grad.jpg"
+                  },
+                  art: {
+                      title: "Student Art Exhibition",
+                      description: "Creative masterpieces showcasing artistic talent, imagination, and self-expression through various art forms.",
+                      image: "main/photo/art-exhibition.jpg"
+                  },
+                  community: {
+                      title: "Community Service Projects",
+                      description: "Students making a positive impact through volunteer work and community engagement initiatives.",
+                      image: "main/photo/community-service.jpg"
+                  }
+              };
+
+              function openActivityModal(activityType) {
+                  const modal = document.getElementById('activityModal');
+                  const modalImage = document.getElementById('modalImage');
+                  const modalTitle = document.getElementById('modalTitle');
+                  const modalDescription = document.getElementById('modalDescription');
+                  
+                  const activity = activityData[activityType];
+                  
+                  modalImage.src = activity.image;
+                  modalTitle.textContent = activity.title;
+                  modalDescription.textContent = activity.description;
+                  
+                  modal.style.display = 'flex';
+                  document.body.style.overflow = 'hidden';
+              }
+
+              function closeActivityModal() {
+                  const modal = document.getElementById('activityModal');
+                  modal.style.display = 'none';
+                  document.body.style.overflow = 'auto';
+              }
+
+              // Close modal when clicking outside
+              document.getElementById('activityModal').addEventListener('click', function(e) {
+                  if (e.target === this) {
+                      closeActivityModal();
+                  }
+              });
+
+              // Close modal with Escape key
+              document.addEventListener('keydown', function(e) {
+                  if (e.key === 'Escape') {
+                      closeActivityModal();
+                  }
+              });
+
+        // Real-time updates simulation
+        const liveTexts = [
+            "All systems operational",
+            "Latest announcements available",
+            "Admissions office open today",
+            "New programs information updated",
+            "Contact information verified"
+        ];
+
+        let currentTextIndex = 0;
+        const liveTextElement = document.getElementById('live-text');
+
+        function updateLiveText() {
+            liveTextElement.style.opacity = '0';
+            setTimeout(() => {
+                liveTextElement.textContent = liveTexts[currentTextIndex];
+                liveTextElement.style.opacity = '1';
+                currentTextIndex = (currentTextIndex + 1) % liveTexts.length;
+            }, 300);
+        }
+
+        // Update live text every 5 seconds
+        setInterval(updateLiveText, 5000);
+
+        // Mobile menu toggle (basic functionality)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Current date and time display
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit',
+                timeZone: 'Asia/Yangon'
+            };
+            const dateTimeString = now.toLocaleDateString('en-US', options);
+            
+            // You can add this to display current time if needed
+            // console.log('Current Myanmar Time:', dateTimeString);
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // Update every minute
+    </script>
+</body>
+</html>
