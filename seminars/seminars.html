@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,16 @@
   <link rel="stylesheet" href="../styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
   <nav>
     <button class="dark-mode-toggle">
       <div class="inner-circle"></div>
     </button>
 
-    <div class="logo"><marquee direction="left"><strong>Seminars, Workshops, and Tours by Aung, Pyae SOne C.</strong></marquee></div>
+    <div class="logo">
+      <marquee direction="left"><strong>Seminars, Workshops, and Tours by Aung, Pyae SOne C.</strong></marquee>
+    </div>
     <div class="hamburger">
       <div class="bar"></div>
       <div class="bar"></div>
@@ -23,12 +27,12 @@
       <li class="nav__item"><a href="../index.html" class="nav__link">Home</a></li>
       <li class="nav__item"><a href="seminars.html" class="nav__link active">Seminars & Workshops</a></li>
 
-    </ul>      
+    </ul>
   </nav>
 
   <section id="seminars" class="container">
     <h2>"Seminars, Workshops, and Tours"</h2>
-    
+
     <!-- Filter Buttons -->
     <div class="filter-buttons">
       <button class="filter-btn active" data-filter="all">All Events</button>
@@ -37,181 +41,199 @@
       <button class="filter-btn" data-filter="tour">Tours</button>
       <button class="filter-btn" data-filter="Certification">Training & Certification</button>
     </div>
-    
+
     <!-- Events Grid -->
-   
-<div class="events-grid">
-  
-    <!-- Training and Certification -->
-    <a href="certification.html" class="event-card Certification">
-      <div class="event-image">
-       <embed src="../main/seminars/certificate.png" width="335px" height="305px" alt="Workshop Photo 1"/>
-      </div>
-      <div class="event-info">
-        <span class="event-type">Training & Certification</span>
-        <h3>Certificate and Pre-training for OJT</h3>
-        <p class="event-speaker">Author: Mr. Pyae Sone Chan Thar Aung</p>
-        <p class="event-date">Summer 2025</p>
-        <p class="event-location">UIC Main Campus</p>
-      </div>
-    </a>
 
-    <!-- Seminar 1 -->
-    <a href="seminar1.html" class="event-card seminar">
-      <div class="event-image">
-        <img src="../main/seminars/seminar1-1.jpg.jpg" alt="Navigating Software Development">
-      </div>
-      <div class="event-info">
-        <span class="event-type">Seminar I</span>
-        <h3>Navigating Software Development in the Industry</h3>
-        <p class="event-speaker">Speaker: Mr. Ned Isaiah Palacios</p>
-        <p class="event-date">May 17, 2025</p>
-        <p class="event-location">UIC Computer Lab</p>
-      </div>
-    </a>
+    <div class="events-grid">
 
-  <!-- Workshop 1 -->
-  <a href="workshop1.html" class="event-card workshop">
-    <div class="event-image">
-      <img src="../main/seminars/workshop1-1.png" alt="Tech-Write PPT Workshop">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Workshop I</span>
-      <h3>Technical Writing Research-Paper Workshop</h3>
-      <p class="event-speaker">Instructor: Mr. Cris John David R. Manero</p>
-      <p class="event-date">May 22, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Training and Certification -->
+      <a href="certification.html" class="event-card Certification">
+        <div class="event-image">
+          <embed src="../main/seminars/certificate.png" width="335px" height="305px" alt="Workshop Photo 1" />
+        </div>
+        <div class="event-info">
+          <span class="event-type">Training & Certification</span>
+          <h3>Certificate and Pre-training for OJT</h3>
+          <p class="event-speaker">Author: Mr. Pyae Sone Chan Thar Aung</p>
+          <p class="event-date">Summer 2025</p>
+          <p class="event-location">UIC Main Campus</p>
+        </div>
+      </a>
 
-  <!-- Tour 1 -->
-  <a href="tour1.html" class="event-card tour">
-    <div class="event-image">
-      <img src="../main/seminars/tour1-1.jpg" alt="Mindanao Media Hub Company Visit">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Tour I</span>
-      <h3>Mindanao Media Hub Visit</h3>
-      <p class="event-speaker">Host: PTV Mindanao Media Hub</p>
-      <p class="event-date">May 30, 2025</p>
-      <p class="event-location">Davao City</p>
-    </div>
-  </a>
+      <!-- Seminar 1 -->
+      <a href="seminar1.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar1-1.jpg.jpg" alt="Navigating Software Development">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar I</span>
+          <h3>Navigating Software Development in the Industry</h3>
+          <p class="event-speaker">Speaker: Mr. Ned Isaiah Palacios</p>
+          <p class="event-date">May 17, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
 
-  <!-- Seminar 2 -->
-  <a href="seminar2.html" class="event-card seminar">
-    <div class="event-image">
-      <img src="../main/seminars/seminar2-1.jpeg" alt="Audio Transcriber">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Seminar II</span>
-      <h3>Enhancing Audio Processing: Development and Evaluation of a Transcriber tool</h3>
-      <p class="event-speaker">Speaker: Mr. Carlo Castro</p>
-      <p class="event-date">May 21, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Workshop 1 -->
+      <a href="workshop1.html" class="event-card workshop">
+        <div class="event-image">
+          <img src="../main/seminars/workshop1-1.png" alt="Tech-Write PPT Workshop">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Workshop I</span>
+          <h3>Technical Writing Research-Paper Workshop</h3>
+          <p class="event-speaker">Instructor: Mr. Cris John David R. Manero</p>
+          <p class="event-date">May 22, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
 
-  <!-- Seminar 3 -->
-  <a href="seminar3.html" class="event-card seminar">
-    <div class="event-image">
-      <img src="../main/seminars/seminar3-1.jpg" alt="Research 101">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Seminar III</span>
-      <h3>Research 101: Conference Presentation and Funding Techniques</h3>
-      <p class="event-speaker">Speaker: Mr. Cris John David R. Manero</p>
-      <p class="event-date">May 22, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Tour 1 -->
+      <a href="tour1.html" class="event-card tour">
+        <div class="event-image">
+          <img src="../main/seminars/tour1-1.jpg" alt="Mindanao Media Hub Company Visit">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Tour I</span>
+          <h3>Mindanao Media Hub Visit</h3>
+          <p class="event-speaker">Host: PTV Mindanao Media Hub</p>
+          <p class="event-date">May 30, 2025</p>
+          <p class="event-location">Davao City</p>
+        </div>
+      </a>
 
-  <!-- Seminar 4 -->
-  <a href="seminar4.html" class="event-card seminar">
-    <div class="event-image">
-      <img src="../main/seminars/seminar4-1.jpg" alt="TherapEase">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Seminar IV</span>
-      <h3>TherapEase: Building & Fostering Therapy Collaboration for Therapist and Carer</h3>
-      <p class="event-speaker">Speaker: Mr. Hizon Caja</p>
-      <p class="event-date">May 23, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Seminar 2 -->
+      <a href="seminar2.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar2-1.jpeg" alt="Audio Transcriber">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar II</span>
+          <h3>Enhancing Audio Processing: Development and Evaluation of a Transcriber tool</h3>
+          <p class="event-speaker">Speaker: Mr. Carlo Castro</p>
+          <p class="event-date">May 21, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
 
-  <!-- Seminar 5 -->
-  <a href="seminar5.html" class="event-card seminar">
-    <div class="event-image">
-      <img src="../main/seminars/seminar5-2.jpg" alt="Software engineering research project">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Seminar V</span>
-      <h3>Research 101: the ins and outs of software engineering research project</h3>
-      <p class="event-speaker">Speaker: Mrs. Shenna Rhea M. Cloribel</p>
-      <p class="event-date">May 26, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Seminar 3 -->
+      <a href="seminar3.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar3-1.jpg" alt="Research 101">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar III</span>
+          <h3>Research 101: Conference Presentation and Funding Techniques</h3>
+          <p class="event-speaker">Speaker: Mr. Cris John David R. Manero</p>
+          <p class="event-date">May 22, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
 
-  <!-- Seminar 6 -->
-  <a href="seminar6.html" class="event-card seminar">
-    <div class="event-image">
-      <img src="../main/seminars/seminar6-1.jpg" alt="MARIAN TBI">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Seminar VI</span>
-      <h3>Bridging Academia and Startup Innovation</h3>
-      <p class="event-speaker">Speaker: Mr. Ceasar Ian Benablo</p>
-      <p class="event-date">May 27, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Seminar 4 -->
+      <a href="seminar4.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar4-1.jpg" alt="TherapEase">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar IV</span>
+          <h3>TherapEase: Building & Fostering Therapy Collaboration for Therapist and Carer</h3>
+          <p class="event-speaker">Speaker: Mr. Hizon Caja</p>
+          <p class="event-date">May 23, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
 
-  <!-- Seminar 7 -->
-  <a href="seminar7.html" class="event-card seminar">
-    <div class="event-image">
-      <img src="../main/seminars/seminar7-1.jpeg" alt="Seminar-7">
-    </div>
-    <div class="event-info">
-      <span class="event-type">Seminar VII</span>
-      <h3>Prompt Enginnering for online and offline Large Language Models</h3>
-      <p class="event-speaker">Speaker: Mr. Eric Emberda</p>
-      <p class="event-date">May 28, 2025</p>
-      <p class="event-location">UIC Computer Lab</p>
-    </div>
-  </a>
+      <!-- Seminar 5 -->
+      <a href="seminar5.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar5-2.jpg" alt="Software engineering research project">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar V</span>
+          <h3>Research 101: the ins and outs of software engineering research project</h3>
+          <p class="event-speaker">Speaker: Mrs. Shenna Rhea M. Cloribel</p>
+          <p class="event-date">May 26, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
 
-</div>
+      <!-- Seminar 6 -->
+      <a href="seminar6.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar6-1.jpg" alt="MARIAN TBI">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar VI</span>
+          <h3>Bridging Academia and Startup Innovation</h3>
+          <p class="event-speaker">Speaker: Mr. Ceasar Ian Benablo</p>
+          <p class="event-date">May 27, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
+
+      <!-- Seminar 7 -->
+      <a href="seminar7.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar7-1.jpeg" alt="Seminar-7">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar VII</span>
+          <h3>Prompt Enginnering for online and offline Large Language Models</h3>
+          <p class="event-speaker">Speaker: Mr. Eric Emberda</p>
+          <p class="event-date">May 28, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
+
+      <!-- Seminar 8 -->
+      <a href="seminar8.html" class="event-card seminar">
+        <div class="event-image">
+          <img src="../main/seminars/seminar7-1.jpeg" alt="Seminar-8">
+        </div>
+        <div class="event-info">
+          <span class="event-type">Seminar VIII</span>
+          <h3>Understanding the Agentic AI</h3>
+          <p class="event-speaker">Speaker: Mr. Ralph Vincent Regalado</p>
+          <p class="event-date">June 13, 2025</p>
+          <p class="event-location">UIC Computer Lab</p>
+        </div>
+      </a>
+
+    </div>
   </section>
 
   <div class="footer-container">
     <!-- Contact Information -->
     <div class="contact-container">
-        <h3>Contact Me</h3>
-        <address id="contact">
-            <strong>With Regards,</strong><br>
-            Pyae Sone Chan Thar Aung<br>
-            <span><a href="mailto:paung_230000001724@uic.edu.ph">paung_230000001724@uic.edu.ph</a></span><br>
-            University of the Immaculate Conception<br>
-            Davao City, Philippines
-        </address>
+      <h3>Contact Me</h3>
+      <address id="contact">
+        <strong>With Regards,</strong><br>
+        Pyae Sone Chan Thar Aung<br>
+        <span><a href="mailto:paung_230000001724@uic.edu.ph">paung_230000001724@uic.edu.ph</a></span><br>
+        University of the Immaculate Conception<br>
+        Davao City, Philippines
+      </address>
     </div>
 
     <!-- Social Media Links -->
     <div class="social-links">
-        <a href="https://www.facebook.com/MgPyaeSoneChanTharAung" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-icon">
-        </a>
-        <a href="https://www.instagram.com/pyaesone_chantharaung/" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="social-icon">
-        </a>
-        <a href="https://github.com/pyae-sone-chan-thar-aung" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="social-icon">
-        </a>
+      <a href="https://www.facebook.com/MgPyaeSoneChanTharAung" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"
+          class="social-icon">
+      </a>
+      <a href="https://www.instagram.com/pyaesone_chantharaung/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"
+          class="social-icon">
+      </a>
+      <a href="https://github.com/pyae-sone-chan-thar-aung" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub"
+          class="social-icon">
+      </a>
     </div>
-</div>
+  </div>
 
   <script src="../web.js"></script>
 </body>
+
 </html>
