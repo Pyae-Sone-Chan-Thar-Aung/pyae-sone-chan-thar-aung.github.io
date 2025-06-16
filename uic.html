@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UIC Visitor Guidebook</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Cover Page */
+        .cover {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.03)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .university-logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cover h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cover .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cover .tagline {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .location {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            padding: 4rem 2rem;
+            background: #f8fafc;
+        }
+        
+        .toc h2 {
+            font-size: 2.5rem;
+            color: #1e40af;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .toc-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3b82f6;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .toc-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .toc-item h3 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .toc-item p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 4rem 2rem;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header .divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        
+        /* Welcome Section */
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        
+        .welcome-text h3 {
+            font-size: 1.8rem;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-text p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        
+        .values-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        
+        .values-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #374151;
+        }
+        
+        .values-list li::before {
+            content: '✓';
+            background: #10b981;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Campus Cards */
+        .campus-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .campus-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .campus-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .campus-header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .campus-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .campus-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .campus-header p {
+            opacity: 0.9;
+        }
+        
+        .campus-content {
+            padding: 2rem;
+        }
+        
+        .department-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .department-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+        
+        .department-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .highlights {
+            background: #f0f9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .highlights h4 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .highlights ul {
+            list-style: none;
+        }
+        
+        .highlights li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        
+        /* Emergency Contacts */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .emergency-card {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .emergency-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .emergency-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #3b82f6;
+        }
+        
+        .contact-card h4 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            color: #374151;
+        }
+        
+        /* Accommodation */
+        .accommodation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .accommodation-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accommodation-header {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .accommodation-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .accommodation-content {
+            padding: 2rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #374151;
+        }
+        
+        .feature-list li::before {
+            content: '🏨';
+            margin-right: 0.8rem;
+        }
+        
+        .wifi-info {
+            background: #f0f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .wifi-info strong {
+            color: #1e40af;
+        }
+        
+        /* Attractions */
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .attraction-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .attraction-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .attraction-icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .attraction-content {
+            padding: 1.5rem;
+        }
+        
+        .attraction-content h4 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        
+        .attraction-content p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        /* Language Section */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .phrase-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phrase-category h4 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .phrase-list {
+            list-style: none;
+        }
+        
+        .phrase-list li {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .phrase-list strong {
+            color: #1e40af;
+        }
+        
+        /* Navigation */
+        .nav-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background: #1e40af;
+            transform: scale(1.05);
+        }
+        
+        .back-btn {
+            background: #6b7280;
+        }
+        
+        .back-btn:hover {
+            background: #374151;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cover .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .welcome-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-buttons {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                padding: 0.8rem;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
+            .content-section {
+                display: block !important;
+                page-break-before: always;
+            }
+            
+            .cover {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cover Page -->
+        <div id="cover" class="cover">
+            <div class="cover-content">
+                <div class="university-logo">UIC</div>
+                <h1>Visitor's Guide</h1>
+                <div class="subtitle">University of the Immaculate Conception</div>
+                <div class="tagline">Faith • Excellence • Service</div>
+                <div class="location">Davao City, Philippines</div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div id="toc" class="toc">
+            <h2>Table of Contents</h2>
+            <div class="toc-grid">
+                <div class="toc-item" onclick="showSection('welcome')">
+                    <h3>01. Welcome to UIC</h3>
+                    <p>Learn about our university's rich history, mission, and values that guide our educational excellence.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('campuses')">
+                    <h3>02. Campus Overview</h3>
+                    <p>Explore our three distinct campuses and discover the unique features and departments of each location.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('emergency')">
+                    <h3>03. Emergency Contacts</h3>
+                    <p>Essential contact information for emergencies, university staff, and key personnel during your visit.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('accommodation')">
+                    <h3>04. Accommodation</h3>
+                    <p>Information about UIC Hotel, Guest House, and dormitory facilities with Wi-Fi access details.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('practical')">
+                    <h3>05. Practical Information</h3>
+                    <p>Transportation, dress codes, electrical sockets, and other essential information for your stay.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('attractions')">
+                    <h3>06. Tourist Attractions</h3>
+                    <p>Discover the best attractions Davao City has to offer, from nature parks to cultural sites.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('language')">
+                    <h3>07. Language Guide</h3>
+                    <p>Essential Bisaya phrases to help you communicate with locals during your visit.</p>
+                </div>
+                <div class="toc-item" onclick="showSection('policies')">
+                    <h3>08. Hotel Policies</h3>
+                    <p>Important guidelines and policies for guests staying at UIC accommodation facilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Section -->
+        <div id="welcome" class="content-section">
+            <div class="section-header">
+                <h2>Welcome to UIC</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="welcome-grid">
+                <div class="welcome-text">
+                    <h3>A Legacy of Excellence Since 1905</h3>
+                    <p>Welcome to the University of the Immaculate Conception (UIC), where faith, excellence, and service converge to create transformative educational experiences. Whether you're here as an international visitor, exchange student, or intern, we're honored to welcome you into our UIC family.</p>
+                    
+                    <p>Founded in 1905 by the Religious of the Virgin Mary (RVM), UIC stands as the first Catholic school in Davao City. Over more than a century, we have evolved from a primary school into a prestigious university, receiving University Status in 1992.</p>
+                    
+                    <h4>Our Core Values:</h4>
+                    <ul class="values-list">
+                        <li><strong>Faith:</strong> Nurturing spiritual growth and Catholic teachings</li>
+                        <li><strong>Excellence:</strong> Providing top-quality education for future success</li>
+                        <li><strong>Service:</strong> Instilling values of humility, love, justice, and peace</li>
+                    </ul>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">119</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Campus Locations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Academic Colleges</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">K-PhD</div>
+                        <div class="stat-label">Education Levels</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campus Overview -->
+        <div id="campuses" class="content-section">
+            <div class="section-header">
+                <h2>Campus Overview</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="campus-grid">
+                <div class="campus-card">
+                    <div class="campus-header">
+                        <h3>1. Bajada Campus</h3>
+                        <p>Basic Education Department</p>
+                    </div>
+                    <div class="campus-content">
+                        <p><strong>Location:</strong> Bajada, near Southern Philippines Medical Center (SPMC)</p>
+                        
+                        <h4>Departments:</h4>
+                        <ul class="department-list">
+                            <li>Kindergarten</li>
+                            <li>Grade School</li>
+                            <li>Junior High School</li>
+                            <li>Senior High School</li>
+                        </ul>
+                        
+                        <div class="highlights">
+                            <h4>Campus Highlights:</h4>
+                            <ul>
+                                <li>Nurturing environment from K-12</li>
+                                <li>SEAMEO SEA Teacher internship hub</li>
+                                <li>Adjacent to SPMC hospital</li>
+                                <li>Focus on foundational education</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="campus-card">
+                    <div class="campus-header">
+                        <h3>2. Annex Campus</h3>
+                        <p>Tertiary Education & Graduate School</p>
+                    </div>
+                    <div class="campus-content">
+                        <p><strong>Location:</strong> Bonifacio, Davao City</p>
+                        
+                        <h4>Colleges & Programs:</h4>
+                        <ul class="department-list">
+                            <li>College of Arts and Humanities</li>
+                            <li>College of Accounting and Business Education</li>
+                            <li>College of Engineering and Architecture</li>
+                            <li>College of Teacher Education</li>
+                            <li>Graduate School (Master's & Ph.D.)</li>
+                            <li>Senior High School (branch)</li>
+                        </ul>
+                        
+                        <div class="highlights">
+                            <h4>Campus Highlights:</h4>
+                            <ul>
+                                <li>Collegiate academic atmosphere</li>
+                                <li>Advanced degree programs</li>
+                                <li>Well-connected to city routes</li>
+                                <li>Diverse academic offerings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="campus-card">
+                    <div class="campus-header">
+                        <h3>3. Main Campus</h3>
+                        <p>Administration & Medical Sciences</p>
+                    </div>
+                    <div class="campus-content">
+                        <p><strong>Location:</strong> Father Selga Street, near Davao's largest public market</p>
+                        
+                        <h4>Colleges & Facilities:</h4>
+                        <ul class="department-list">
+                            <li>College of Computer Studies</li>
+                            <li>College of Human Environmental Science</li>
+                            <li>College of Medical and Biological Sciences</li>
+                            <li>College of Music</li>
+                            <li>College of Nursing</li>
+                            <li>College of Pharmacy and Chemistry</li>
+                        </ul>
+                        
+                        <div class="highlights">
+                            <h4>Campus Highlights:</h4>
+                            <ul>
+                                <li>Administrative headquarters</li>
+                                <li>UIC Hotel and Guest House</li>
+                                <li>Medical and science programs hub</li>
+                                <li>Near public market for local experience</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contacts -->
+        <div id="emergency" class="content-section">
+            <div class="section-header">
+                <h2>Emergency Contacts</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="emergency-grid">
+                <div class="emergency-card">
+                    <h3>Emergency Services</h3>
+                    <div class="emergency-number">911</div>
+                    <p>General Emergency</p>
+                </div>
+                <div class="emergency-card">
+                    <h3>Davao Emergency</h3>
+                    <div class="emergency-number">082-296-9626</div>
+                    <p>Local Emergency Services</p>
+                </div>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4>Director of Internationalization</h4>
+                    <div class="contact-info">
+                        <p><strong>Sir Rene Babiera</strong></p>
+                        <p>📱 +63 921 444 7878</p>
+                        <p>Primary contact for international visitors and program-related inquiries</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h4>Internationalization Coordinator</h4>
+                    <div class="contact-info">
+                        <p><strong>Sir Charles</strong></p>
+                        <p>📱 +63 975 061 9605</p>
+                        <p>Coordination and assistance for international programs</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h4>Global Leaders Club</h4>
+                    <div class="contact-info">
+                        <p><strong>Mr. Oliver (President)</strong></p>
+                        <p>📱 +63 945 354 3153</p>
+                        <p>Student organization support and cultural activities</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h4>UIC Hotel Reception</h4>
+                    <div class="contact-info">
+                        <p><strong>24/7 Available</strong></p>
+                        <p>📞 Landline: +63 XXX XXX XXXX</p>
+                        <p>📱 Mobile: +63 XXXX XXX XXX</p>
+                        <p>Accommodation concerns and emergencies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accommodation -->
+        <div id="accommodation" class="content-section">
+            <div class="section-header">
+                <h2>Accommodation</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="accommodation-grid">
+                <div class="accommodation-card">
+                    <div class="accommodation-header">
+                        <h3>UIC Hotel</h3>
+                        <p>Premium Accommodation</p>
+                    </div>
+                    <div class="accommodation-content">
+                        <ul class="feature-list">
+                            <li>Modern rooms with amenities</li>
+                            <li>24/7
