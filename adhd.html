@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADHD Symptom Checker & Education</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #f1f5f9;
+      --accent: #38bdf8;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --card-bg: #fff;
+      --shadow: 0 4px 24px rgba(37,99,235,0.08);
+      --radius: 18px;
+      --font: 'Segoe UI', 'Inter', Arial, sans-serif;
+    }
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+      min-height: 100vh;
+      color: #222;
+    }
+    header {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    header h1 { margin: 0; font-size: 2.3rem; font-weight: 700; }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      background: var(--secondary);
+      padding: 1rem 0;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+    }
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: border 0.2s;
+    }
+    nav a.active, nav a:focus {
+      border-bottom: 2.5px solid var(--accent);
+    }
+    .container {
+      max-width: 700px;
+      margin: 2.5rem auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem 2rem;
+    }
+    .toggle-group {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+    .toggle-group label {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      color: var(--primary);
+    }
+    .toggle-group select {
+      font-size: 1rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #e0e7ff;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.3s;
+    }
+    .question-card {
+      background: var(--secondary);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+      padding: 1.2rem 1rem 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .question-label {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tooltip {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      color: var(--accent);
+      font-size: 1.1em;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 220px;
+      background: #222;
+      color: #fff;
+      text-align: left;
+      border-radius: 8px;
+      padding: 0.7em 1em;
+      position: absolute;
+      z-index: 1;
+      bottom: 120%;
+      left: 50%;
+      margin-left: -110px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 0.95em;
+    }
+    .tooltip:hover .tooltiptext, .tooltip:focus .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    .options {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .options label {
+      font-size: 1rem;
+      font-weight: 400;
+      cursor: pointer;
+      color: #333;
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid #cbd5e1;
+      transition: background 0.2s, border 0.2s;
+    }
+    .options input[type=radio]:checked + label {
+      background: var(--accent);
+      color: #fff;
+      border: 1.5px solid var(--primary);
+    }
+    .checker-btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .checker-btns button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.7em 1.7em;
+      border-radius: 7px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .checker-btns button:disabled {
+      background: #b0c4de;
+      cursor: not-allowed;
+    }
+    .result-card {
+      background: #f8fafc;
+      border-left: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 1.5rem 1.2rem;
+      margin-top: 2rem;
+      font-size: 1.15rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+    }
+    .result-card .severity {
+      font-weight: 700;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    .result-card .advice {
+      margin-top: 1em;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .disclaimer {
+      background: #fffbe7;
+      color: #b45309;
+      border-left: 5px solid #fbbf24;
+      border-radius: 10px;
+      padding: 1.2em 1em;
+      margin-top: 2em;
+      font-size: 1em;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 1em; }
+      nav { flex-direction: column; gap: 1em; }
+      .question-card { padding: 1em 0.5em 1em 1em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ADHD Symptom Checker & Education</h1>
+  </header>
+  <nav>
+    <a href="#checker" id="nav-checker" class="active">Symptom Checker</a>
+    <a href="#education" id="nav-education">Education</a>
+    <a href="#prevention" id="nav-prevention">Prevention & Help</a>
+  </nav>
+  <div class="container">
+    <div class="toggle-group">
+      <label for="age-group">For:</label>
+      <select id="age-group">
+        <option value="adult">Adult (18+)</option>
+        <option value="child">Child/Teen (6-17)</option>
+      </select>
+    </div>
+    <!-- Symptom Checker Page -->
+    <section id="checker-section">
+      <form id="adhd-form">
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div id="question-list"></div>
+        <div class="checker-btns">
+          <button type="button" id="prev-btn" disabled>Previous</button>
+          <button type="button" id="next-btn">Next</button>
+          <button type="submit" id="submit-btn" style="display:none;">See Results</button>
+        </div>
+      </form>
+      <div class="result-card" id="result" style="display:none;"></div>
+      <div class="disclaimer">
+        <b>Disclaimer:</b> This tool is for educational purposes only and is not a diagnosis. Please consult a healthcare professional for a full evaluation.
+      </div>
+    </section>
+    <!-- Education Page -->
+    <section id="education-section" style="display:none;">
+      <h2>What is ADHD?</h2>
+      <p>ADHD (Attention-Deficit/Hyperactivity Disorder) is a neurodevelopmental disorder that affects both children and adults. It is characterized by patterns of inattention, hyperactivity, and impulsivity that interfere with functioning or development. ADHD can present as predominantly inattentive, predominantly hyperactive-impulsive, or combined type.</p>
+      <h3>Symptoms</h3>
+      <ul>
+        <li><b>Inattentive:</b> Trouble focusing, forgetfulness, disorganization, losing things, distractibility.</li>
+        <li><b>Hyperactive-Impulsive:</b> Fidgeting, restlessness, excessive talking, interrupting, difficulty waiting.</li>
+      </ul>
+      <h3>Levels of Severity</h3>
+      <ul>
+        <li><b>Mild:</b> Few symptoms, minor impairment.</li>
+        <li><b>Moderate:</b> Symptoms or impairment between mild and severe.</li>
+        <li><b>Severe:</b> Many symptoms, significant impairment in social, school, or work settings.</li>
+      </ul>
+      <h3>Diagnosis</h3>
+      <p>Diagnosis is made by a healthcare professional using clinical interviews, rating scales, and information from multiple sources (e.g., family, teachers). Self-screeners like this one can help identify if further evaluation is needed.</p>
+    </section>
+    <!-- Prevention/Help Page -->
+    <section id="prevention-section" style="display:none;">
+      <h2>Prevention & How to Help</h2>
+      <ul>
+        <li>Maintain a regular routine and structure.</li>
+        <li>Break tasks into smaller, manageable steps.</li>
+        <li>Use reminders and organizational tools.</li>
+        <li>Encourage physical activity and healthy sleep habits.</li>
+        <li>Seek professional help if symptoms interfere with daily life.</li>
+        <li>Support from family, teachers, and friends is important.</li>
+        <li>Consider behavioral therapy, coaching, and, if appropriate, medication.</li>
+      </ul>
+      <p>If you or someone you know may have ADHD, consult a healthcare professional for a full evaluation and guidance.</p>
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://chadd.org/for-parents/overview/" target="_blank">CHADD (Children and Adults with ADHD)</a></li>
+        <li><a href="https://www.cdc.gov/ncbddd/adhd/" target="_blank">CDC ADHD Information</a></li>
+        <li><a href="https://www.additudemag.com/" target="_blank">ADDitude Magazine</a></li>
+      </ul>
+    </section>
+  </div>
+  <script>
+    // --- Navigation logic ---
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = {
+      'checker': document.getElementById('checker-section'),
+      'education': document.getElementById('education-section'),
+      'prevention': document.getElementById('prevention-section')
+    };
+    function showSection(section) {
+      for (const key in sections) {
+        sections[key].style.display = (key === section) ? '' : 'none';
+        document.getElementById('nav-' + key).classList.toggle('active', key === section);
+      }
+    }
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const section = this.getAttribute('href').replace('#', '');
+        showSection(section);
+      });
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (sections[hash]) showSection(hash);
+    });
+
+    // --- ADHD Questions (ASRS v1.1/DSM-5 inspired) ---
+    const questions = {
+      adult: [
+        { text: "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?", tip: "Difficulty finishing tasks is a common sign of inattention." },
+        { text: "How often do you have difficulty getting things in order when you have to do a task that requires organization?", tip: "Organization problems are a hallmark of ADHD." },
+        { text: "How often do you have problems remembering appointments or obligations?", tip: "Forgetfulness is a frequent symptom." },
+        { text: "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?", tip: "Procrastination and avoidance are common." },
+        { text: "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?", tip: "Restlessness and fidgeting are signs of hyperactivity." },
+        { text: "How often do you feel overly active and compelled to do things, like you were driven by a motor?", tip: "Feeling 'driven' is a classic ADHD symptom." },
+        { text: "How often do you make careless mistakes when you have to work on a boring or difficult project?", tip: "Careless mistakes are a sign of inattention." },
+        { text: "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?", tip: "Sustaining attention is often hard for people with ADHD." },
+        { text: "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?", tip: "Listening and focus can be impaired." },
+        { text: "How often do you misplace or have difficulty finding things at home or at work?", tip: "Losing things is a common symptom." },
+        { text: "How often are you distracted by activity or noise around you?", tip: "Easily distracted by environment." },
+        { text: "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?", tip: "Impulsivity and restlessness." },
+        { text: "How often do you feel restless or fidgety?", tip: "Physical restlessness is a core symptom." },
+        { text: "How often do you have difficulty unwinding and relaxing when you have time to yourself?", tip: "Difficulty relaxing is common." },
+        { text: "How often do you find yourself talking too much when you are in social situations?", tip: "Excessive talking is a hyperactive symptom." },
+        { text: "When you’re in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?", tip: "Impulsivity in conversation." },
+        { text: "How often do you have difficulty waiting your turn in situations when turn taking is required?", tip: "Impatience and impulsivity." },
+        { text: "How often do you interrupt others when they are busy?", tip: "Interrupting is a sign of impulsivity." }
+      ],
+      child: [
+        { text: "How often does your child have trouble sustaining attention in tasks or play activities?", tip: "Difficulty focusing is a key sign." },
+        { text: "How often does your child make careless mistakes in schoolwork or other activities?", tip: "Careless mistakes are common in ADHD." },
+        { text: "How often does your child not seem to listen when spoken to directly?", tip: "Appearing not to listen is a symptom." },
+        { text: "How often does your child not follow through on instructions and fail to finish schoolwork or chores?", tip: "Incomplete tasks are a sign." },
+        { text: "How often does your child have difficulty organizing tasks and activities?", tip: "Disorganization is common." },
+        { text: "How often does your child lose things necessary for tasks or activities?", tip: "Losing things is a symptom." },
+        { text: "How often is your child easily distracted by extraneous stimuli?", tip: "Easily distracted by environment." },
+        { text: "How often does your child fidget with hands or feet or squirm in seat?", tip: "Fidgeting is a hyperactive symptom." },
+        { text: "How often does your child leave seat in situations when remaining seated is expected?", tip: "Restlessness and impulsivity." },
+        { text: "How often does your child run about or climb excessively in situations where it is inappropriate?", tip: "Hyperactivity symptom." },
+        { text: "How often does your child have difficulty playing or engaging in leisure activities quietly?", tip: "Difficulty with quiet play." },
+        { text: "How often does your child talk excessively?", tip: "Excessive talking is a symptom." },
+        { text: "How often does your child blurt out answers before questions have been completed?", tip: "Impulsivity in conversation." },
+        { text: "How often does your child have difficulty waiting their turn?", tip: "Impatience and impulsivity." },
+        { text: "How often does your child interrupt or intrude on others?", tip: "Interrupting is a sign of impulsivity." }
+      ]
+    };
+    const options = [
+      { label: "Never", value: 0 },
+      { label: "Rarely", value: 1 },
+      { label: "Sometimes", value: 2 },
+      { label: "Often", value: 3 },
+      { label: "Very Often", value: 4 }
+    ];
+    // --- State ---
+    let currentQ = 0;
+    let answers = [];
+    let ageGroup = 'adult';
+    const ageGroupSelect = document.getElementById('age-group');
+    ageGroupSelect.addEventListener('change', () => {
+      ageGroup = ageGroupSelect.value;
+      resetChecker();
+    });
+    // --- Render Question ---
+    function renderQuestion() {
+      const qList = document.getElementById('question-list');
+      qList.innerHTML = '';
+      const q = questions[ageGroup][currentQ];
+      const card = document.createElement('div');
+      card.className = 'question-card';
+      // Label with tooltip
+      const label = document.createElement('div');
+      label.className = 'question-label';
+      label.innerHTML = `${currentQ+1}. ${q.text} <span class="tooltip" tabindex="0">&#9432;<span class="tooltiptext">${q.tip}</span></span>`;
+      card.appendChild(label);
+      // Options
+      const opts = document.createElement('div');
+      opts.className = 'options';
+      options.forEach((opt, i) => {
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'q'+currentQ;
+        radio.id = 'q'+currentQ+'_'+i;
+        radio.value = opt.value;
+        radio.checked = (answers[currentQ] == opt.value);
+        radio.style.display = 'none';
+        radio.addEventListener('change', () => {
+          answers[currentQ] = opt.value;
+          updateBtns();
+        });
+        const lbl = document.createElement('label');
+        lbl.htmlFor = radio.id;
+        lbl.innerText = opt.label;
+        opts.appendChild(radio);
+        opts.appendChild(lbl);
+      });
+      card.appendChild(opts);
+      qList.appendChild(card);
+      // Progress
+      const progress = document.getElementById('progress');
+      progress.style.width = `${((currentQ+1)/questions[ageGroup].length)*100}%`;
+      updateBtns();
+    }
+    function updateBtns() {
+      document.getElementById('prev-btn').disabled = currentQ === 0;
+      document.getElementById('next-btn').style.display = (currentQ < questions[ageGroup].length-1) ? '' : 'none';
+      document.getElementById('submit-btn').style.display = (currentQ === questions[ageGroup].length-1) ? '' : 'none';
+      // Disable next if not answered
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.disabled = (answers[currentQ] === undefined);
+      document.getElementById('submit-btn').disabled = (answers[currentQ] === undefined);
+    }
+    document.getElementById('prev-btn').onclick = () => {
+      if (currentQ > 0) {
+        currentQ--;
+        renderQuestion();
+      }
+    };
+    document.getElementById('next-btn').onclick = () => {
+      if (answers[currentQ] !== undefined && currentQ < questions[ageGroup].length-1) {
+        currentQ++;
+        renderQuestion();
+      }
+    };
+    function resetChecker() {
+      currentQ = 0;
+      answers = [];
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('adhd-form').style.display = '';
+      renderQuestion();
+    }
+    // --- Scoring & Result ---
+    document.getElementById('adhd-form').onsubmit = function(e) {
+      e.preventDefault();
+      // Sum scores
+      const total = answers.reduce((a,b) => a+parseInt(b), 0);
+      let severity = '', advice = '', type = '';
+      // Adult: 18 questions, Child: 15 questions
+      const max = questions[ageGroup].length * 4;
+      // Thresholds based on ASRS/DSM-5 guidance
+      if (ageGroup === 'adult') {
+        if (total >= 32) { severity = 'Severe'; advice = 'Your symptoms are highly consistent with ADHD. Please consult a healthcare professional for a full evaluation.'; }
+        else if (total >= 24) { severity = 'Moderate'; advice = 'Your symptoms are moderately consistent with ADHD. Consider seeking professional advice.'; }
+        else if (total >= 14) { severity = 'Mild'; advice = 'Some symptoms of ADHD are present. If these impact your life, consider talking to a professional.'; }
+        else { severity = 'Low'; advice = 'Your symptoms are not consistent with ADHD. If you have concerns, consult a professional.'; }
+      } else {
+        if (total >= 40) { severity = 'Severe'; advice = 'Symptoms are highly consistent with ADHD. Please consult a healthcare professional for a full evaluation.'; }
+        else if (total >= 30) { severity = 'Moderate'; advice = 'Symptoms are moderately consistent with ADHD. Consider seeking professional advice.'; }
+        else if (total >= 18) { severity = 'Mild'; advice = 'Some symptoms of ADHD are present. If these impact your child, consider talking to a professional.'; }
+        else { severity = 'Low'; advice = 'Symptoms are not consistent with ADHD. If you have concerns, consult a professional.'; }
+      }
+      // Type (simple logic)
+      const inattentive = answers.slice(0, Math.floor(answers.length/2)).reduce((a,b)=>a+parseInt(b),0);
+      const hyperactive = answers.slice(Math.floor(answers.length/2)).reduce((a,b)=>a+parseInt(b),0);
+      if (inattentive >= hyperactive+3) type = 'Predominantly Inattentive';
+      else if (hyperactive >= inattentive+3) type = 'Predominantly Hyperactive-Impulsive';
+      else type = 'Combined Type';
+      // Show result
+      const result = document.getElementById('result');
+      result.innerHTML = `<div class='severity'>${severity} ADHD Symptoms (${total}/${max})</div>
+        <div><b>Type:</b> ${type}</div>
+        <div class='advice'>${advice}</div>
+        <div style='margin-top:1em;font-size:0.95em;color:#666;'>This result is not a diagnosis. Only a qualified professional can diagnose ADHD.</div>
+        <button onclick="window.print()" style="margin-top:1.5em;background:var(--accent);color:#fff;border:none;padding:0.6em 1.5em;border-radius:6px;cursor:pointer;">Print/Save Result</button>`;
+      result.style.display = '';
+      document.getElementById('adhd-form').style.display = 'none';
+    };
+    // --- Initial render ---
+    resetChecker();
+  </script>
+</body>
+</html> 
