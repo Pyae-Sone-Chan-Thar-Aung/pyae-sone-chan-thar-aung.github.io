@@ -1,0 +1,990 @@
+<!--
+Pharmacy Career Advisor - Single-file Web App
+Place this file (index.html) at the root of a GitHub repo and enable GitHub Pages (branch: main / docs/) to host as https://<username>.github.io/<repo>/
+
+What this contains:
+- A responsive, accessible UI to collect inputs from pharmacy students/enthusiasts
+- A lightweight in-browser K-Nearest Neighbors classifier (KNN) with a small synthetic dataset
+- Explainable output: predicted career(s), confidence, nearest neighbors, suggested next steps
+- Downloadable report (JSON)
+
+How to customize:
+- Edit the `sampleData` array below to add/replace real examples
+- Adjust the `featureWeights` and `K_VALUE` constants to tune behaviour
+- To use a trained ML model instead, replace the prediction function with TensorFlow.js model loading
+
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pharmacy Career Advisor — ML-driven Career Match</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #3B82F6;
+      --primary-dark: #2563EB;
+      --secondary: #10B981;
+      --accent: #8B5CF6;
+      --surface: #FFFFFF;
+      --background: #F8FAFC;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    html,
+    body {
+
+      height: 100%;
+      background: linear-gradient(105deg, #fedafb 0%, #ffffff 100%);
+      background-attachment: fixed;
+    }
+
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .chip:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .chip input[type="checkbox"] {
+      width: 1rem;
+      height: 1rem;
+      accent-color: var(--primary);
+      margin: 0;
+    }
+
+    .chip:has(input:checked) {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .modern-select {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border: 2px solid rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+    }
+
+    .modern-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .slider-container {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      padding: 1.25rem;
+      border-radius: 16px;
+      border: 2px solid rgba(59, 130, 246, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .slider-container:hover {
+      border-color: rgba(59, 130, 246, 0.2);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    }
+
+    input[type=range] {
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%);
+      border-radius: 50px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .career-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+      border: 2px solid rgba(59, 130, 246, 0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .career-card:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border: none;
+      padding: 0.875rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      color: #475569;
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      padding: 0.875rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
+      color: white;
+      border: none;
+      padding: 0.875rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      cursor: pointer;
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .floating-shapes::before,
+    .floating-shapes::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .floating-shapes::before {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      right: -150px;
+      animation-delay: -10s;
+    }
+
+    .floating-shapes::after {
+      width: 200px;
+      height: 200px;
+      bottom: -100px;
+      left: -100px;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      33% {
+        transform: translateY(-20px) rotate(120deg);
+      }
+
+      66% {
+        transform: translateY(20px) rotate(240deg);
+      }
+    }
+
+    .result-summary {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-summary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+    }
+
+    .neighbor-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .neighbor-card:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    }
+
+    .explanation-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      border-radius: 16px;
+      position: relative;
+    }
+
+    .explanation-card::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 15px;
+      font-size: 1.5rem;
+      background: white;
+      padding: 0 0.5rem;
+    }
+  </style>
+</head>
+
+<body class="text-slate-800 antialiased min-h-screen relative">
+  <div class="floating-shapes"></div>
+
+  <div class="max-w-7xl mx-auto p-6 relative z-10">
+    <header class="mb-8">
+      <h1 class="text-5xl font-extrabold hero-gradient mb-4">Pharmacy Career Advisor</h1>
+      <p class="text-slate-700 text-lg max-w-">
+        Discover your perfect pharmacy career path with our AI-powered matching system. Get personalized recommendations
+        based on your interests, skills, and preferences.
+      </p>
+    </header>
+
+    <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left: Form -->
+      <section class="lg:col-span-2 glass-card p-8 rounded-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div
+            class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+            1</div>
+          <h2 class="text-2xl font-bold">Tell us about yourself</h2>
+        </div>
+
+        <form id="inputForm" class="space-y-8">
+          <div>
+            <label class="block font-semibold text-lg mb-4 text-slate-700">What areas interest you most? 🎯</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <label class="chip"><input type="checkbox" name="interest" value="lab"> <span>Lab/Bench
+                  Work</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="patient"> <span>Patient
+                  Counseling</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="manufacturing">
+                <span>Manufacturing</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="regulatory"> <span>Regulatory /
+                  QA</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="research"> <span>Research &
+                  R&D</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="sales"> <span>Medical
+                  Affairs</span></label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-lg mb-4 text-slate-700">Preferred work environment 🏢</label>
+            <select id="env" class="modern-select w-full">
+              <option value="pharma_company">Pharmaceutical Company / Industry</option>
+              <option value="hospital">Hospital / Clinical Setting</option>
+              <option value="community">Community / Retail Pharmacy</option>
+              <option value="research_lab">Research Laboratory / University</option>
+              <option value="regulatory_agency">Regulatory Agency / QA Office</option>
+              <option value="sales_office">Sales / Medical Affairs Office</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="slider-container">
+              <label class="block font-semibold mb-3 text-slate-700">Management Skills 👥</label>
+              <input id="management" type="range" min="0" max="10" value="4">
+              <div class="flex justify-between text-sm text-slate-500 mt-2">
+                <span>Beginner</span>
+                <span>Expert</span>
+              </div>
+            </div>
+            <div class="slider-container">
+              <label class="block font-semibold mb-3 text-slate-700">Tech/Coding Skills 💻</label>
+              <input id="coding" type="range" min="0" max="10" value="2">
+              <div class="flex justify-between text-sm text-slate-500 mt-2">
+                <span>None</span>
+                <span>Advanced</span>
+              </div>
+            </div>
+            <div class="slider-container">
+              <label class="block font-semibold mb-3 text-slate-700">Salary Priority 💰</label>
+              <input id="salary" type="range" min="0" max="10" value="6">
+              <div class="flex justify-between text-sm text-slate-500 mt-2">
+                <span>Low</span>
+                <span>High</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-lg mb-4 text-slate-700">Work style preferences ⚡</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <label class="chip"><input type="checkbox" name="workstyle" value="office"> <span>Office
+                  Work</span></label>
+              <label class="chip"><input type="checkbox" name="workstyle" value="shifts"> <span>Shift
+                  Work</span></label>
+              <label class="chip"><input type="checkbox" name="workstyle" value="field"> <span>Field Work</span></label>
+              <label class="chip"><input type="checkbox" name="workstyle" value="lab"> <span>Lab-based</span></label>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-4">
+            <button type="button" id="analyzeBtn" class="btn-primary flex items-center gap-2">
+              <span>🚀</span>
+              Analyze & Predict
+            </button>
+            <button type="button" id="clearBtn" class="btn-secondary">
+              Clear Form
+            </button>
+            <button type="button" id="downloadBtn" class="btn-success ml-auto flex items-center gap-2">
+              <span>🖨️</span>
+              Print Report
+            </button>
+          </div>
+        </form>
+
+        <section class="mt-8 explanation-card p-6" id="explainSection">
+          <h3 class="text-xl font-bold mb-3 text-slate-700">How our AI works</h3>
+          <p class="text-slate-600 leading-relaxed">
+            Your responses are converted into a feature vector and compared against career archetypes using a K-Nearest
+            Neighbors algorithm.
+            The system identifies the most similar career profiles and provides confidence scores based on feature
+            matching and weighted distances.
+          </p>
+        </section>
+      </section>
+
+      <!-- Right: Results -->
+      <aside class="glass-card p-8 rounded-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div
+            class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+            2</div>
+          <h2 class="text-2xl font-bold">Your Results</h2>
+        </div>
+
+        <div id="resultArea" class="space-y-6">
+          <div id="summary" class="result-summary p-6">
+            <div class="text-center py-8">
+              <div class="text-6xl mb-4">🎯</div>
+              <p class="text-slate-500 text-lg">Ready to discover your path?</p>
+              <p class="text-slate-400 text-sm mt-2">Complete the form and click <strong>Analyze & Predict</strong></p>
+            </div>
+          </div>
+
+          <div id="topCareers" class="space-y-4"></div>
+
+          <div id="nearestNeighbors" class="space-y-3"></div>
+
+          <div id="recommendations" class="space-y-3"></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="mt-12 text-center text-slate-600 bg-white/20 backdrop-blur-sm rounded-2xl p-6">
+      <p class="text-sm leading-relaxed">
+        <strong>Disclaimer:</strong> This tool is designed to assist you in exploring potential career paths.
+        It is intended for informational and educational purposes only and should not replace professional career
+        counseling.
+      </p>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    /********** Configuration & Synthetic dataset (editable) **********/
+    const CAREERS = [
+      'Industry - Manufacturing',
+      'Clinical / Hospital Pharmacist',
+      'Community / Retail Pharmacist',
+      'Regulatory Affairs / QA',
+      'Research & Development Scientist',
+      'Medical Science Liaison / Sales'
+    ];
+
+
+    // Feature ordering: [lab, patient, manufacturing, regulatory, research, sales, office, shifts, management, coding]
+    const FEATURE_NAMES = ['lab', 'patient', 'manufacturing', 'regulatory', 'research', 'sales', 'office', 'shifts', 'management', 'coding'];
+
+    // Small synthetic dataset: each item has `features` (10 numbers 0..1) and a `label` index into CAREERS
+    const sampleData = [
+      // Industry - Manufacturing (6 examples)
+      { features: [0.8, 0.1, 0.95, 0.6, 0.25, 0.05, 0.8, 0.1, 0.45, 0.25], label: 0 },
+      { features: [0.7, 0.15, 0.9, 0.5, 0.2, 0.05, 0.9, 0.05, 0.5, 0.3], label: 0 },
+      { features: [0.6, 0.05, 0.85, 0.65, 0.3, 0.02, 0.7, 0.1, 0.6, 0.2], label: 0 },
+      { features: [0.7, 0.2, 0.9, 0.4, 0.35, 0.1, 0.85, 0.05, 0.4, 0.35], label: 0 },
+      { features: [0.85, 0.1, 0.95, 0.7, 0.2, 0.03, 0.9, 0.05, 0.55, 0.15], label: 0 },
+      { features: [0.75, 0.12, 0.88, 0.55, 0.25, 0.06, 0.8, 0.08, 0.5, 0.28], label: 0 },
+
+      // Clinical / Hospital Pharmacist (6 examples)
+      { features: [0.2, 0.95, 0.05, 0.2, 0.4, 0.05, 0.3, 0.85, 0.25, 0.08], label: 1 },
+      { features: [0.25, 0.9, 0.05, 0.15, 0.3, 0.03, 0.3, 0.9, 0.3, 0.1], label: 1 },
+      { features: [0.15, 0.88, 0.02, 0.2, 0.45, 0.02, 0.25, 0.8, 0.2, 0.05], label: 1 },
+      { features: [0.22, 0.9, 0.1, 0.18, 0.35, 0.04, 0.4, 0.8, 0.35, 0.12], label: 1 },
+      { features: [0.18, 0.92, 0.05, 0.25, 0.4, 0.02, 0.28, 0.88, 0.28, 0.07], label: 1 },
+      { features: [0.2, 0.87, 0.03, 0.18, 0.33, 0.04, 0.35, 0.82, 0.22, 0.09], label: 1 },
+
+      // Community / Retail Pharmacist (6 examples)
+      { features: [0.08, 0.9, 0.05, 0.2, 0.12, 0.55, 0.45, 0.75, 0.6, 0.08], label: 2 },
+      { features: [0.1, 0.92, 0.02, 0.18, 0.15, 0.6, 0.5, 0.7, 0.65, 0.05], label: 2 },
+      { features: [0.05, 0.88, 0.03, 0.2, 0.1, 0.5, 0.4, 0.78, 0.55, 0.06], label: 2 },
+      { features: [0.12, 0.94, 0.01, 0.15, 0.08, 0.62, 0.48, 0.72, 0.7, 0.04], label: 2 },
+      { features: [0.07, 0.89, 0.02, 0.1, 0.11, 0.58, 0.42, 0.8, 0.6, 0.06], label: 2 },
+      { features: [0.09, 0.91, 0.02, 0.17, 0.09, 0.56, 0.46, 0.74, 0.63, 0.05], label: 2 },
+
+      // Regulatory / QA (6 examples)
+      { features: [0.25, 0.1, 0.5, 0.95, 0.3, 0.02, 0.95, 0.05, 0.45, 0.2], label: 3 },
+      { features: [0.2, 0.05, 0.45, 0.9, 0.25, 0.01, 0.9, 0.05, 0.55, 0.15], label: 3 },
+      { features: [0.18, 0.08, 0.45, 0.92, 0.28, 0.02, 0.92, 0.08, 0.5, 0.18], label: 3 },
+      { features: [0.3, 0.12, 0.5, 0.88, 0.35, 0.03, 0.88, 0.06, 0.6, 0.12], label: 3 },
+      { features: [0.22, 0.1, 0.55, 0.9, 0.3, 0.02, 0.9, 0.05, 0.48, 0.16], label: 3 },
+      { features: [0.2, 0.05, 0.5, 0.93, 0.22, 0.01, 0.94, 0.04, 0.52, 0.14], label: 3 },
+
+      // Research & Development (6 examples)
+      { features: [0.95, 0.05, 0.4, 0.25, 0.95, 0.01, 0.6, 0.05, 0.25, 0.7], label: 4 },
+      { features: [0.9, 0.02, 0.35, 0.2, 0.9, 0.02, 0.55, 0.02, 0.2, 0.8], label: 4 },
+      { features: [0.92, 0.03, 0.4, 0.18, 0.93, 0.01, 0.65, 0.03, 0.22, 0.75], label: 4 },
+      { features: [0.88, 0.04, 0.38, 0.22, 0.9, 0.02, 0.6, 0.05, 0.3, 0.68], label: 4 },
+      { features: [0.94, 0.01, 0.36, 0.15, 0.96, 0.01, 0.58, 0.02, 0.18, 0.82], label: 4 },
+      { features: [0.9, 0.05, 0.4, 0.2, 0.88, 0.02, 0.6, 0.04, 0.28, 0.7], label: 4 },
+
+      // MSL / Sales (6 examples)
+      { features: [0.15, 0.45, 0.05, 0.2, 0.35, 0.95, 0.85, 0.1, 0.6, 0.15], label: 5 },
+      { features: [0.18, 0.4, 0.02, 0.15, 0.3, 0.9, 0.8, 0.1, 0.55, 0.12], label: 5 },
+      { features: [0.12, 0.5, 0.03, 0.18, 0.32, 0.92, 0.82, 0.08, 0.62, 0.1], label: 5 },
+      { features: [0.2, 0.38, 0.04, 0.22, 0.28, 0.88, 0.78, 0.12, 0.6, 0.1], label: 5 },
+      { features: [0.15, 0.42, 0.03, 0.2, 0.3, 0.9, 0.8, 0.09, 0.58, 0.14], label: 5 },
+      { features: [0.14, 0.46, 0.02, 0.18, 0.34, 0.93, 0.83, 0.07, 0.59, 0.13], label: 5 }
+    ];
+
+    // Feature importance weights (tune these to emphasize or de-emphasize features)
+    const featureWeights = [1.4, 1.6, 1.3, 1.5, 1.6, 1.2, 1.0, 1.1, 1.1, 1.0];
+    const K_VALUE = 5; // default k for KNN
+
+    /********** Utility functions **********/
+    function normalizeFeatureArray(arr) {
+      // dataset uses 0..1 scale; ensure values in 0..1
+      return arr.map(v => Math.max(0, Math.min(1, v)));
+    }
+
+    function weightedDistance(a, b) {
+      let s = 0;
+      for (let i = 0; i < a.length; i++) {
+        const d = a[i] - b[i];
+        s += featureWeights[i] * d * d;
+      }
+      return Math.sqrt(s);
+    }
+
+    // KNN prediction: returns sorted list of {label,score,neighbors}
+    function knnPredict(features, k = K_VALUE) {
+      features = normalizeFeatureArray(features);
+      const distances = sampleData.map((row, idx) => ({ idx, label: row.label, distance: weightedDistance(features, row.features), features: row.features }));
+      distances.sort((a, b) => a.distance - b.distance);
+      const neighbors = distances.slice(0, k);
+      // Weighted voting: weight = 1/(distance+eps)
+      const eps = 1e-6;
+      const vote = {};
+      neighbors.forEach(n => {
+        const w = 1 / (n.distance + eps);
+        vote[n.label] = (vote[n.label] || 0) + w;
+      });
+      // normalize to probabilities
+      const total = Object.values(vote).reduce((a, b) => a + b, 0);
+      const probs = Object.entries(vote).map(([lab, val]) => ({ label: parseInt(lab), score: val / total }));
+      probs.sort((a, b) => b.score - a.score);
+      return { probs, neighbors };
+    }
+
+    /********** Encoding user input -> features **********/
+    function encodeFormToFeatures() {
+      // read interests
+      const interests = Array.from(document.querySelectorAll('input[name="interest"]:checked')).map(el => el.value);
+      const workstyles = Array.from(document.querySelectorAll('input[name="workstyle"]:checked')).map(el => el.value);
+      const env = document.getElementById('env').value;
+      const management = parseInt(document.getElementById('management').value) / 10; // 0..1
+      const coding = parseInt(document.getElementById('coding').value) / 10;
+      const salary = parseInt(document.getElementById('salary').value) / 10;
+
+      // initialize features
+      const f = { lab: 0, patient: 0, manufacturing: 0, regulatory: 0, research: 0, sales: 0, office: 0, shifts: 0, management: 0, coding: 0 };
+
+      // map interests
+      interests.forEach(i => { if (i in f) f[i] = Math.max(f[i], 0.9); });
+
+      // map environment
+      if (env === 'pharma_company') { f.office = Math.max(f.office, 0.8); f.manufacturing = Math.max(f.manufacturing, 0.6); }
+      if (env === 'hospital') { f.patient = Math.max(f.patient, 0.9); f.shifts = Math.max(f.shifts, 0.8); }
+      if (env === 'community') { f.patient = Math.max(f.patient, 0.95); f.shifts = Math.max(f.shifts, 0.7); f.management = Math.max(f.management, 0.6); }
+      if (env === 'research_lab') { f.lab = Math.max(f.lab, 0.95); f.research = Math.max(f.research, 0.9); }
+      if (env === 'regulatory_agency') { f.regulatory = Math.max(f.regulatory, 0.95); f.office = Math.max(f.office, 0.9); }
+      if (env === 'sales_office') { f.sales = Math.max(f.sales, 0.9); f.office = Math.max(f.office, 0.8); f.management = Math.max(f.management, 0.6); }
+
+      // map workstyles
+      if (workstyles.includes('office')) f.office = Math.max(f.office, 0.8);
+      if (workstyles.includes('shifts')) f.shifts = Math.max(f.shifts, 0.8);
+      if (workstyles.includes('field')) { f.sales = Math.max(f.sales, 0.7); f.office = Math.max(f.office, 0.6); }
+      if (workstyles.includes('lab')) { f.lab = Math.max(f.lab, 0.9); f.research = Math.max(f.research, 0.7); }
+
+      // management / coding / salary
+      f.management = Math.max(f.management, management);
+      f.coding = Math.max(f.coding, coding);
+
+      // adjust a bit based on salary priority (salary preference nudges toward industry/sales/research)
+      if (salary >= 0.7) { f.manufacturing = Math.min(1, f.manufacturing + 0.12); f.sales = Math.min(1, f.sales + 0.12); f.research = Math.min(1, f.research + 0.08); }
+
+      // scale to 0..1
+      const vec = FEATURE_NAMES.map(k => Math.max(0, Math.min(1, f[k] || 0)));
+      return vec;
+    }
+
+    /********** Mapping career -> suggestions **********/
+    const CAREER_SUGGESTIONS = {
+      'Industry - Manufacturing': {
+        quick: ['Quality systems (GMP)', 'Process validation', 'Scale-up & batch production', 'Quality control analytics'],
+        nextRoles: ['Production Pharmacist', 'Formulation Scientist', 'Process Development'],
+      },
+      'Clinical / Hospital Pharmacist': {
+        quick: ['Clinical rotations', 'Medication therapy management', 'Hospital workflow & rounds', 'ACLS/BLS training'],
+        nextRoles: ['Clinical Pharmacist', ' ICU/Oncology Pharmacist', 'Pharmacy Specialist'],
+      },
+      'Community / Retail Pharmacist': {
+        quick: ['Patient communication', 'Pharmacy management', 'OTC counselling', 'Inventory and POS systems'],
+        nextRoles: ['Retail Pharmacist', 'Pharmacy Manager', 'Independent Pharmacy Owner'],
+      },
+      'Regulatory Affairs / QA': {
+        quick: ['Regulatory writing', 'GxP & audits', 'Stability testing', 'Complaint handling'],
+        nextRoles: ['Regulatory Affairs Associate', 'QA Specialist', 'Compliance Officer'],
+      },
+      'Research & Development Scientist': {
+        quick: ['Experimental design', 'Data analysis (Python/R)', 'Assay development', 'Scientific writing'],
+        nextRoles: ['R&D Scientist', 'Formulation Scientist', 'Analytical Scientist'],
+      },
+      'Medical Science Liaison / Sales': {
+        quick: ['Medical communication', 'Presentation skills', 'KOL engagement', 'Product knowledge & clinical data'],
+        nextRoles: ['MSL', 'Pharma Sales Rep', 'Medical Affairs Specialist'],
+      }
+    };
+
+    /********** UI bindings & result rendering **********/
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    analyzeBtn.addEventListener('click', () => {
+      const features = encodeFormToFeatures();
+      const out = knnPredict(features, K_VALUE);
+      renderResults(features, out);
+    });
+
+    clearBtn.addEventListener('click', () => { document.getElementById('inputForm').reset(); resetResults(); });
+
+    downloadBtn.addEventListener('click', () => {
+      const features = encodeFormToFeatures();
+      const out = knnPredict(features, K_VALUE);
+      generatePDFReport(features, out);
+    });
+
+    function generatePDFReport(features, out) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const topCareer = CAREERS[out.probs[0].label];
+      const confidence = Math.round(out.probs[0].score * 100);
+      const currentDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      // Get user inputs for the report
+      const interests = Array.from(document.querySelectorAll('input[name="interest"]:checked')).map(el => el.value);
+      const workstyles = Array.from(document.querySelectorAll('input[name="workstyle"]:checked')).map(el => el.value);
+      const env = document.getElementById('env').value;
+      const management = document.getElementById('management').value;
+      const coding = document.getElementById('coding').value;
+      const salary = document.getElementById('salary').value;
+
+      // Set up colors
+      const primaryColor = [59, 130, 246]; // Blue
+      const secondaryColor = [16, 185, 129]; // Green
+      const accentColor = [139, 92, 246]; // Purple
+
+      let yPos = 20;
+
+      // Header
+      doc.setFillColor(...primaryColor);
+      doc.rect(0, 0, 210, 40, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(24);
+      doc.setFont(undefined, 'bold');
+      doc.text('Pharmacy Career Advisor', 20, 25);
+
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.text('AI-Powered Career Matching Analysis', 20, 32);
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(10);
+      doc.text(`Generated on ${currentDate}`, 150, 32);
+
+      yPos = 55;
+
+      // Main Result Section
+      doc.setFillColor(239, 246, 255);
+      doc.rect(15, yPos, 180, 35, 'F');
+      doc.setDrawColor(...primaryColor);
+      doc.setLineWidth(2);
+      doc.rect(15, yPos, 180, 35, 'S');
+
+      doc.setTextColor(30, 64, 175);
+      doc.setFontSize(18);
+      doc.setFont(undefined, 'bold');
+      doc.text('Your Best Career Match', 105, yPos + 12, { align: 'center' });
+
+      doc.setFontSize(16);
+      doc.text(topCareer, 105, yPos + 22, { align: 'center' });
+
+      doc.setTextColor(...secondaryColor);
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.text(`${confidence}% Confidence`, 105, yPos + 30, { align: 'center' });
+
+      yPos += 50;
+
+      // Career Rankings
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.text('All Career Match Results:', 20, yPos);
+      yPos += 10;
+
+      out.probs.slice(0, 5).forEach((p, index) => {
+        const name = CAREERS[p.label];
+        const pct = Math.round(p.score * 100);
+
+        // Career name
+        doc.setFontSize(11);
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(51, 65, 85);
+        doc.text(`${index + 1}. ${name}`, 25, yPos);
+
+        // Progress bar background
+        doc.setFillColor(226, 232, 240);
+        doc.rect(120, yPos - 3, 50, 4, 'F');
+
+        // Progress bar fill
+        const fillWidth = (pct / 100) * 50;
+        doc.setFillColor(...primaryColor);
+        doc.rect(120, yPos - 3, fillWidth, 4, 'F');
+
+        // Percentage
+        doc.setTextColor(...secondaryColor);
+        doc.setFont(undefined, 'bold');
+        doc.text(`${pct}%`, 175, yPos);
+
+        yPos += 8;
+      });
+
+      yPos += 15;
+
+      // Profile Summary
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.text('Your Profile Summary:', 20, yPos);
+      yPos += 12;
+
+      // Create a summary box
+      doc.setFillColor(248, 250, 252);
+      doc.rect(20, yPos - 5, 170, 45, 'F');
+      doc.setDrawColor(203, 213, 225);
+      doc.rect(20, yPos - 5, 170, 45, 'S');
+
+      doc.setFontSize(10);
+      doc.setTextColor(71, 85, 105);
+      doc.setFont(undefined, 'normal');
+
+      const profileText = [
+        `Interests: ${interests.length > 0 ? interests.join(', ') : 'None specified'}`,
+        `Environment: ${env.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`,
+        `Management Skills: ${management}/10 • Tech Skills: ${coding}/10 • Salary Priority: ${salary}/10`,
+        `Work Styles: ${workstyles.length > 0 ? workstyles.join(', ') : 'None specified'}`
+      ];
+
+      profileText.forEach((text, index) => {
+        doc.text(text, 25, yPos + (index * 8));
+      });
+
+      yPos += 55;
+
+      // Recommendations
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.text('Recommended Next Steps:', 20, yPos);
+      yPos += 12;
+
+      const chosen = CAREER_SUGGESTIONS[topCareer];
+      if (chosen) {
+        // Skills to develop
+        doc.setFontSize(12);
+        doc.setTextColor(75, 85, 99);
+        doc.setFont(undefined, 'bold');
+        doc.text('Skills to Develop:', 25, yPos);
+        yPos += 8;
+
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(71, 85, 105);
+
+        chosen.quick.forEach((skill, index) => {
+          doc.text(`• ${skill}`, 30, yPos);
+          yPos += 5;
+        });
+
+        yPos += 8;
+
+        // Career progression
+        doc.setFontSize(12);
+        doc.setTextColor(75, 85, 99);
+        doc.setFont(undefined, 'bold');
+        doc.text('Typical Career Progression:', 25, yPos);
+        yPos += 8;
+
+        doc.setFontSize(8);
+        doc.setTextColor(...secondaryColor);
+        doc.setFont(undefined, 'bold');
+        doc.text(chosen.nextRoles.join(' → '), 30, yPos);
+        yPos += 10;
+
+        doc.setFontSize(7);
+        doc.setTextColor(...secondaryColor);
+        doc.setFont(undefined, 'bold');
+        doc.text('Developed by Pyae Sone Chan Thar Aung', 25, yPos);
+        yPos += 3;
+
+        doc.setFontSize(7);
+        doc.setTextColor(...secondaryColor);
+        doc.setFont(undefined, 'bold');
+        doc.text('Advised by Dr.Lauret', 25, yPos);
+      }
+
+      yPos += 20;
+
+      // Footer
+      doc.setDrawColor(226, 232, 240);
+      doc.setLineWidth(0.5);
+      doc.line(20, yPos, 190, yPos);
+      yPos += 10;
+
+      doc.setFontSize(8);
+      doc.setTextColor(100, 116, 139);
+      doc.setFont(undefined, 'normal');
+      doc.text('Disclaimer: This analysis is for guidance purposes only. Please consult with career professionals for comprehensive advice.', 20, yPos);
+      doc.text(`Report generated by Pharmacy Career Advisor AI on ${currentDate}`, 20, yPos + 8);
+
+      // Save the PDF
+      doc.save(`Pharmacy_Career_Report_${new Date().toISOString().split('T')[0]}.pdf`);
+    }
+
+    function resetResults() {
+      document.getElementById('summary').innerHTML = '<p class="text-slate-500">No analysis yet — fill the form and click <strong>Analyze & Predict</strong>.</p>';
+      document.getElementById('topCareers').innerHTML = '';
+      document.getElementById('nearestNeighbors').innerHTML = '';
+      document.getElementById('recommendations').innerHTML = '';
+    }
+
+    function renderResults(features, out) {
+      const summary = document.getElementById('summary');
+      const top = out.probs[0];
+      const topCareer = CAREERS[top.label];
+      const confidence = Math.round(top.score * 100);
+      summary.innerHTML = `<div class=\"flex items-center justify-between\"><div><h3 class=\"font-semibold text-lg\">Best match: ${topCareer}</h3><p class=\"text-sm text-slate-600\">Confidence: <strong>${confidence}%</strong></p></div><div class=\"text-xs text-slate-500\">k=${K_VALUE} • dataset=${sampleData.length} examples</div></div>`;
+
+      // top careers list
+      const topCareersDiv = document.getElementById('topCareers'); topCareersDiv.innerHTML = '';
+      out.probs.slice(0, 4).forEach(p => {
+        const name = CAREERS[p.label];
+        const pct = Math.round(p.score * 100);
+        const el = document.createElement('div');
+        el.className = 'p-3 bg-slate-50 rounded-lg border border-slate-100';
+        el.innerHTML = `<div class=\"flex items-center justify-between\"><div><strong>${name}</strong><div class=\"text-sm text-slate-500\">${pct}% match</div></div><div style=\"width:140px;\"> <div class=\"bar\" style=\"width:${pct}%;\"></div></div></div>`;
+        topCareersDiv.appendChild(el);
+      });
+
+      // nearest neighbors
+      const nn = document.getElementById('nearestNeighbors'); nn.innerHTML = '<h4 class="font-medium mt-2">Nearest neighbors (examples)</h4>';
+      const list = document.createElement('div'); list.className = 'space-y-2 mt-2';
+      out.neighbors.forEach(n => {
+        const labelName = CAREERS[n.label];
+        const dist = n.distance.toFixed(3);
+        const fv = FEATURE_NAMES.map((k, i) => `${k}:${(n.features[i] * 100).toFixed(0)}%`).join(' • ');
+        const row = document.createElement('div'); row.className = 'p-2 bg-white border rounded-md text-sm';
+        row.innerHTML = `<div class=\"flex items-center justify-between\"><div><strong>${labelName}</strong><div class=\"text-slate-500 text-xs mt-1\">${fv}</div></div><div class=\"text-slate-400 text-xs\">dist ${dist}</div></div>`;
+        list.appendChild(row);
+      });
+      nn.appendChild(list);
+
+      // recommendations
+      const rec = document.getElementById('recommendations'); rec.innerHTML = '<h4 class="font-medium">Recommended next steps</h4>';
+      const chosen = CAREER_SUGGESTIONS[topCareer];
+      if (chosen) {
+        const ul = document.createElement('ul'); ul.className = 'list-disc ml-5 mt-2';
+        chosen.quick.forEach(i => { const li = document.createElement('li'); li.textContent = i; ul.appendChild(li); });
+        const roles = document.createElement('div'); roles.className = 'text-sm text-slate-600 mt-3'; roles.innerHTML = `<strong>Typical next roles:</strong> ${chosen.nextRoles.join(', ')}`;
+        rec.appendChild(ul); rec.appendChild(roles);
+      }
+
+      // small explanation about feature matches
+      const desc = document.createElement('div'); desc.className = 'text-xs text-slate-500 mt-3'; desc.innerHTML = 'Explanation: the app compares your answers to career archetypes and finds the closest matches. To improve accuracy, you can add real survey or HR-labelled examples into the dataset (inside the source file).';
+      rec.appendChild(desc);
+    }
+
+    // initialize
+    resetResults();
+  </script>
+</body>
+
+</html>
