@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Climate Guardians: Future Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Exo+2:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="prelim.css" />
+</head>
+
+<body>
+  <!-- Background & particles -->
+  <div class="particles" aria-hidden="true"></div>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+    <span aria-hidden="true">☾</span>
+  </button>
+
+  <div class="quiz-container">
+    <header class="quiz-header">
+      <div class="logo" aria-hidden="true">🌱</div>
+      <h1 class="app-title">Climate Guardians</h1>
+      <p class="subtitle">Future Edition</p>
+    </header>
+
+    <!-- Progress -->
+    <div class="progress-section">
+      <div class="progress-info" aria-live="polite">
+        <span>Question <span id="q-current">1</span> of <span id="q-total">0</span></span>
+        <span>Score: <span id="score-value">0</span></span>
+      </div>
+      <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+          <div class="progress-icon" aria-hidden="true">🌿</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ CONTENT -->
+    <div id="quiz-content">
+      <p id="question-text" class="question-text">Question goes here...</p>
+      <div id="options-container" class="options" role="group" aria-label="Answer choices"></div>
+      <p id="score-text" class="visually-hidden">Score: 0</p>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results-container" class="results" style="display:none;">
+      <div class="results-card">
+        <div class="results-icon" aria-hidden="true">🏆</div>
+        <h2 class="results-title">Mission Complete!</h2>
+        <p id="final-score" class="final-score"></p>
+        <p id="results-message" class="results-message"></p>
+        <button id="restart-btn" class="restart-btn">Start New Mission</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="sound-correct" preload="auto">
+    <source
+      src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBSuR2O/LdyMFl2+n5meTY1gkBTCH0fDUfzQFKIbT8s5+PAUuhNT0z3xBBzCH1fHTgzECMo6k21l2AQUyQQhOg2AkC3AQKXTGt8BNmTNXLgkFGbgfhfEVaA=="
+      type="audio/wav">
+  </audio>
+  <audio id="sound-incorrect" preload="auto">
+    <source src="sounds/error.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <script src="prelim.js"></script>
+</body>
+
+</html>
