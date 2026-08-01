@@ -4,21 +4,19 @@
   const menu = document.querySelector(".nav__list");
   const year = document.getElementById("year");
 
-  if (year) {
-    year.textContent = String(new Date().getFullYear());
-  }
+  if (year) year.textContent = String(new Date().getFullYear());
 
   const setMenuOpen = (open) => {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     menu.classList.toggle("is-open", open);
+    document.body.style.overflow = open ? "hidden" : "";
   };
 
   if (toggle && menu) {
     toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") !== "true";
-      setMenuOpen(open);
+      setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
     });
 
     menu.querySelectorAll("a").forEach((link) => {
@@ -32,7 +30,7 @@
 
   const onScroll = () => {
     if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
+    header.classList.toggle("is-scrolled", window.scrollY > 10);
   };
 
   onScroll();
@@ -54,7 +52,7 @@
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+    { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
   );
 
   reveals.forEach((el) => observer.observe(el));

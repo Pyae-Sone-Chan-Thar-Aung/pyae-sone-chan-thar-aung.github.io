@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pyae Sone Chan Thar Aung — Software Engineer building full-stack web, mobile, and ML/AI systems.">
-  <meta name="author" content="Pyae Sone Chan Thar Aung">
+  <meta name="description" content="Pyae Sone Chan Thar Aung — Software Engineer & Computer Scientist building full-stack, mobile, and ML/AI systems.">
   <title>Pyae Sone Chan Thar Aung — Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
 
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="#top">PSCTA</a>
+      <a class="nav__brand" href="#top">pyae.sone</a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
         <span></span><span></span>
       </button>
@@ -33,329 +33,239 @@
 
   <main id="main">
     <section class="hero" aria-label="Introduction">
-      <div class="hero__atmosphere" aria-hidden="true"></div>
-      <div class="hero__grid">
-        <div class="hero__copy reveal">
-          <p class="hero__eyebrow">Open to software engineering roles</p>
-          <h1 class="hero__name">Pyae Sone Chan Thar Aung</h1>
-          <p class="hero__role">Software Engineer · Full-Stack · Mobile · ML/AI</p>
-          <p class="hero__pitch">
-            I ship web platforms, Flutter apps, and applied ML prototypes — from campus systems to Wi-Fi sensing research — with a focus on reliable products and inclusive technology.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#work">View projects</a>
-            <a class="btn btn--ghost" href="#contact">Contact</a>
-            <a class="btn btn--text" href="assets/Pyae-Sone-Chan-Thar-Aung-CV.pdf" download>Download CV</a>
-          </div>
-        </div>
-        <div class="hero__visual reveal reveal--delay">
-          <img
-            src="main/photo/formal%20pic.jpg"
-            alt="Portrait of Pyae Sone Chan Thar Aung"
-            width="480"
-            height="600"
-            fetchpriority="high">
+      <div class="hero__media" aria-hidden="true">
+        <img src="assets/hero-atmosphere.jpg" alt="" width="2400" height="1500" fetchpriority="high">
+      </div>
+      <div class="hero__veil" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__status"><span class="dot" aria-hidden="true"></span> Open to software engineering roles</p>
+        <h1 class="hero__name">Pyae Sone<br>Chan Thar Aung</h1>
+        <p class="hero__role">Software Engineer &amp; Computer Scientist</p>
+        <p class="hero__pitch">I design and ship full-stack systems, mobile products, and applied ML — from Wi-Fi sensing research to campus platforms used in the real world.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#work">Explore work</a>
+          <a class="btn btn--ghost" href="mailto:pyaesonechantharaung25@gmail.com">pyaesonechantharaung25@gmail.com</a>
         </div>
       </div>
     </section>
 
     <section class="section" id="work">
-      <div class="section__inner">
-        <header class="section__header reveal">
-          <p class="section__label">Selected work</p>
-          <h2>Projects that show how I build</h2>
-          <p>Full-stack products, mobile apps, and ML systems — linked to live demos and source where available.</p>
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker">Selected work</p>
+          <h2>A few systems that show how I think.</h2>
+          <p class="lede">Research prototypes, campus products, and mobile apps — each with a clear problem and a shipped interface.</p>
         </header>
 
-        <div class="project-list">
+        <div class="projects">
           <article class="project reveal">
-            <div class="project__meta">
-              <span class="project__index">01</span>
-              <ul class="tags" aria-label="Tech stack">
-                <li>Python</li><li>FastAPI</li><li>Next.js</li><li>ESP32 CSI</li>
-              </ul>
+            <div class="project__top">
+              <span class="project__num">01</span>
+              <span class="project__year">2025 — 2026</span>
             </div>
-            <h3>WiCare — Wi-Fi CSI Human Detection</h3>
-            <p>
-              Thesis-level prototype that pairs ESP32 channel-state sensing with a FastAPI station backend and Next.js ward console for elderly-care demos, alerts, and sensing labs.
-            </p>
+            <h3><a href="https://wifi-human-detection.vercel.app" target="_blank" rel="noopener noreferrer">WiCare / Wi-Fi Human Detection</a></h3>
+            <p class="project__tech">Python · FastAPI · Next.js · ESP32 CSI</p>
+            <p class="project__copy">Thesis-level sensing stack: CSI capture, FastAPI station backend, and a Next.js ward console for elderly-care demos, alerts, and annotation labs.</p>
             <div class="project__links">
-              <a href="https://wifi-human-detection.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a>
-              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/wifi-human-detection" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://wifi-human-detection.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/wifi-human-detection" target="_blank" rel="noopener noreferrer">Source →</a>
             </div>
           </article>
 
           <article class="project reveal">
-            <div class="project__meta">
-              <span class="project__index">02</span>
-              <ul class="tags" aria-label="Tech stack">
-                <li>TypeScript</li><li>Machine Learning</li><li>Web</li>
-              </ul>
+            <div class="project__top">
+              <span class="project__num">02</span>
+              <span class="project__year">2025</span>
             </div>
-            <h3>ML SkinSyn</h3>
-            <p>
-              Personalized skincare product matching that analyzes a user’s skin profile with ML to recommend safer options and reduce adverse reactions.
-            </p>
+            <h3><a href="https://ml-skin-syn.vercel.app" target="_blank" rel="noopener noreferrer">ML SkinSyn</a></h3>
+            <p class="project__tech">TypeScript · Machine Learning · Web</p>
+            <p class="project__copy">ML-assisted skincare matching that turns a skin profile into safer product recommendations — product thinking applied to personalization.</p>
             <div class="project__links">
-              <a href="https://ml-skin-syn.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a>
-              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/ML_SkinSyn" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://ml-skin-syn.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/ML_SkinSyn" target="_blank" rel="noopener noreferrer">Source →</a>
             </div>
           </article>
 
           <article class="project reveal">
-            <div class="project__meta">
-              <span class="project__index">03</span>
-              <ul class="tags" aria-label="Tech stack">
-                <li>JavaScript</li><li>Full-Stack</li><li>Campus System</li>
-              </ul>
+            <div class="project__top">
+              <span class="project__num">03</span>
+              <span class="project__year">2025</span>
             </div>
-            <h3>UIC CCS Alumni Portal</h3>
-            <p>
-              Web portal for the UIC College of Computer Studies alumni community — built as a real campus system for profiles, engagement, and institutional use.
-            </p>
+            <h3><a href="https://ccs-alumni-portal-system.vercel.app" target="_blank" rel="noopener noreferrer">UIC CCS Alumni Portal</a></h3>
+            <p class="project__tech">JavaScript · Full-stack · Campus system</p>
+            <p class="project__copy">A real institutional portal for UIC’s College of Computer Studies alumni — profiles, engagement, and operational workflows.</p>
             <div class="project__links">
-              <a href="https://ccs-alumni-portal-system.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a>
-              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/Alumni" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://ccs-alumni-portal-system.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/Alumni" target="_blank" rel="noopener noreferrer">Source →</a>
             </div>
           </article>
 
           <article class="project reveal">
-            <div class="project__meta">
-              <span class="project__index">04</span>
-              <ul class="tags" aria-label="Tech stack">
-                <li>Flutter</li><li>Dart</li><li>Mobile</li>
-              </ul>
+            <div class="project__top">
+              <span class="project__num">04</span>
+              <span class="project__year">2025</span>
             </div>
-            <h3>EcoGuard</h3>
-            <p>
-              Flutter mobile application focused on environmental awareness and engagement — designed for clear UX and cross-platform delivery.
-            </p>
+            <h3><a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/EcoGuard" target="_blank" rel="noopener noreferrer">EcoGuard</a></h3>
+            <p class="project__tech">Flutter · Dart · Mobile</p>
+            <p class="project__copy">Cross-platform Flutter application for environmental awareness — focused on clarity, speed, and practical mobile UX.</p>
             <div class="project__links">
-              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/EcoGuard" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/EcoGuard" target="_blank" rel="noopener noreferrer">Source →</a>
             </div>
           </article>
 
           <article class="project reveal">
-            <div class="project__meta">
-              <span class="project__index">05</span>
-              <ul class="tags" aria-label="Tech stack">
-                <li>JavaScript</li><li>Web</li>
-              </ul>
+            <div class="project__top">
+              <span class="project__num">05</span>
+              <span class="project__year">2025</span>
             </div>
-            <h3>ERIO</h3>
-            <p>
-              Institutional web presence for UIC ERIO — a product-facing site built for clarity, accessibility, and straightforward content delivery.
-            </p>
+            <h3><a href="https://uic-erio.vercel.app" target="_blank" rel="noopener noreferrer">ERIO</a></h3>
+            <p class="project__tech">JavaScript · Web</p>
+            <p class="project__copy">Public-facing web product for UIC ERIO with clean information architecture for campus stakeholders.</p>
             <div class="project__links">
-              <a href="https://uic-erio.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a>
-              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/erio" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://uic-erio.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+              <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung/erio" target="_blank" rel="noopener noreferrer">Source →</a>
             </div>
           </article>
 
           <article class="project reveal">
-            <div class="project__meta">
-              <span class="project__index">06</span>
-              <ul class="tags" aria-label="Tech stack">
-                <li>JavaScript</li><li>KNN</li><li>Applied ML</li>
-              </ul>
+            <div class="project__top">
+              <span class="project__num">06</span>
+              <span class="project__year">2025</span>
             </div>
-            <h3>Pharmacy Career Advisor</h3>
-            <p>
-              Interactive career-matching tool that runs a lightweight K-Nearest Neighbors classifier in the browser and explains predicted pharmacy pathways.
-            </p>
+            <h3><a href="pharmacy-career-advisor.html">Pharmacy Career Advisor</a></h3>
+            <p class="project__tech">JavaScript · KNN · Applied ML</p>
+            <p class="project__copy">Explainable in-browser career matching using a lightweight nearest-neighbors classifier for pharmacy pathways.</p>
             <div class="project__links">
-              <a href="pharmacy-career-advisor.html">Live demo</a>
+              <a href="pharmacy-career-advisor.html">Live demo →</a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section section--alt" id="experience">
-      <div class="section__inner">
-        <header class="section__header reveal">
-          <p class="section__label">Experience</p>
-          <h2>Leadership, operations, and regional work</h2>
-          <p>Roles where I coordinated people, programs, and outcomes — not just code.</p>
+    <section class="section section--band" id="experience">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker">Experience</p>
+          <h2>Where I’ve led people and programs.</h2>
         </header>
 
-        <ol class="timeline">
-          <li class="timeline__item reveal">
-            <div class="timeline__when">2024 – Present</div>
-            <div class="timeline__body">
-              <h3>President, UIC-Global Leaders Club</h3>
+        <div class="timeline">
+          <article class="timeline__row reveal">
+            <p class="timeline__when">2024 — Present</p>
+            <div>
+              <h3>President, UIC Global Leaders Club</h3>
               <p>Lead UIC’s largest non-academic student organization. Organize SDG, cultural exchange, and technology-for-development programs.</p>
             </div>
-          </li>
-          <li class="timeline__item reveal">
-            <div class="timeline__when">Jul 2023 – Present</div>
-            <div class="timeline__body">
-              <h3>Student Assistant — International Linkages &amp; Affairs Office, UIC</h3>
-              <p>Front-desk operations and communications support for international programs and student mobility.</p>
+          </article>
+          <article class="timeline__row reveal">
+            <p class="timeline__when">2023 — Present</p>
+            <div>
+              <h3>Student Assistant, International Linkages &amp; Affairs Office</h3>
+              <p>Operations and communications support for international programs and student mobility at UIC.</p>
             </div>
-          </li>
-          <li class="timeline__item reveal">
-            <div class="timeline__when">2023 – Present</div>
-            <div class="timeline__body">
-              <h3>Moderator — International Students Mobility Program, UIC</h3>
+          </article>
+          <article class="timeline__row reveal">
+            <p class="timeline__when">2023 — Present</p>
+            <div>
+              <h3>Moderator, International Students Mobility Program</h3>
               <p>Facilitate exchange forums and global networking sessions for international students.</p>
             </div>
-          </li>
-          <li class="timeline__item reveal">
-            <div class="timeline__when">Jul 2024</div>
-            <div class="timeline__body">
-              <h3>Youth Volunteer — SMEs Development Project, Surabaya</h3>
-              <p>Supported farmers and villagers with digital tools to strengthen small-scale agriculture and economic resilience.</p>
+          </article>
+          <article class="timeline__row reveal">
+            <p class="timeline__when">2024</p>
+            <div>
+              <h3>Youth Volunteer, SMEs Development Project — Surabaya</h3>
+              <p>Helped local farmers adopt digital tools for small-scale agriculture and economic resilience.</p>
             </div>
-          </li>
-          <li class="timeline__item reveal">
-            <div class="timeline__when">2021</div>
-            <div class="timeline__body">
-              <h3>Country Youth Ambassador — 4th ASEAN-EU Cooperation Project</h3>
+          </article>
+          <article class="timeline__row reveal">
+            <p class="timeline__when">2021</p>
+            <div>
+              <h3>Country Youth Ambassador, ASEAN–EU Cooperation Project</h3>
               <p>Contributed data analysis and advocacy for persons with disabilities in Myanmar.</p>
             </div>
-          </li>
-        </ol>
-
-        <div class="chips reveal" aria-label="International programs">
-          <p class="chips__label">Also selected for</p>
-          <ul>
-            <li>Young ASEAN Leaders Policy Initiative · Thailand · 2025</li>
-            <li>ASEAN Youth Volunteer Programme · Malaysia · 2024</li>
-            <li>Asian Undergraduate Symposium · NUS · 2024</li>
-            <li>ASEAN Young Leaders Program · Jakarta · 2023</li>
-          </ul>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section" id="skills">
-      <div class="section__inner">
-        <header class="section__header reveal">
-          <p class="section__label">Skills</p>
-          <h2>Tools I use to ship</h2>
-          <p>Practical stack for software engineering roles across web, mobile, and applied ML.</p>
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker">Capabilities</p>
+          <h2>Stack I use to move from idea to interface.</h2>
         </header>
-
-        <div class="skill-grid">
-          <div class="skill-block reveal">
-            <h3>Languages</h3>
-            <ul>
-              <li>Java</li>
-              <li>Python</li>
-              <li>JavaScript / TypeScript</li>
-              <li>Dart</li>
-              <li>HTML / CSS</li>
-              <li>SQL</li>
-            </ul>
-          </div>
-          <div class="skill-block reveal">
-            <h3>Frontend &amp; Mobile</h3>
-            <ul>
-              <li>Next.js / React</li>
-              <li>Responsive web UI</li>
-              <li>Flutter</li>
-              <li>Product-focused UX</li>
-            </ul>
-          </div>
-          <div class="skill-block reveal">
-            <h3>Backend &amp; Data</h3>
-            <ul>
-              <li>FastAPI</li>
-              <li>Node / JS APIs</li>
-              <li>MySQL</li>
-              <li>Auth &amp; real-time flows</li>
-            </ul>
-          </div>
-          <div class="skill-block reveal">
-            <h3>ML / AI</h3>
-            <ul>
-              <li>Applied ML prototypes</li>
-              <li>Sensing pipelines (CSI)</li>
-              <li>Computer vision adjacent systems</li>
-              <li>Growing focus: NLP &amp; vision-language models</li>
-            </ul>
-          </div>
-        </div>
+        <dl class="skills">
+          <div class="reveal"><dt>Languages</dt><dd>Java · Python · JavaScript / TypeScript · Dart · HTML / CSS · SQL</dd></div>
+          <div class="reveal"><dt>Frontend &amp; Mobile</dt><dd>Next.js / React · Responsive web · Flutter · Product UX</dd></div>
+          <div class="reveal"><dt>Backend &amp; Data</dt><dd>FastAPI · Node APIs · MySQL · Auth &amp; realtime flows</dd></div>
+          <div class="reveal"><dt>ML / AI</dt><dd>Applied ML prototypes · Sensing pipelines · Vision-adjacent systems · Focus areas: NLP &amp; vision-language models</dd></div>
+        </dl>
       </div>
     </section>
 
-    <section class="section section--alt" id="education">
-      <div class="section__inner education">
-        <header class="section__header reveal">
-          <p class="section__label">Education &amp; awards</p>
-          <h2>Academic foundation and recognition</h2>
+    <section class="section section--band" id="education">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker">Education &amp; honors</p>
+          <h2>Academic path and recognition.</h2>
         </header>
-
-        <div class="edu-grid">
-          <article class="edu-card reveal">
+        <div class="edu reveal">
+          <div>
             <h3>B.S. Computer Science</h3>
-            <p class="edu-card__meta">University of the Immaculate Conception · Davao City · 2023 – Present (Year 3 / Graduating)</p>
-            <p>Building systems across software engineering, research prototypes, and campus platforms.</p>
-          </article>
-          <article class="edu-card reveal">
+            <p class="meta">University of the Immaculate Conception · Davao City · 2023 — Present (Year 3 / Graduating)</p>
+          </div>
+          <div>
             <h3>B.A. English Language &amp; Literature</h3>
-            <p class="edu-card__meta">Kyaing Tong University, Myanmar · 2019 – 2021 (attended until Year 2)</p>
-            <p>Strong communication foundation that supports leadership, advocacy, and cross-cultural work.</p>
-          </article>
+            <p class="meta">Kyaing Tong University, Myanmar · 2019 — 2021 (attended until Year 2)</p>
+          </div>
         </div>
-
-        <ul class="award-list reveal">
+        <ul class="honors reveal">
           <li><strong>CCS Research Forum, UIC · 2025</strong> — Best Project Leader, Best Presenter, Best in Innovation (HCI with Robotics)</li>
-          <li><strong>Leadership Training for Tertiary Students, Mindanao · 2024</strong> — Best in Communication Leadership</li>
-          <li><strong>ASEAN Youth Volunteer Programme · 2024</strong> — Best group presentation (Planetary Health)</li>
+          <li><strong>Leadership Training for Tertiary Students · 2024</strong> — Best in Communication Leadership</li>
+          <li><strong>ASEAN Youth Volunteer Programme · 2024</strong> — Best group presentation on Planetary Health</li>
           <li><strong>ASEAN Festival · 2021</strong> — Winner, Digital Photography &amp; Culinary Arts</li>
         </ul>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="section__inner about">
-        <header class="section__header reveal">
-          <p class="section__label">About</p>
-          <h2>Builder, leader, and advocate</h2>
-        </header>
+    <section class="section about" id="about">
+      <div class="wrap about__grid">
+        <div class="about__media reveal">
+          <img src="assets/portrait.jpg" alt="Portrait of Pyae Sone Chan Thar Aung" width="1056" height="1104">
+        </div>
         <div class="about__copy reveal">
-          <p>
-            I’m a Burmese Computer Science student based in Davao City, Philippines. I care about shipping software that is useful in the real world — campus systems, mobile products, and research prototypes that sit at the edge of sensing and machine learning.
-          </p>
-          <p>
-            Beyond engineering, I lead youth programs across ASEAN and advocate for justice and digital inclusion, especially for ethnic minorities and people with disabilities. I’m actively deepening work in NLP and vision-language models while staying grounded in full-stack and mobile delivery.
-          </p>
+          <p class="kicker">About</p>
+          <h2>Builder, researcher-in-practice, advocate.</h2>
+          <p>I’m a Burmese Computer Science student based in Davao City. I care about software that survives contact with reality — campus systems, mobile products, and research prototypes at the edge of sensing and machine learning.</p>
+          <p>I also lead ASEAN youth programs and advocate for digital inclusion. I’m deepening NLP and vision-language work while staying grounded in full-stack and mobile delivery.</p>
         </div>
       </div>
     </section>
 
-    <section class="section section--contact" id="contact">
-      <div class="section__inner reveal">
-        <header class="section__header">
-          <p class="section__label">Contact</p>
-          <h2>Let’s build something worth shipping</h2>
-          <p>Open to software engineering, full-stack, mobile, and ML/AI roles.</p>
-        </header>
-        <div class="contact-actions">
-          <a class="btn btn--primary" href="mailto:pyaesonechantharaung25@gmail.com">pyaesonechantharaung25@gmail.com</a>
-          <a class="btn btn--ghost" href="https://www.linkedin.com/in/pyae-sone-chan-thar-aung/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a class="btn btn--ghost" href="https://github.com/Pyae-Sone-Chan-Thar-Aung" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="btn btn--text" href="assets/Pyae-Sone-Chan-Thar-Aung-CV.pdf" download>Download CV</a>
+    <section class="section contact" id="contact">
+      <div class="wrap reveal">
+        <p class="kicker">Contact</p>
+        <h2>If you’re hiring for software, full-stack, mobile, or ML/AI — let’s talk.</h2>
+        <div class="contact__links">
+          <a href="mailto:pyaesonechantharaung25@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/pyae-sone-chan-thar-aung/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/Pyae-Sone-Chan-Thar-Aung" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="assets/Pyae-Sone-Chan-Thar-Aung-CV.pdf" download>CV / Resume</a>
         </div>
-        <p class="contact-secondary">
-          Campus email: <a href="mailto:paung_230000001724@uic.edu.ph">paung_230000001724@uic.edu.ph</a>
-          · Phone: <a href="tel:+639453543153">+63 945 354 3153</a>
-        </p>
+        <p class="contact__meta">+63 945 354 3153 · paung_230000001724@uic.edu.ph</p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer__inner">
+  <footer class="footer">
+    <div class="wrap footer__inner">
       <p>© <span id="year"></span> Pyae Sone Chan Thar Aung</p>
-      <ul class="site-footer__links">
-        <li><a href="main/personal%20achievement/cv.html">Achievement gallery</a></li>
-        <li><a href="seminars/seminars.html">E-journal archive</a></li>
-        <li><a href="https://www.instagram.com/pyaesone_chantharaung/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="https://www.facebook.com/MgPyaeSoneChanTharAung" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-      </ul>
+      <div class="footer__links">
+        <a href="main/personal%20achievement/cv.html">Achievement gallery</a>
+        <a href="seminars/seminars.html">E-journal archive</a>
+      </div>
     </div>
   </footer>
 
