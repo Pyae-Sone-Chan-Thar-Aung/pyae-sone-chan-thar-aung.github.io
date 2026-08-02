@@ -123,47 +123,37 @@ ul, dl { padding: 0; list-style: none; }
 
 /* Hero */
 .hero {
-  /* Upper hero only: pure black stage for cutout portrait */
+  /* Upper hero only: pure black to match studio portrait */
   --hero-bg: #000000;
   position: relative;
   min-height: calc(100svh - var(--nav));
   display: grid;
-  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
   overflow: hidden;
   background: var(--hero-bg);
-  padding: 3.5rem 1.25rem 4rem;
 }
 .hero__glow {
   position: absolute;
-  inset: 15% 20% auto 20%;
-  height: 55%;
-  background:
-    radial-gradient(circle at 35% 45%, rgba(94, 234, 212, 0.14), transparent 45%),
-    radial-gradient(circle at 70% 40%, rgba(231, 194, 125, 0.08), transparent 40%);
+  inset: auto -8% -18% auto;
+  width: 46%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.1), transparent 65%);
   pointer-events: none;
-  z-index: 0;
-}
-.hero__inner {
-  position: relative;
   z-index: 1;
-  width: min(100%, 1240px);
-  display: grid;
-  grid-template-columns: minmax(420px, 560px) minmax(300px, 1fr);
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  animation: rise 0.85s var(--ease) both;
 }
 .hero__photo {
   position: relative;
-  justify-self: center;
-  width: min(100%, 560px);
+  min-height: calc(100svh - var(--nav));
+  background: var(--hero-bg);
+  overflow: hidden;
 }
 .hero__photo img {
   width: 100%;
-  height: auto;
-  max-height: 78vh;
-  object-fit: contain;
-  filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.55));
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% center;
+  display: block;
   animation: fade 1s var(--ease) both;
 }
 .hero__text {
@@ -171,7 +161,12 @@ ul, dl { padding: 0; list-style: none; }
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  max-width: 34rem;
+  max-width: 36rem;
+  padding: 4rem max(1.5rem, calc((100vw - var(--max)) / 2)) 4rem 2.5rem;
+  background: var(--hero-bg);
+  position: relative;
+  z-index: 1;
+  animation: rise 0.85s var(--ease) both;
 }
 .eyebrow {
   display: inline-flex;
@@ -527,23 +522,18 @@ ul, dl { padding: 0; list-style: none; }
 
 @media (max-width: 960px) {
   .hero {
-    min-height: auto;
-    padding: 2.5rem 1.25rem 3.2rem;
-  }
-  .hero__inner {
     grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
+    min-height: auto;
+  }
+  .hero__photo {
+    order: 1;
+    min-height: 62vh;
   }
   .hero__text {
-    text-align: center;
-    align-items: center;
+    order: 2;
+    padding: 2.4rem 1.25rem 3rem;
+    max-width: none;
   }
-  .hero__inner { grid-template-columns: 1fr; }
-  .hero__photo { width: min(88vw, 520px); }
-  .hero__photo img { max-height: 62vh; }
-  .eyebrow { margin-left: auto; margin-right: auto; }
-  .actions { justify-content: center; }
   .work,
   .strip__grid,
   .about,
