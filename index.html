@@ -8,9 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=hero-cutout-8">
+  <link rel="stylesheet" href="styles.css?v=chat-bg-9">
 </head>
 <body>
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="top">
@@ -282,6 +283,30 @@
     </div>
   </footer>
 
-  <script src="web.js"></script>
+  <div class="chatbot" data-chatbot>
+    <button class="chatbot__toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel" data-chat-toggle>
+      <span class="chatbot__toggle-dot" aria-hidden="true"></span>
+      <span class="chatbot__toggle-label">Ask about me</span>
+    </button>
+
+    <section id="chatbot-panel" class="chatbot__panel" aria-label="Ask about Pyae" hidden data-chat-panel>
+      <header class="chatbot__head">
+        <div>
+          <p class="chatbot__title">Ask Pyae’s portfolio</p>
+          <p class="chatbot__sub">Guided answers · fast facts for recruiters</p>
+        </div>
+        <button class="chatbot__close" type="button" aria-label="Close chat" data-chat-close>×</button>
+      </header>
+
+      <div class="chatbot__messages" data-chat-messages aria-live="polite"></div>
+
+      <div class="chatbot__guides" data-chat-guides>
+        <p class="chatbot__guides-label">Try a guided question</p>
+        <div class="chatbot__chips" data-chat-chips></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="web.js?v=chat-bg-9"></script>
 </body>
 </html>
