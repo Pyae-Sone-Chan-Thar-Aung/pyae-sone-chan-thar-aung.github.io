@@ -539,7 +539,9 @@ ul, dl { padding: 0; list-style: none; }
     text-align: center;
     align-items: center;
   }
-  .hero__photo { width: min(72vw, 320px); }
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__photo { width: min(88vw, 520px); }
+  .hero__photo img { max-height: 62vh; }
   .eyebrow { margin-left: auto; margin-right: auto; }
   .actions { justify-content: center; }
   .work,
