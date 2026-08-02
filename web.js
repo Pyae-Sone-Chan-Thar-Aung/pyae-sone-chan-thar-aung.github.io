@@ -60,39 +60,53 @@ function initBackground() {
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = Math.max(28, Math.min(72, Math.floor((width * height) / 22000)));
+    const count = Math.max(36, Math.min(90, Math.floor((width * height) / 17000)));
     nodes = Array.from({ length: count }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r: 1.1 + Math.random() * 1.8,
+      vx: (Math.random() - 0.5) * 0.42,
+      vy: (Math.random() - 0.5) * 0.42,
+      r: 1.2 + Math.random() * 2.1,
       pulse: Math.random() * Math.PI * 2,
+      warm: Math.random() > 0.82,
     }));
   };
 
   const draw = (t) => {
     ctx.clearRect(0, 0, width, height);
 
-    // Soft atmospheric wash so the field feels alive without fighting content.
-    const wash = ctx.createRadialGradient(
-      width * 0.78,
-      height * 0.08,
-      40,
-      width * 0.78,
-      height * 0.08,
-      Math.max(width, height) * 0.55
+    // Soft atmospheric washes so the field reads as an active skill showcase.
+    const washA = ctx.createRadialGradient(
+      width * 0.8,
+      height * 0.05,
+      20,
+      width * 0.8,
+      height * 0.05,
+      Math.max(width, height) * 0.6
     );
-    wash.addColorStop(0, "rgba(45, 212, 191, 0.08)");
-    wash.addColorStop(1, "rgba(7, 9, 12, 0)");
-    ctx.fillStyle = wash;
+    washA.addColorStop(0, "rgba(45, 212, 191, 0.14)");
+    washA.addColorStop(1, "rgba(7, 9, 12, 0)");
+    ctx.fillStyle = washA;
     ctx.fillRect(0, 0, width, height);
 
-    const linkDist = Math.min(150, Math.max(96, width * 0.11));
+    const washB = ctx.createRadialGradient(
+      width * 0.12,
+      height * 0.75,
+      10,
+      width * 0.12,
+      height * 0.75,
+      Math.max(width, height) * 0.45
+    );
+    washB.addColorStop(0, "rgba(231, 194, 125, 0.06)");
+    washB.addColorStop(1, "rgba(7, 9, 12, 0)");
+    ctx.fillStyle = washB;
+    ctx.fillRect(0, 0, width, height);
+
+    const linkDist = Math.min(170, Math.max(110, width * 0.125));
 
     for (let i = 0; i < nodes.length; i += 1) {
       const a = nodes[i];
-      a.pulse += 0.012;
+      a.pulse += 0.014;
       a.x += a.vx;
       a.y += a.vy;
 
@@ -100,18 +114,18 @@ function initBackground() {
         const dx = pointer.x - a.x;
         const dy = pointer.y - a.y;
         const dist = Math.hypot(dx, dy) || 1;
-        if (dist < 180) {
-          a.vx += (dx / dist) * 0.012;
-          a.vy += (dy / dist) * 0.012;
+        if (dist < 220) {
+          a.vx += (dx / dist) * 0.018;
+          a.vy += (dy / dist) * 0.018;
         }
       }
 
-      a.vx *= 0.992;
-      a.vy *= 0.992;
+      a.vx *= 0.99;
+      a.vy *= 0.99;
       const speed = Math.hypot(a.vx, a.vy);
-      if (speed > 0.9) {
-        a.vx = (a.vx / speed) * 0.9;
-        a.vy = (a.vy / speed) * 0.9;
+      if (speed > 1.05) {
+        a.vx = (a.vx / speed) * 1.05;
+        a.vy = (a.vy / speed) * 1.05;
       }
 
       if (a.x < -20) a.x = width + 20;
@@ -125,8 +139,10 @@ function initBackground() {
         const dy = a.y - b.y;
         const dist = Math.hypot(dx, dy);
         if (dist < linkDist) {
-          const alpha = (1 - dist / linkDist) * 0.22;
-          ctx.strokeStyle = `rgba(94, 234, 212, ${alpha})`;
+          const alpha = (1 - dist / linkDist) * 0.34;
+          ctx.strokeStyle = a.warm || b.warm
+            ? `rgba(231, 194, 125, ${alpha * 0.7})`
+            : `rgba(94, 234, 212, ${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -135,20 +151,22 @@ function initBackground() {
         }
       }
 
-      const glow = 0.35 + Math.sin(a.pulse + t * 0.001) * 0.15;
+      const glow = 0.4 + Math.sin(a.pulse + t * 0.0012) * 0.2;
       ctx.beginPath();
-      ctx.fillStyle = `rgba(94, 234, 212, ${0.35 + glow * 0.35})`;
+      ctx.fillStyle = a.warm
+        ? `rgba(231, 194, 125, ${0.28 + glow * 0.3})`
+        : `rgba(94, 234, 212, ${0.42 + glow * 0.4})`;
       ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
       ctx.fill();
     }
 
     if (pointer.active && pointer.x != null) {
-      const ring = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 90);
-      ring.addColorStop(0, "rgba(94, 234, 212, 0.12)");
+      const ring = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 110);
+      ring.addColorStop(0, "rgba(94, 234, 212, 0.16)");
       ring.addColorStop(1, "rgba(94, 234, 212, 0)");
       ctx.fillStyle = ring;
       ctx.beginPath();
-      ctx.arc(pointer.x, pointer.y, 90, 0, Math.PI * 2);
+      ctx.arc(pointer.x, pointer.y, 110, 0, Math.PI * 2);
       ctx.fill();
     }
 
