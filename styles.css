@@ -160,13 +160,13 @@ ul, dl { padding: 0; list-style: none; }
 }
 .hero__photo img {
   width: 100%;
-  aspect-ratio: 4 / 5;
   height: auto;
   max-height: min(72vh, 680px);
-  object-fit: cover;
-  object-position: 55% 18%;
+  object-fit: contain;
+  object-position: center bottom;
   display: block;
-  background: #000;
+  background: transparent;
+  filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.55));
   animation: fade 1s var(--ease) both;
 }
 .hero__text {
