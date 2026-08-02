@@ -121,14 +121,14 @@ ul, dl { padding: 0; list-style: none; }
   background: var(--ink);
 }
 
-/* Hero — full-bleed left portrait panel (same scale as pre-background-removal) */
+/* Hero — restored contained panel layout (matches preferred screenshot) */
 .hero {
   /* Upper hero only: pure black to match studio portrait */
   --hero-bg: #000000;
   position: relative;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--nav));
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: stretch;
   overflow: hidden;
   background: var(--hero-bg);
@@ -144,21 +144,20 @@ ul, dl { padding: 0; list-style: none; }
 }
 .hero__photo {
   position: relative;
-  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  min-height: calc(100svh - var(--nav));
   height: 100%;
-  padding: 0;
+  padding: 2.5rem 1.75rem;
   background: var(--hero-bg);
   overflow: hidden;
 }
 .hero__photo img {
-  /* Absolute fill so the portrait covers the full left panel again */
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
+  width: min(100%, 520px);
+  height: auto;
+  max-height: min(78vh, 640px);
   object-fit: cover;
-  object-position: 58% 18%;
+  object-position: 55% 20%;
   display: block;
   animation: fade 1s var(--ease) both;
 }
@@ -167,8 +166,8 @@ ul, dl { padding: 0; list-style: none; }
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  max-width: 42rem;
-  padding: 5.5rem max(2.25rem, calc((100vw - 1280px) / 2)) 5.5rem 3.25rem;
+  max-width: 36rem;
+  padding: 4rem max(1.5rem, calc((100vw - var(--max)) / 2)) 4rem 2.5rem;
   background: var(--hero-bg);
   position: relative;
   z-index: 1;
@@ -533,16 +532,13 @@ ul, dl { padding: 0; list-style: none; }
   }
   .hero__photo {
     order: 1;
-    min-height: 68vh;
-    height: 68vh;
+    min-height: auto;
+    height: auto;
+    padding: 2rem 1.25rem 0.5rem;
   }
   .hero__photo img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
+    width: min(100%, 420px);
+    max-height: 56vh;
   }
   .hero__text {
     order: 2;
