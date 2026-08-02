@@ -1,59 +1,31 @@
 (() => {
-  const header = document.querySelector(".site-header");
-  const toggle = document.querySelector(".nav__toggle");
-  const menu = document.querySelector(".nav__list");
+  const header = document.querySelector(".top");
+  const toggle = document.querySelector(".menu-btn");
+  const menu = document.querySelector(".menu");
   const year = document.getElementById("year");
 
   if (year) year.textContent = String(new Date().getFullYear());
 
-  const setMenuOpen = (open) => {
+  const setOpen = (open) => {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    menu.classList.toggle("is-open", open);
-    document.body.style.overflow = open ? "hidden" : "";
+    menu.classList.toggle("open", open);
   };
 
   if (toggle && menu) {
     toggle.addEventListener("click", () => {
-      setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
     });
-
-    menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => setMenuOpen(false));
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") setMenuOpen(false);
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
     });
   }
 
   const onScroll = () => {
-    if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 10);
+    if (header) header.classList.toggle("scrolled", window.scrollY > 8);
   };
-
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const reveals = document.querySelectorAll(".reveal");
-
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    reveals.forEach((el) => el.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
-  );
-
-  reveals.forEach((el) => observer.observe(el));
 })();
