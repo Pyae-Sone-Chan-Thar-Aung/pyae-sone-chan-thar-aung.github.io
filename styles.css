@@ -146,9 +146,9 @@ ul, dl { padding: 0; list-style: none; }
 .hero__inner {
   position: relative;
   z-index: 1;
-  width: min(100%, 1080px);
+  width: min(100%, 1240px);
   display: grid;
-  grid-template-columns: minmax(240px, 380px) minmax(280px, 1fr);
+  grid-template-columns: minmax(420px, 560px) minmax(300px, 1fr);
   align-items: center;
   gap: clamp(1.5rem, 4vw, 3.5rem);
   animation: rise 0.85s var(--ease) both;
@@ -156,11 +156,12 @@ ul, dl { padding: 0; list-style: none; }
 .hero__photo {
   position: relative;
   justify-self: center;
-  width: min(100%, 380px);
+  width: min(100%, 560px);
 }
 .hero__photo img {
   width: 100%;
   height: auto;
+  max-height: 78vh;
   object-fit: contain;
   filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.55));
   animation: fade 1s var(--ease) both;
