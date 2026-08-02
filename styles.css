@@ -121,44 +121,52 @@ ul, dl { padding: 0; list-style: none; }
   background: var(--ink);
 }
 
-/* Hero — restored contained panel layout (matches preferred screenshot) */
+/* Hero — centered photo+text panel matching the preferred screenshot */
 .hero {
-  /* Upper hero only: pure black to match studio portrait */
   --hero-bg: #000000;
   position: relative;
   min-height: calc(100svh - var(--nav));
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: stretch;
+  place-items: center;
   overflow: hidden;
   background: var(--hero-bg);
+  padding: 2.75rem clamp(1.25rem, 3vw, 2.5rem) 3rem;
 }
 .hero__glow {
   position: absolute;
-  inset: auto -8% -18% auto;
-  width: 46%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.1), transparent 65%);
+  inset: 18% 12% auto 12%;
+  height: 55%;
+  background:
+    radial-gradient(circle at 30% 45%, rgba(94, 234, 212, 0.1), transparent 45%),
+    radial-gradient(circle at 72% 40%, rgba(231, 194, 125, 0.06), transparent 42%);
   pointer-events: none;
+  z-index: 0;
+}
+.hero__inner {
+  position: relative;
   z-index: 1;
+  width: min(100%, 1280px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  animation: rise 0.85s var(--ease) both;
 }
 .hero__photo {
   position: relative;
-  display: grid;
-  place-items: center;
-  min-height: calc(100svh - var(--nav));
-  height: 100%;
-  padding: 2.5rem 1.75rem;
-  background: var(--hero-bg);
-  overflow: hidden;
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
 }
 .hero__photo img {
-  width: min(100%, 520px);
+  width: 100%;
+  aspect-ratio: 4 / 5;
   height: auto;
-  max-height: min(78vh, 640px);
+  max-height: min(72vh, 680px);
   object-fit: cover;
-  object-position: 55% 20%;
+  object-position: 55% 18%;
   display: block;
+  background: #000;
   animation: fade 1s var(--ease) both;
 }
 .hero__text {
@@ -167,11 +175,7 @@ ul, dl { padding: 0; list-style: none; }
   justify-content: center;
   text-align: left;
   max-width: 36rem;
-  padding: 4rem max(1.5rem, calc((100vw - var(--max)) / 2)) 4rem 2.5rem;
-  background: var(--hero-bg);
-  position: relative;
-  z-index: 1;
-  animation: rise 0.85s var(--ease) both;
+  justify-self: start;
 }
 .eyebrow {
   display: inline-flex;
@@ -527,24 +531,29 @@ ul, dl { padding: 0; list-style: none; }
 
 @media (max-width: 960px) {
   .hero {
-    grid-template-columns: 1fr;
     min-height: auto;
+    padding: 2.5rem 1.25rem 3.2rem;
+  }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    width: min(100%, 560px);
   }
   .hero__photo {
-    order: 1;
-    min-height: auto;
-    height: auto;
-    padding: 2rem 1.25rem 0.5rem;
+    max-width: min(88vw, 420px);
+    justify-self: center;
   }
   .hero__photo img {
-    width: min(100%, 420px);
     max-height: 56vh;
   }
   .hero__text {
-    order: 2;
-    padding: 2.4rem 1.25rem 3rem;
+    text-align: center;
+    align-items: center;
     max-width: none;
+    justify-self: center;
   }
+  .eyebrow { margin-left: auto; margin-right: auto; }
+  .actions { justify-content: center; }
   .work,
   .strip__grid,
   .about,
